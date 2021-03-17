@@ -34,4 +34,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Pages\BooksPage.xaml.cs">
+      <DependentUpon>BooksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\TabbedHomePage.xaml.cs">
+      <DependentUpon>TabbedHomePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
