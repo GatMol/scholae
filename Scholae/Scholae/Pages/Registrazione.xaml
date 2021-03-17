@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scholae.Registrazione"
+             Padding="0,20,0,0">
+
+    <AbsoluteLayout>
+        <!--Onda scura--> 
+        <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
+              AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+              Data="M-2552.03,2434.542s-85.089-24.01-131.343-15.909-94.013,57.732-167.167,67.124-115.46-35.7-115.46-35.7v118.3h413.97Z"
+              Fill="#2f3a56"
+              Aspect="Fill"/>
+
+         <!--Onda chiara--> 
+        <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
+              AbsoluteLayout.LayoutFlags="XProportional, YProportional" 
+              Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
+              Fill="#3b5998"
+              Aspect="Fill"/>
+
+        <!-- Bottono che ingloba path sotto>
+        <Button x:Name="Registrati"
+                AbsoluteLayout.LayoutBounds="0.1,0.05,0.05,0.05"
+                AbsoluteLayout.LayoutFlags="All"
+                Opacity="0"
+                Clicked="OnBackPage"/>
+        <Freccia indietro>
+        <Path AbsoluteLayout.LayoutBounds="0.1,0.05,0.04,0.04"
+              AbsoluteLayout.LayoutFlags="All"
+              Data="M245.173,409.321l-2.908,2.908L229.8,399.765,242.265,387.3l2.908,2.908-9.556,9.556Z" 
+              Fill="#2f3a56"
+              Aspect="Uniform"/>-->
+        
+        
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5,0,0.8,0.8"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Spacing="15"
+                     >
+            
+            <!--Benvenuto-->
+            <Label Text="BENVENUTO!"  TextColor="{x:StaticResource TextColorDark}"
+               FontSize="30"  FontAttributes="Bold"/>
+
+           
+                <!--inserimento dati sensibili-->
+            <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.28,0.9,0.8"
+                             AbsoluteLayout.LayoutFlags="All" 
+                             Spacing="13">
+                <Entry 
+                    x:Name="NomeEntry"
+                    Placeholder="Nome*"
+                    Text="{Binding Nome}"/>
+                <Entry 
+                    x:Name="CognomeEntry"
+                    Placeholder="Cognome*"
+                    Text="{Binding Cognome}"/>
+                <Entry 
+                    x:Name="EmailEntry"
+                    Placeholder="Email*"
+                    Text="{Binding Email}"/>
+                <Entry 
+                    x:Name="PasswordEntry"
+                    IsPassword="true"
+                    Placeholder="Password*"
+                    FontAttributes="Italic"
+                    Text="{Binding Password}"/>
+                <Entry 
+                    x:Name="VerificaPasswordEntry"
+                    IsPassword="True"
+                    Placeholder="Verifica password*"
+                    FontAttributes="Italic"/>
+                <Entry 
+                    x:Name="NumeroDiTelefonoEntry"
+                    Placeholder="Numero di telefono"
+                    Text="{Binding NumeroDiTelefono}"/>
+                <Entry 
+                    x:Name="CittaEntry"
+                    Placeholder="Citta"
+                    Text="{Binding Citta}"/>
+                <Entry 
+                    x:Name="LinguaEntry"
+                    Placeholder="Lingua"
+                    Text="{Binding Lingua}"/>
+            </StackLayout>
+
+            
+        </StackLayout>
+
+        <!--Bottone registrati-->
+        <Button 
+            AbsoluteLayout.LayoutBounds="0.5,0.9,0.9,0.1"
+            AbsoluteLayout.LayoutFlags="All"
+                Text="Registrati"
+                TextColor="#2F3A56"
+                FontSize="20"
+                FontAttributes="Bold"
+                CornerRadius="30"
+                BackgroundColor="#FCB677"
+                Margin="0,10,0,0"
+                Clicked="Registration"/>
+
+        <!-- campo obligatorio -->
+        <Label AbsoluteLayout.LayoutBounds="1.05,1,0.5,0.05"
+               AbsoluteLayout.LayoutFlags="All"
+               Text="* = Campo obbligatorio"
+               FontSize="18"
+               FontAttributes="Italic"
+               TextColor="{x:StaticResource TextColorLight}"/>
+        
+    </AbsoluteLayout>
+</ContentPage>
