@@ -116,17 +116,41 @@
     <Folder Include="Assets.xcassets\icona_piu.imageset\" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_account.imageset\icona_account.png" />
-    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\icona_chat.png" />
-    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\icona_libro_.png" />
-    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\icona_avanti.png" />
-    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\icona_tutor.png" />
-    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\icona_piu.png" />
+    <ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_account.imageset\icona_account.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\icona_chat.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\icona_libro_.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\icona_avanti.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\icona_tutor.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\icona_piu.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
 </Project>
