@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Scholae.AccountPage"
+    Padding="0, 20, 0, 0">
+
+    
+   <AbsoluteLayout BackgroundColor="#e4e4e4">
+
+        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
+              CornerRadius="30" BackgroundColor="#3b5998">
+           </Frame>
+
+
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
+                  AbsoluteLayout.LayoutBounds="0.5, -0.03, 130, 100" HorizontalTextAlignment="Center"
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
+
+        <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85"
+                    Orientation="Vertical" VerticalScrollBarVisibility="Never"
+                    BackgroundColor="#e4e4e4" Scrolled="OnScrollViewScrolled">
+
+            <StackLayout BackgroundColor="#e4e4e4">
+
+                <Frame CornerRadius="40" Margin="10, 20"
+                       HeightRequest="40" WidthRequest="40" 
+                       IsClippedToBounds="True" HorizontalOptions="Start"
+                    >
+                        <ImageButton Source="icona_account"
+                                     HorizontalOptions="Center" WidthRequest="40"
+                                     VerticalOptions="Center" HeightRequest="40"
+                                     />
+                </Frame>
+
+                <Label Text="Nome e cognome" Margin="10, 0"
+                       FontAttributes="Bold" TextColor="#2f3a56"/>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.1"/>
+
+                <Rectangle BackgroundColor="#f6f6f6" Margin="-10, -6"
+                           HeightRequest="20"/>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.1"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Tipologia account" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.05"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Libri in vendita" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+
+
+                <AbsoluteLayout HeightRequest="60">
+
+                    <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           BorderColor="#2f3a56" Margin="-10, 0" BackgroundColor="#f6f6f6"
+                           HeightRequest="30" HasShadow="False"
+                           />
+
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.3, 0.9, 0.9, 0.3"
+                           Text="INFORMAZIONI ACCOUNT" FontSize="14"
+                           FontAttributes="Bold" VerticalTextAlignment="End"
+                           TextColor="#2f3a56"
+                           />
+                </AbsoluteLayout>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Nome" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Cognome" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="E-mail" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Password" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+                
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Città" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                    
+                </AbsoluteLayout>
+
+                <AbsoluteLayout HeightRequest="60">
+
+                    <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           BorderColor="#2f3a56" Margin="-10, 0" BackgroundColor="#f6f6f6"
+                           HeightRequest="30" HasShadow="False"
+                           />
+
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.3, 0.9, 0.9, 0.3"
+                           Text="IMPOSTAZIONI DELL'APP" FontSize="14"
+                           FontAttributes="Bold" VerticalTextAlignment="End"
+                           TextColor="#2f3a56"
+                           />
+                </AbsoluteLayout>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Lingua" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Città" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="14" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+        
+                </Label>
+
+                </AbsoluteLayout>
+
+                <Button Text="Esci" TextColor="#df4f4f"
+                        BorderColor="#2f3a56" 
+                        CornerRadius="0" BorderWidth="1"
+                        Margin="-10, 0"
+                        />
+
+                <Button Text="Elimina account" TextColor="#df4f4f"
+                        BorderColor="#2f3a56" 
+                        CornerRadius="0" BorderWidth="1"
+                        Margin="-10, -7"
+                        />
+
+            </StackLayout>
+
+           
+        </ScrollView>
+  
+    </AbsoluteLayout>
+    
+</ContentPage>

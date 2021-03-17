@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scholae.SellPhotoPage">
+    <AbsoluteLayout>
+        <!--Onda scura-->
+        <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
+              AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+              Data="M-2552.03,2434.542s-85.089-24.01-131.343-15.909-94.013,57.732-167.167,67.124-115.46-35.7-115.46-35.7v118.3h413.97Z"
+              Fill="#2f3a56"
+              Aspect="Fill"/>
+
+        <!--Onda chiara-->
+        <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
+              AbsoluteLayout.LayoutFlags="XProportional, YProportional" 
+              Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
+              Fill="#3b5998"
+              Aspect="Fill"/>
+
+        <Frame 
+            Padding="20,0,20,0"
+            AbsoluteLayout.LayoutBounds="0.5,0.4,0.9,0.6"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="AliceBlue">
+            <Grid RowDefinitions="*,*,*,*"
+              ColumnDefinitions="*,*,*">
+               <!--Al posto delle box ci andranno delle immagini collegato con quelle inserite dall'utente-->
+              <BoxView Grid.Row="0" Grid.Column="0" BackgroundColor="Red"/>
+            </Grid>
+            
+        </Frame>
+        
+
+        
+
+
+
+    </AbsoluteLayout>
+</ContentPage>

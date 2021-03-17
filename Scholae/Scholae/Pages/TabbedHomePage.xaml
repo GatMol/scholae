@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:Scholae"
+            x:Class="Scholae.TabbedHomePage"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BackgroundColor="#e4e4e4"
+            BarBackground="#3b5998"
+            SelectedTabColor="#2f3a56"
+            UnselectedTabColor="#f6f6f6"
+            >
+
+    <local:BooksPage  IconImageSource="icona_libro_" />
+
+    <local:TutorPage   IconImageSource="icona_tutoraggio"/>
+
+    <local:BooksPage   IconImageSource="icona_piu" />
+
+    <local:BooksPage   IconImageSource="icona_chat"/>
+
+    <local:AccountPage   IconImageSource="icona_account"/>
+
+</TabbedPage>

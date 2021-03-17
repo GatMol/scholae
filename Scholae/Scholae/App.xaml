@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scholae.App">
+    <Application.Resources>
+        
+        <!--Fonts-->
+            
+        <!-- Colors -->
+        <Color x:Key="BackgroundAppLight">WhiteSmoke</Color>
+        <Color x:Key="PrimaryColor">#3b5998</Color>
+        <Color x:Key="SecondaryColor">#FCB677</Color>
+        <Color x:Key="TextColorLight">WhiteSmoke</Color>
+        <Color x:Key="TextColorDark">#2F3A56</Color>
+        <Color x:Key="LightGrey">#E4E4E4</Color>
+ 
+        <!--NavigationPage-->
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="#3b5998"/>
+        </Style>
+
+        <!--Path-->
+        <Style TargetType="Path">
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Aspect" Value="Fill"/>
+        </Style>
+
+        <!--Entry-->
+        <Style TargetType="Entry">
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        
+    </Application.Resources>
+</Application>

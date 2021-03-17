@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scholae.SellBooksPage"
+             Padding="0,20,0,0">
+    <AbsoluteLayout>
+        <!--Onda scura-->
+        <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
+              AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+              Data="M-2552.03,2434.542s-85.089-24.01-131.343-15.909-94.013,57.732-167.167,67.124-115.46-35.7-115.46-35.7v118.3h413.97Z"
+              Fill="#2f3a56"
+              Aspect="Fill"/>
+
+        <!--Onda chiara-->
+        <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
+              AbsoluteLayout.LayoutFlags="XProportional, YProportional" 
+              Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
+              Fill="#3b5998"
+              Aspect="Fill"/>
+
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.68,0.88,0.8"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Spacing="50">
+            <Frame BackgroundColor="#F1F1F1"
+                   CornerRadius="25">
+                <!--inserimento libro da vendere-->
+                <StackLayout Spacing="20">
+                    <Editor Placeholder=""/>
+                    <Editor Placeholder=""/>
+                    <Editor Placeholder=""/>
+                    <Editor Placeholder=""
+                            FontAttributes=""/>
+                    <Editor Placeholder=""
+                            FontAttributes=""/>
+                    <Editor Placeholder=""/>
+                </StackLayout>
+            </Frame>
+
+            <Button BorderWidth="5"
+                    BorderColor="Green"
+                    FontSize="25"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    BackgroundColor="#F1F1F1"
+                    Text="Conferma"
+                    TextColor="Green"/>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

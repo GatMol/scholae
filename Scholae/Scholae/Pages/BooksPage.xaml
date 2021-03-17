@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scholae.BooksPage" Padding="0, 20, 0, 0"
+             >
+
+    <AbsoluteLayout BackgroundColor="#e4e4e4">
+
+        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
+              CornerRadius="30" BackgroundColor="#3b5998">
+           </Frame>
+
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
+                  AbsoluteLayout.LayoutBounds="0.5, -0.03, 130, 100" HorizontalTextAlignment="Center"
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
+
+        <Button AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" FontSize="17" FontAttributes="Bold"
+                AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"/>
+
+        <Rectangle AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.21, 0.115, 0.3, 0.005"
+               BackgroundColor="#f6f6f6">
+           </Rectangle>
+
+        <Button AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
+                FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"/>
+
+        <SearchBar  VerticalOptions="Start" AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0, 0.15, 1, 0.05"
+                    CancelButtonColor="#3b5998" Text="Clicca per cercare" TextColor="#2f3a56"
+                    FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"/>
+
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}"
+                         AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0, 0.32, 1, 0.6">
+
+                <CollectionView
+                    ItemsSource="Binding Libro"
+                    x:Name="LV"
+                    VerticalScrollBarVisibility="Default"
+                    Margin="10, 0" BackgroundColor="#e4e4e4">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            ItemSpacing="15" 
+                            Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="5" HasShadow="False"
+                                   CornerRadius="30" BackgroundColor="#f6f6f6"
+                                   >
+                                <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4"/>
+                                    <ColumnDefinition Width="0.6"/>
+                                </Grid.ColumnDefinitions>
+                                
+                            
+
+                                <Image Grid.Column="0"
+                                       Source="{Binding immagine_copertina}"
+                                       Aspect="AspectFill"
+                                       Grid.ColumnSpan="5"
+                                       Grid.RowSpan="5"/>
+
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.2"/>
+                                        <RowDefinition Height="0.2"/>
+                                        <RowDefinition Height="0.2"/>
+                                        <RowDefinition Height="0.2"/>
+                                        <RowDefinition Height="0.2"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0"
+                                           Text="{Binding titolo}"
+                                           FontFamily="Century Gothic"
+                                           FontAttributes="Bold"
+                                           FontSize="20"/>
+
+                                    <Label Grid.Row="1"
+                                           Text="{Binding autore}"
+                                           FontFamily="Century Gothic"
+                                           FontSize="16"/>
+
+                                    <Label Grid.Row="2"
+                                           Text="{Binding editore}"
+                                           FontFamily="Century Gothic"
+                                           FontSize="16"/>
+
+                                    <AbsoluteLayout Grid.Row="3">
+                                        <Image AbsoluteLayout.LayoutFlags="PositionProportional"
+                                               Source="{Binding account}"
+                                               AbsoluteLayout.LayoutBounds="0, 0"/>
+                                        <Image AbsoluteLayout.LayoutFlags="PositionProportional"
+                                               Source="{Binding stelline}"
+                                               AbsoluteLayout.LayoutBounds="0, 0.3"/>
+                                    </AbsoluteLayout>
+
+                                    <Label Grid.Row="4"
+                                           Text="{Binding prezzo}"
+                                           FontFamily="Century Gothic"
+                                           FontSize="20"/>
+                                </Grid>
+
+                            </Grid>
+                            </Frame> 
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </RefreshView>
+            
+    </AbsoluteLayout>
+</ContentPage>

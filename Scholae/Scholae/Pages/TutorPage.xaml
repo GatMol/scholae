@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Scholae.TutorPage" Padding="0, 20, 0, 0">
+   <AbsoluteLayout BackgroundColor="#e4e4e4">
+
+        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.21"
+              CornerRadius="30" BackgroundColor="#3b5998">
+           </Frame>
+
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
+                  AbsoluteLayout.LayoutBounds="0.5, 0.003, 130, 100" HorizontalTextAlignment="Center"
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
+
+        <ImageButton AbsoluteLayout.LayoutFlags="All" Source="chata"
+                     AbsoluteLayout.LayoutBounds="0.89, 0.021, 0.06, 0.06 "/>
+
+        <ImageButton AbsoluteLayout.LayoutFlags="All" Source="chatb"
+                     AbsoluteLayout.LayoutBounds="0.91, 0.031, 0.06, 0.06 "/>
+
+        <ImageButton AbsoluteLayout.LayoutFlags="All" Source="impostazioni"
+                     AbsoluteLayout.LayoutBounds="0.06, 0.008, 0.09, 0.09"/>
+
+        <Button AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" FontSize="17" FontAttributes="Bold"
+                AbsoluteLayout.LayoutBounds="0.25, 0.07, 0.1, 0.09"/>
+
+        <Rectangle AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.2, 0.127, 0.3, 0.005"
+               BackgroundColor="#f6f6f6">
+           </Rectangle>
+
+        <Button AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
+                FontSize="17" AbsoluteLayout.LayoutBounds="0.7, 0.073, 0.21, 0.09"/>
+
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.35, 1, 0.6"  VerticalScrollBarVisibility="Always">
+
+                    <StackLayout>
+
+                    <SearchBar  VerticalOptions="Start" 
+                        CancelButtonColor="#3b5998" Text="Clicca per cercare" TextColor="#2f3a56"
+                        FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"/>
+
+                     </StackLayout>
+            </ScrollView>
+            
+        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 1.15, 1, 0.20"
+              CornerRadius="18" BackgroundColor="#3b5998">
+           </Frame>
+
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.99, 1, 0.06">
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="0.2*"/>
+
+                <ColumnDefinition Width="0.2*"/>
+
+                <ColumnDefinition Width="0.2*"/>
+
+                <ColumnDefinition Width="0.2*"/>
+
+                <ColumnDefinition Width="0.2*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Grid.Column="0" Source ="home" WidthRequest="80"/>
+
+            <ImageButton Grid.Column="1" Source ="icona_libro"  WidthRequest="80"/>
+
+            <ImageButton Grid.Column="2" Source ="piu_da_solo"  WidthRequest="80"/>
+
+            <ImageButton Grid.Column="3" Source ="icona_tutor_premuta" WidthRequest="80"/>
+
+            <ImageButton Grid.Column="4" Source ="icona_account"  WidthRequest="80"/>
+
+
+        </Grid>
+
+            
+
+    </AbsoluteLayout>
+</ContentPage>
