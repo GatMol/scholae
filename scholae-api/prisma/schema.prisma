@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Disponibilit_ {
+  Tutor                        String @db.VarChar
+  Id                           BigInt
+  Giorno                       BigInt
+  Inizio                       String @db.VarChar
+  Fine                         String @db.VarChar
+  Giorno_Disponibilit_ToGiorno Giorno @relation(fields: [Giorno], references: [Id])
+  Ora                          Ora    @relation(fields: [Inizio, Fine], references: [OraInizio, OraFine])
+  Tutor_Disponibilit_ToTutor   Tutor  @relation(fields: [Tutor, Id], references: [Utente, Id])
+
+  @@id([Tutor, Id, Giorno, Inizio, Fine])
+  @@map("Disponibilità")
+}
+
+model Giorno {
+  Nome          String          @db.VarChar
+  Id            BigInt          @id
+  Disponibilit_ Disponibilit_[]
+}
+
+model Insegnamento {
+  Materia                       String  @db.VarChar
+  Tutor                         String  @db.VarChar
+  Id                            BigInt
+  Materia_InsegnamentoToMateria Materia @relation(fields: [Materia], references: [Nome])
+  Tutor_InsegnamentoToTutor     Tutor   @relation(fields: [Tutor, Id], references: [Utente, Id])
+
+  @@id([Materia, Tutor, Id])
+}
+
+model Libro {
+  Id                     BigInt         @id
+  ISBN                   String?        @db.VarChar
+  Nome                   String         @db.VarChar
+  Autore                 String         @db.VarChar
+  Edizione               String         @db.VarChar
+  Editore                String         @db.VarChar
+  Prezzo                 BigInt
+  Materia                String         @db.VarChar
+  Utente                 String         @db.VarChar
+  Materia_LibroToMateria Materia        @relation(fields: [Materia], references: [Nome])
+  Utente_LibroToUtente   Utente         @relation(fields: [Utente], references: [E_mail])
+  LibroSalvato           LibroSalvato[]
+}
+
+model LibroSalvato {
+  Libro                       BigInt
+  Utente                      String @db.VarChar
+  Libro_LibroToLibroSalvato   Libro  @relation(fields: [Libro], references: [Id])
+  Utente_LibroSalvatoToUtente Utente @relation(fields: [Utente], references: [E_mail])
+
+  @@id([Libro, Utente])
+}
+
+model Materia {
+  Nome         String         @id @db.VarChar
+  Insegnamento Insegnamento[]
+  Libro        Libro[]
+}
+
+model Ora {
+  OraInizio     String          @db.VarChar
+  OraFine       String          @db.VarChar
+  Disponibilit_ Disponibilit_[]
+
+  @@id([OraInizio, OraFine])
+}
+
+model QualificaTutor {
+  Tutor                       String @db.VarChar
+  Qualifica                   String @db.VarChar
+  Id                          BigInt
+  Tutor_QualificaTutorToTutor Tutor  @relation(fields: [Tutor, Id], references: [Utente, Id])
+
+  @@id([Tutor, Qualifica, Id])
+}
+
+model Tutor {
+  Id                   BigInt
+  Utente               String           @db.VarChar
+  Prezzo_ora           BigInt           @map("Prezzo/ora")
+  Utente_TutorToUtente Utente           @relation(fields: [Utente], references: [E_mail])
+  Disponibilit_        Disponibilit_[]
+  Insegnamento         Insegnamento[]
+  QualificaTutor       QualificaTutor[]
+  TutorSalvati         TutorSalvati[]
+
+  @@id([Id, Utente])
+}
+
+model TutorSalvati {
+  Tutor                       String @db.VarChar
+  Utente                      String @db.VarChar
+  Id                          BigInt
+  Tutor_TutorToTutorSalvati   Tutor  @relation(fields: [Tutor, Id], references: [Utente, Id])
+  Utente_TutorSalvatiToUtente Utente @relation(fields: [Utente], references: [E_mail])
+
+  @@id([Tutor, Utente, Id])
+}
+
+model Utente {
+  E_mail       String         @id @db.VarChar
+  Nome         String         @db.VarChar
+  Cognome      String         @db.VarChar
+  Password     String         @db.VarChar
+  Telefono     Int
+  Citt_        String?        @map("Città") @db.VarChar
+  Lingua       String         @db.VarChar
+  Libro        Libro[]
+  LibroSalvato LibroSalvato[]
+  Tutor        Tutor[]
+  TutorSalvati TutorSalvati[]
+}
