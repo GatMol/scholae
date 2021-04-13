@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
-using Amazon.CognitoIdentity;
 using Amazon;
+using Amazon.CognitoIdentityProvider.Model;
+using System.Diagnostics;
+using Amazon.Extensions.CognitoAuthentication;
 
 namespace Scholae
 {
@@ -22,10 +24,7 @@ namespace Scholae
             BindingContext = this;
         }
 
-        //async void OnRegistrationPage(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushModalAsync(new Registrazione());
-        //}
+      
         async void OnRegistrationPage(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Registrazione());
@@ -75,61 +74,44 @@ namespace Scholae
 
         
 
-        async void Login(object sender, EventArgs e)
+        async void LoginClicked(object sender, EventArgs e)
         {
+            var username = EmailEntry.Text;
+            var password = PasswordEntry.Text;
             
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-            {
-                await DisplayAlert("No internet", "", "Ok");
-                return;
-            }
-
-            /*E' VALIDO SE NON SONO VUOTI E SE E' PRESENTE NEL DATABASE*/
-            /*TODO : CONTROLLO PRESENZA ACCOUNT NEL DATABASE*/
             var isValid = true;
 
-            if(string.IsNullOrEmpty(EmailEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text))
+            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 await DisplayAlert("Error login", "Email e/o password non validi", "Ok");
                 isValid = false;
             }
 
-            //if (string.IsNullOrEmpty(EmailEntry.Text))
-            //{
-            //    VisualStateManager.GoToState(EmailEntry, "Invalid");
-            //    isValid = false;
-            //}
-
-            //else
-            //{
-            //  VisualStateManager.GoToState(EmailEntry, "valid");
-            //}
-
-            //if (string.IsNullOrEmpty(PasswordEntry.Text))
-            //{
-            //    //VisualStateManager.GoToState(PasswordEntry, "Invalid");
-            //    isValid = false;
-            //}
-
-            /*...*/
-            //var service = DependencyService.Get<IStatusBar>();
-            //service?.SetStatusBarColor(isValid ? Color.Green : Color.Red);
-            /*...*/
-
             if (isValid)
             {
                 try
                 {
-                    await SecureStorage.SetAsync("token", PasswordEntry.Text);
+                    await AuthenticateUser(username, password);
+                    Navigation.InsertPageBefore(new TabbedHomePage(), this);
+                    await Navigation.PopAsync();
                 }
                 catch (Exception ex)
                 {
-                    /*device does not support secure storage?*/
+                    LoginErrorHandler(ex);
+                    PasswordEntry.Text = string.Empty;
                 }
-                //await DisplayAlert("Login succeded", "", "Grazie!");
-                //await Clipboard.SetTextAsync("1234");
-                await Navigation.PushAsync(new TabbedHomePage());
             }
+        }
+
+        private async Task AuthenticateUser(string username, string password)
+        {
+            
+        }
+
+        private void LoginErrorHandler(Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            DisplayAlert("Login error", ex.Message, "Close");
         }
 
         protected override async void OnAppearing()
@@ -153,37 +135,6 @@ namespace Scholae
             {
                 // Possible that device doesn't support secure storage on device.
             }
-
-            //Accelerometer.Start(SensorSpeed.Game);
         }
-
-        //private void Accelerometer_ShakeDetected(object sender, EventArgs e)
-        //{
-        //    MainThread.BeginInvokeOnMainThread(() =>
-        //    {
-        //        PasswordEntry.Text = string.Empty;
-        //        EmailEntry.Text = string.Empty;
-        //    });
-        //}
-
-        //private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        //{
-        //    if (e.NetworkAccess == NetworkAccess.Internet)
-        //    {
-        //        LabelConnection.FadeTo(0).ContinueWith((result) => { });
-        //    }
-        //    else
-        //    {
-        //        LabelConnection.FadeTo(1).ContinueWith((result) => { });
-        //    }
-        //}
-
-        //protected override void OnDisappearing()
-        //{
-        //    base.OnDisappearing();
-        //    //Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
-        //    //Accelerometer.ShakeDetected -= Accelerometer_ShakeDetected;
-        //    //Accelerometer.Stop();
-        //}
     }
 }
