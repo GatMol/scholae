@@ -13,9 +13,9 @@
 
     <local:BooksPage  IconImageSource="icona_libro_" />
 
-    <local:TutorPage   IconImageSource="icona_tutoraggio"/>
+    <local:TutorPage   IconImageSource="icona_tutor"/>
 
-    <local:BooksPage   IconImageSource="icona_piu" />
+    <local:SellBooksPage   IconImageSource="icona_piu" />
 
     <local:BooksPage   IconImageSource="icona_chat"/>
 

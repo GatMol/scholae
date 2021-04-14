@@ -14,7 +14,7 @@
 
 
         <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
-                  AbsoluteLayout.LayoutBounds="0.5, -0.03, 130, 100" HorizontalTextAlignment="Center"
+                  AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
 
         <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85"
@@ -51,10 +51,10 @@
                     <Label Text="Tipologia account" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
+                            <TapGestureRecognizer Tapped="tipologia_account_tapped" />
                         </Label.GestureRecognizers>
         
                 </Label>
@@ -72,10 +72,10 @@
                     <Label Text="Libri in vendita" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
+                            <TapGestureRecognizer Tapped="Libri_in_vendita_tapped"/>
                         </Label.GestureRecognizers>
         
                 </Label>
@@ -100,19 +100,15 @@
 
                 <AbsoluteLayout HeightRequest="15">
 
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.273, 1"
+                           Text="Il mio nome" FontSize="14"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
 
                     <Label Text="Nome" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.2, 1"/>
 
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
-                        </Label.GestureRecognizers>
-        
-                </Label>
 
                     
                 </AbsoluteLayout>
@@ -121,19 +117,14 @@
 
                 <AbsoluteLayout HeightRequest="15">
 
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.35, 1"
+                           Text="Il mio cognome" FontSize="14"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
 
                     <Label Text="Cognome" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
-                        </Label.GestureRecognizers>
-        
-                </Label>
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
 
                     
                 </AbsoluteLayout>
@@ -142,19 +133,14 @@
 
                 <AbsoluteLayout HeightRequest="15">
 
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.25, 1"
+                           Text="la mia mail" FontSize="14"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
 
                     <Label Text="E-mail" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
-                        </Label.GestureRecognizers>
-        
-                </Label>
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
 
                     
                 </AbsoluteLayout>
@@ -184,19 +170,14 @@
 
                 <AbsoluteLayout HeightRequest="15">
 
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.15, 1"
+                           Text="Roma" FontSize="14"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
 
                     <Label Text="Città" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
-                        </Label.GestureRecognizers>
-        
-                </Label>
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
 
                     
                 </AbsoluteLayout>
@@ -215,32 +196,13 @@
                            />
                 </AbsoluteLayout>
 
-                <AbsoluteLayout HeightRequest="15">
-
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
-
-                    <Label Text="Lingua" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
-                        </Label.GestureRecognizers>
-        
-                </Label>
-    
-                </AbsoluteLayout>
-
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
 
                 <AbsoluteLayout HeightRequest="15">
 
                     <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
                            Source="icona_avanti"/>
 
-                    <Label Text="Città" BackgroundColor="#e4e4e4"
+                    <Label Text="Notifiche" BackgroundColor="#e4e4e4"
                        Margin="10, 0" TextColor="#2f3a56"
                        FontSize="14" FontAttributes="Bold"
                        AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
@@ -255,7 +217,7 @@
 
                 <Button Text="Esci" TextColor="#df4f4f"
                         BorderColor="#2f3a56" 
-                        CornerRadius="0" BorderWidth="1"
+                        CornerRadius="0" BorderWidth="1.1"
                         Margin="-10, 0"
                         />
 
@@ -267,7 +229,6 @@
 
             </StackLayout>
 
-           
         </ScrollView>
   
     </AbsoluteLayout>

@@ -29,6 +29,6 @@
         <Style TargetType="Entry">
             <Setter Property="FontSize" Value="18"/>
         </Style>
-        
+
     </Application.Resources>
 </Application>

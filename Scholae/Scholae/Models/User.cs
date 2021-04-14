@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Scholae
 {
-    class User
+    public class User
     {
         /*campo password?*/
         public string nome;

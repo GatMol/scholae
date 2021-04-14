@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Scholae.Pages.AccountTypePage"
+    Padding="0, 20, 0, 0">
+
+    <AbsoluteLayout BackgroundColor="#f6f6f6">
+
+        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
+              CornerRadius="30" BackgroundColor="#3b5998"
+               HasShadow="False">
+           </Frame>
+
+
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
+                  AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
+
+        <Button ImageSource="icona_indietro" AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0.05, 0.025, 0.04, 0.04" Clicked="Back_Button_Clicked"/>
+
+        <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85"
+                    Orientation="Vertical" VerticalScrollBarVisibility="Never"
+                    BackgroundColor="#e4e4e4" Scrolled="OnScrollViewScrolled">
+
+                <StackLayout BackgroundColor="#e4e4e4">
+
+                <AbsoluteLayout HeightRequest="1">
+
+                    <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,-0.1, 1, 1"
+                           BackgroundColor="#f6f6f6" BorderColor="#2f3a56"
+                           HasShadow="False" Margin="-10, -1"/>
+
+                </AbsoluteLayout>
+
+                <AbsoluteLayout HeightRequest="30">
+
+                    <Label Text="Privilegi Tutor" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="17" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.5, 0.5, 0.6"
+                       />
+
+                    <Switch x:Name="tutor_switch" ThumbColor="{StaticResource PrimaryColor}"
+                        IsToggled="False" Toggled="tutor_switch_Toggled"
+                        AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.9, 0, 0.1, 0.1"/>
+                    
+                </AbsoluteLayout>
+
+                <AbsoluteLayout HeightRequest="40">
+
+                    <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           BorderColor="#2f3a56" Margin="-10, 0" BackgroundColor="#f6f6f6"
+                           HeightRequest="30" HasShadow="False"
+                           />
+
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.3, 0.9, 0.9, 0.3"
+                           Text="INFORMAZIONI TUTOR" FontSize="14"
+                           FontAttributes="Bold" VerticalTextAlignment="End"
+                           TextColor="#2f3a56"
+                           />
+                </AbsoluteLayout>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Materie" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="15" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+
+                           <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Materie_tapped" />
+                        </Label.GestureRecognizers>
+        
+                    </Label>
+
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.05"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Qualifiche" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="15" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Qualifiche_tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.05"/>
+
+                <AbsoluteLayout HeightRequest="15">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti"/>
+
+                    <Label Text="Prezzo orario" BackgroundColor="#e4e4e4"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="15" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+                    
+                </AbsoluteLayout>
+
+                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.05"/>
+
+                </StackLayout>
+
+           </ScrollView>
+
+
+    </AbsoluteLayout>
+</ContentPage>
+

@@ -86,6 +86,12 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Refractored.MvvmHelpers">
+      <Version>1.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="linq2db">
+      <Version>3.2.3</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -98,7 +104,6 @@
     <Folder Include="Assets.xcassets\chata.imageset\" />
     <Folder Include="Assets.xcassets\chatb.imageset\" />
     <Folder Include="Assets.xcassets\home.imageset\" />
-    <Folder Include="Assets.xcassets\icona_libro.imageset\" />
     <Folder Include="Assets.xcassets\icona_libro_premuta.imageset\" />
     <Folder Include="Assets.xcassets\icona_tutor.imageset\" />
     <Folder Include="Assets.xcassets\icona_tutor_premuta.imageset\" />
@@ -114,19 +119,28 @@
     <Folder Include="Assets.xcassets\icona_tutor.imageset\" />
     <Folder Include="Assets.xcassets\icona_avanti.imageset\" />
     <Folder Include="Assets.xcassets\icona_piu.imageset\" />
+    <Folder Include="Assets.xcassets\icona_libro_.imageset\" />
+    <Folder Include="Assets.xcassets\icona_libro_.imageset\" />
+    <Folder Include="Assets.xcassets\icona_indietro.imageset\" />
+    <Folder Include="Assets.xcassets\icona_piu_verde.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icona_account.imageset\icona_account.png" />
     <ImageAsset Include="Assets.xcassets\icona_chat.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icona_chat.imageset\icona_chat.png" />
-    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\icona_libro_.png" />
     <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\icona_avanti.png" />
     <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\icona_tutor.png" />
     <ImageAsset Include="Assets.xcassets\icona_piu.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icona_piu.imageset\icona_piu.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icona_libro_.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icona_libro_.imageset\icona_libro_.png" />
+    <ImageAsset Include="Assets.xcassets\icona_indietro.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icona_indietro.imageset\icona_indietro.png" />
+    <ImageAsset Include="Assets.xcassets\icona_piu_verde.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icona_piu_verde.imageset\icona_piu_verde.png" />
   </ItemGroup>
 </Project>

@@ -14,7 +14,6 @@ namespace Scholae
     public partial class MainPage : ContentPage
     {
 
-
         public MainPage()
         {
             Device.SetFlags(new string[] { "Shapes_Experimental" });
