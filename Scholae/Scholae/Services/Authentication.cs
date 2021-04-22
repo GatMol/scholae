@@ -1,7 +1,7 @@
-﻿using Amazon.Extensions.CognitoAuthentication;
+﻿using Amazon.CognitoIdentityProvider.Model;
+using Amazon.Extensions.CognitoAuthentication;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Scholae.Services
@@ -23,6 +23,14 @@ namespace Scholae.Services
             AuthFlowResponse authResponse = await user.StartWithSrpAuthAsync(authRequest).ConfigureAwait(false);
             var accessToken = authResponse.AuthenticationResult.AccessToken;
             return accessToken;
+        }
+
+        public static List<AttributeType> GetUserAttributes(string accessToken)
+        {
+            var getUserAttributesRequest = new GetUserRequest { AccessToken = accessToken };
+            var getUser = AmazonUtils.IdentityProviderClient.GetUserAsync(getUserAttributesRequest);
+            var userAttributes = getUser.Result.UserAttributes;
+            return userAttributes;
         }
     }
 }

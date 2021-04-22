@@ -7,12 +7,19 @@ namespace Scholae
     public class Utente
     {
         /*campo password?*/
-        public string nome;
-        public string cognome;
-        public string email;
-        public long numeroTelefono;
-        public string lingua;
-        public string citta;
+        private string nome;
+        private string cognome;
+        private string email;
+        private long numeroTelefono;
+        private string lingua;
+        private string citta;
+
+        public string Nome { get => nome; set => nome = value; }
+        public string Cognome { get => cognome; set => cognome = value; }
+        public string Email { get => email; set => email = value; }
+        public long NumeroTelefono { get => numeroTelefono; set => numeroTelefono = value; }
+        public string Lingua { get => lingua; set => lingua = value; }
+        public string Citta { get => citta; set => citta = value; }
 
         public Utente(string nome, string cognome, string email, long numeroTelefono, string lingua, string citta)
         {
@@ -31,67 +38,6 @@ namespace Scholae
             this.cognome = cognome;
             this.email = email;
             this.lingua = lingua;
-            this.citta = citta;
-        }
-
-        /*inizio getter setter*/
-        public string getNome()
-        {
-            return this.nome;
-        }
-
-        public void setNome(string nome)
-        {
-            this.nome = nome;
-        }
-
-        public string getCognome()
-        {
-            return this.cognome;
-        }
-
-        public void setCognome(string cognome)
-        {
-            this.cognome = cognome;
-        }
-
-        public string getEmail()
-        {
-            return this.email;
-        }
-
-        public void setEmail(string email)
-        {
-            this.email = email;
-        }
-
-        public long getNumeroTelefono()
-        {
-            return this.numeroTelefono;
-        }
-
-        public void setNumeroDiTelefono(long numeroTelefono)
-        {
-            this.numeroTelefono = numeroTelefono;
-        }
-
-        public string getLingua()
-        {
-            return this.lingua;
-        }
-
-        public void setLingua(string lingua)
-        {
-            this.lingua = lingua;
-        }
-
-        public string getCitta()
-        {
-            return this.citta;
-        }
-
-        public void setCitta(string citta)
-        {
             this.citta = citta;
         }
 

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Npgsql;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,11 +11,27 @@ namespace Scholae
 {
     public partial class App : Application
     {
+        private string _email;
+        private static string token;
 
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            _ = GetCurrentUser();
+            MainPage = _email != null ? new NavigationPage(new TabbedHomePage()) : new NavigationPage(new LoginPage());
+        }
+
+        private async Task GetCurrentUser()
+        {
+            try
+            {
+                _email = await SecureStorage.GetAsync("email");
+                token = await SecureStorage.GetAsync("token");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
         }
 
         protected override void OnStart()

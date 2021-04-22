@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 router.post("/signup", async (req, res, next) => {
-    const user = await db.utente.findUnique({ where: { E_mail: req.body.email } })
+    const user = await db.utente.findUnique({ where: { Email: req.body.email } })
         .catch((err) => {
             console.log(err);
             return res.status(500).json({
@@ -26,12 +26,12 @@ router.post("/signup", async (req, res, next) => {
             }
             else {
                 const newUtente = {
-                    E_mail: req.body.email,
+                    Email: req.body.email,
                     Nome: req.body.nome,
                     Cognome: req.body.cognome,
                     Password: hash,
                     Telefono: req.body.telefono,
-                    Lingua: req.body.lingua
+                    Nazionalita: req.body.nazionalita
                 }
 
                 db.utente.create({ data: newUtente })
@@ -51,7 +51,7 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
-    const user = await db.utente.findFirst({ where: { E_mail: req.body.email } })
+    const user = await db.utente.findFirst({ where: { Email: req.body.email } })
         .catch((err) => {
             console.log(err);
             return res.status(500).json({
@@ -75,7 +75,7 @@ router.post("/login", async (req, res, next) => {
             if (result) {
                 const token = jwt.sign(
                     {
-                        email: user.E_mail,
+                        email: user.Email,
                     },
                     process.env.JWT_KEY,
                     {

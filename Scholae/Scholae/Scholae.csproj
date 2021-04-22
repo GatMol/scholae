@@ -43,6 +43,9 @@
     <Compile Update="Pages\BooksPage.xaml.cs">
       <DependentUpon>BooksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\TabbedHomePage.xaml.cs">
       <DependentUpon>TabbedHomePage.xaml</DependentUpon>
     </Compile>
