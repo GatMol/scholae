@@ -130,7 +130,7 @@
                 FontAttributes="Bold"
                 CornerRadius="20"
                 BackgroundColor="{x:StaticResource SecondaryColor}"
-                Clicked="Login"/>
+                Clicked="LoginClicked"/>
 
         <!--<Label
             x:Name="LabelConnection"

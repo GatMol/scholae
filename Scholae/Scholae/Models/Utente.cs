@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Scholae
 {
-    public class User
+    public class Utente
     {
         /*campo password?*/
         public string nome;
@@ -14,7 +14,7 @@ namespace Scholae
         public string lingua;
         public string citta;
 
-        public User(string nome, string cognome, string email, long numeroTelefono, string lingua, string citta)
+        public Utente(string nome, string cognome, string email, long numeroTelefono, string lingua, string citta)
         {
             this.nome = nome;
             this.cognome = cognome;
@@ -25,7 +25,7 @@ namespace Scholae
         }
 
         /*costruttore senza numero di telefono*/
-        public User(string nome, string cognome, string email, string lingua, string citta)
+        public Utente(string nome, string cognome, string email, string lingua, string citta)
         {
             this.nome = nome;
             this.cognome = cognome;
@@ -98,7 +98,7 @@ namespace Scholae
         /*Equals e hashCode*/
         public override bool Equals(object obj)
         {
-            return obj is User user &&
+            return obj is Utente user &&
                    email == user.email;
         }
 

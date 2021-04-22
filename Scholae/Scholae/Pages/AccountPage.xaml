@@ -14,7 +14,7 @@
 
 
         <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
-                  AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
+                  AbsoluteLayout.LayoutBounds="0.5, -0.03, 130, 100" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
 
         <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85"
