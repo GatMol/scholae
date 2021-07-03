@@ -14,7 +14,7 @@ namespace Scholae.ViewModels
 
         }
 
-        public User Utente
+        public Utente Utente
         {
             get;
             set;

@@ -7,24 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Utente {
-  Id           BigInt         @id @default(autoincrement())    
-  Email        String         @db.VarChar @unique
-  Nome         String         @db.VarChar
-  Cognome      String         @db.VarChar
-  Password     String         @db.VarChar
-  Telefono     String         @db.VarChar
-  Citta        String?        @db.VarChar
-  Nazionalita  String         @db.VarChar
-  Libro        Libro[]
-  LibroSalvato LibroSalvato[]
-}
-
-model Materia {
-  Nome         String         @id @db.VarChar
-  Libro        Libro[]
-}
-
 model Libro {
   Id                     BigInt         @id @default(autoincrement())
   ISBN                   String?        @db.VarChar
@@ -34,7 +16,7 @@ model Libro {
   Editore                String         @db.VarChar
   Prezzo                 Decimal        @db.Money
   Materia                String         @db.VarChar
-  Utente                 BigInt         
+  Utente                 BigInt
   Materia_LibroToMateria Materia        @relation(fields: [Materia], references: [Nome])
   Utente_LibroToUtente   Utente         @relation(fields: [Utente], references: [Id])
   LibroSalvato           LibroSalvato[]
@@ -42,11 +24,27 @@ model Libro {
 
 model LibroSalvato {
   Libro                       BigInt
-  Utente                      BigInt 
+  Utente                      BigInt
   Libro_LibroToLibroSalvato   Libro  @relation(fields: [Libro], references: [Id])
   Utente_LibroSalvatoToUtente Utente @relation(fields: [Utente], references: [Id])
 
   @@id([Libro, Utente])
 }
 
+model Materia {
+  Nome  String  @id @db.VarChar
+  Libro Libro[]
+}
 
+model Utente {
+  Id           BigInt         @id @default(autoincrement())
+  Email        String         @unique @db.VarChar
+  Nome         String         @db.VarChar
+  Cognome      String         @db.VarChar
+  Password     String         @db.VarChar
+  Telefono     String         @db.VarChar
+  Citta        String?        @db.VarChar
+  Nazionalita  String         @db.VarChar
+  Libro        Libro[]
+  LibroSalvato LibroSalvato[]
+}

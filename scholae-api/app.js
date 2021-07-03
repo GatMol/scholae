@@ -14,6 +14,9 @@ const pool = new Pool({
 });
 
 const utenteRoute = require('./routes/utente');
+const libroRoute = require('./routes/libro');
+const materiaRoute = require('./routes/materia');
+const libroSalvatoRoute = require("./routes/libroSalvato");
 
 app.use(cors());
 app.use(morgan('dev'));
@@ -40,6 +43,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/utente", utenteRoute);
+app.use("/libro", libroRoute);
+app.use("/materia", materiaRoute);
+app.use("/libroSalvato", libroSalvatoRoute);
 
 /*if request reaches this line, return error because we don't handle that path*/
 app.use((req, res, next) => {
@@ -49,7 +55,7 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-    res.status(err.status || 500);
+    res.status(error.status || 500);
     res.json({
         error: {
             message: error.message
