@@ -37,7 +37,7 @@ namespace Scholae
                     await DisplayAlert("Errore", "Password non coincidenti", "Ok");
                 else
                 {
-                    var connectionString = "";
+                    var connectionString = "host=scholae-database.cu9bh0ufrged.us-east-2.rds.amazonaws.com;database=myDB;username=gatto;password=scholaemobile2021";
                     var conn = new NpgsqlConnection(connectionString);
                     await conn.OpenAsync();
                     /*metti nel database cryptando password*/

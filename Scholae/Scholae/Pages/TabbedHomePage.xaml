@@ -11,11 +11,11 @@
             UnselectedTabColor="#f6f6f6"
             >
 
-    <local:BooksPage  IconImageSource="icona_libro_" />
+    <local:BooksPage  IconImageSource="icona_libro"/>
 
     <local:TutorPage   IconImageSource="icona_tutor"/>
 
-    <local:SellBooksPage   IconImageSource="icona_piu" />
+    <local:SellBooksPage   IconImageSource="icona_piu"/>
 
     <local:BooksPage   IconImageSource="icona_chat"/>
 

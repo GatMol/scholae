@@ -14,6 +14,8 @@ namespace Scholae
         public BooksPage()
         {
             InitializeComponent();
+
+            LV.BindingContext = new LibriViewModels();
         }
 
 

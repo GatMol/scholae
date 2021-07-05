@@ -9,6 +9,17 @@ namespace Scholae.ViewModels
 
         }
 
+        public Libro(long id, String nome, String ISBN, String autore, String editore, String edizione, int prezzo)
+        {
+            this.id = id;
+            this.Nome = nome;
+            this.Isbn = ISBN;
+            this.Autore = autore;
+            this.Editore = editore;
+            this.Edizione = edizione;
+            this.Prezzo = prezzo;
+        }
+
         public long id
         {
             get;
@@ -22,7 +33,7 @@ namespace Scholae.ViewModels
             set;
         }
 
-        public String ISBN
+        public String Isbn
         {
             get;
             set;
