@@ -1,38 +1,36 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Scholae.TutorPage" Padding="0, 20, 0, 0">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Scholae.Pages.LibriInVenditaPage" Padding="0, 20, 0, 0">
 
-     <AbsoluteLayout BackgroundColor="#e4e4e4">
+    <AbsoluteLayout BackgroundColor="{StaticResource TextColorLight}">
 
         <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
-              CornerRadius="30" BackgroundColor="#3b5998">
+              CornerRadius="30" BackgroundColor="#3b5998"
+               HasShadow="False">
            </Frame>
+
 
         <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
                   AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
 
-        <Button AbsoluteLayout.LayoutFlags="All" Text="Tutor" TextColor="#f6f6f6" FontSize="17" FontAttributes="Bold"
-                AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"/>
+        <Button ImageSource="icona_indietro" AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0.05, 0.025, 0.04, 0.04" Clicked="Back_Button_Clicked"/>
 
-        <Rectangle AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.21, 0.115, 0.3, 0.005"
-               BackgroundColor="#f6f6f6">
-           </Rectangle>
+        <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.1, 0.41, 0.8, 0.6"
+               Text="Libri in vendita" FontSize="15"
+               BackgroundColor="{x:StaticResource BackgroundAppLight}" TextColor="#2f3a56"
+               FontAttributes="Bold"
+               />
 
-        <Button AbsoluteLayout.LayoutFlags="All" Text="I miei tutor" TextColor="#f6f6f6"
-                FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"/>
+        <Line AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.19, 1, 0.002"
+              BackgroundColor="{x:StaticResource TextColorDark}"/>
 
-        <SearchBar  VerticalOptions="Start" AbsoluteLayout.LayoutFlags="All"
-                    AbsoluteLayout.LayoutBounds="0, 0.15, 1, 0.05"
-                    CancelButtonColor="#3b5998" Text="Clicca per cercare" TextColor="#2f3a56"
-                    FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"/>
-
-            <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                         Command="{Binding RefreshCommand}"
-                         AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0, 0.32, 1, 0.6">
-
-                <CollectionView
-                    
+        <CollectionView
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0, 0.49, 1, 0.6"
                     x:Name="LV"
                     VerticalScrollBarVisibility="Default"
                     Margin="10, 0" BackgroundColor="#e4e4e4">
@@ -110,7 +108,7 @@
 
                 </CollectionView>
 
-            </RefreshView>
-            
+        
+
     </AbsoluteLayout>
 </ContentPage>

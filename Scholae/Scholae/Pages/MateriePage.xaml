@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Scholae.Pages.MateriePage"
+    Padding="0, 20, 0, 0">
+
+    <AbsoluteLayout BackgroundColor="{StaticResource BackgroundAppLight}">
+
+        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
+              CornerRadius="30" BackgroundColor="#3b5998"
+               HasShadow="False">
+           </Frame>
+
+
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
+                  AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
+
+        <Button ImageSource="icona_indietro" AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0.05, 0.025, 0.04, 0.04" Clicked="Back_Button_Clicked"/>
+
+
+        <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.1, 0.41, 0.8, 0.6"
+               Text="MATERIE" FontSize="14"
+               BackgroundColor="{x:StaticResource BackgroundAppLight}" TextColor="#2f3a56"
+               FontAttributes="Bold"
+               />
+
+        <Line AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.19, 1, 0.002"
+              BackgroundColor="{x:StaticResource TextColorDark}"/>
+
+        <Entry AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.202, 1, 0.05"
+                BackgroundColor="{StaticResource LightGrey}" Text="Aggiungi materia"
+                FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextColorDark}"
+                VerticalTextAlignment="Center">
+
+         </Entry>
+
+        <Image Source="icona_piu_verde"
+               AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.98, 0.202, 0.07, 0.05"
+               BackgroundColor="{StaticResource LightGrey}"/>
+
+        
+        
+        </AbsoluteLayout>
+</ContentPage>
