@@ -466,3 +466,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+Scholae/Scholae/Scholae.csproj
+Scholae/Scholae.Android/Scholae.Android.csproj
+Scholae/Scholae.iOS/Scholae.iOS.csproj
