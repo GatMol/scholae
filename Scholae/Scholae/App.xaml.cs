@@ -12,7 +12,7 @@ namespace Scholae
     public partial class App : Application
     {
         private string _email;
-        private static string token;
+        public static string token;
 
         public App()
         {

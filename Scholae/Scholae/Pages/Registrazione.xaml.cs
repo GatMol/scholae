@@ -8,7 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using Npgsql;
-
+using Scholae.Services;
+using System.Diagnostics;
 
 namespace Scholae
 {
@@ -27,9 +28,16 @@ namespace Scholae
 
         async void Registration(object sender, EventArgs e)
         {
+            string nome = NomeEntry.Text;
+            string cognome = CognomeEntry.Text;
+            string email = EmailEntry.Text;
+            string password = PasswordEntry.Text;
+            long telefono = long.Parse(NumeroDiTelefonoEntry.Text);
+            string nazionalita = NazionalitaEntry.Text;
+            string citta = CittaEntry.Text;
+            //TODO: VALIDAZIONE DATI
             /* controllo che i dati siano giusti (altrimenti popUp) e che possa metterli nel database (altrimenti popup)*/
             /* allora li metto nel database e torno alla homepage da cui accedo con i dati messi qui*/
-            //await Navigation.PopToRootAsync();
             if (InvalidData())
                 await DisplayAlert("Errore", "Campi non validi", "Ok");
             else {
@@ -37,24 +45,10 @@ namespace Scholae
                     await DisplayAlert("Errore", "Password non coincidenti", "Ok");
                 else
                 {
-                    var connectionString = "";
-                    var conn = new NpgsqlConnection(connectionString);
-                    await conn.OpenAsync();
-                    /*metti nel database cryptando password*/
-                    using (var cmd = new NpgsqlCommand("INSERT INTO public.\"Utente\" VALUES (@email,@nome,@cognome,@password,@tel,@citta,@lingua)"
-                        , conn))
-                    {
-                        cmd.Parameters.AddWithValue("email", EmailEntry.Text);
-                        cmd.Parameters.AddWithValue("nome", NomeEntry.Text);
-                        cmd.Parameters.AddWithValue("cognome", CognomeEntry.Text);
-                        cmd.Parameters.AddWithValue("password", PasswordEntry.Text);
-                        cmd.Parameters.AddWithValue("tel", long.Parse(NumeroDiTelefonoEntry.Text));
-                        cmd.Parameters.AddWithValue("citta", CittaEntry.Text);
-                        cmd.Parameters.AddWithValue("lingua", LinguaEntry.Text);
-                        cmd.ExecuteNonQuery();
-                    }
-                    await conn.CloseAsync();
-                    await Navigation.PushAsync(new TabbedHomePage());
+                    Utente u = new Utente(nome, cognome, email, password, telefono, nazionalita, citta);
+                    Debug.WriteLine(u.ToString());
+                    APIConnector.Signup(u);
+                    await Navigation.PopToRootAsync();
                 }
             }
         }
@@ -71,8 +65,6 @@ namespace Scholae
         private bool InvalidVerificationPassword()
         {
             return !string.Equals(PasswordEntry.Text, VerificaPasswordEntry.Text);
-        }
-
-    
+        }   
     }
 }

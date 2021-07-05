@@ -31,6 +31,7 @@ router.post("/signup", async (req, res, next) => {
                     Cognome: req.body.cognome,
                     Password: hash,
                     Telefono: req.body.telefono,
+                    Citta: req.body.citta,
                     Nazionalita: req.body.nazionalita
                 }
 
@@ -60,7 +61,6 @@ router.post("/login", async (req, res, next) => {
         });
 
     if (user === null) {
-        console.log(err);
         return res.status(401).json({
             message: 'Auth failed'
         });

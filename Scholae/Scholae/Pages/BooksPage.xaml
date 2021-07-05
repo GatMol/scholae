@@ -35,7 +35,7 @@
                          AbsoluteLayout.LayoutBounds="0, 0.32, 1, 0.6">
 
                 <CollectionView
-                    ItemsSource="Binding Libro"
+                    
                     x:Name="LV"
                     VerticalScrollBarVisibility="Default"
                     Margin="10, 0" BackgroundColor="#e4e4e4">

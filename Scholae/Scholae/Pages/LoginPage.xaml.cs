@@ -26,7 +26,6 @@ namespace Scholae
         {
             var email = EmailEntry.Text;
             var password = PasswordEntry.Text;
-            
             var isValid = true;
 
             if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
@@ -34,14 +33,11 @@ namespace Scholae
                 await DisplayAlert("Error login", "Email e/o password non validi", "Ok");
                 isValid = false;
             }
-
             if (isValid)
             {
                 try
                 {
                     await AuthenticateUser(email, password);
-                    Navigation.InsertPageBefore(new TabbedHomePage(), this);
-                    await Navigation.PopAsync();
                 }
                 catch (Exception ex)
                 {
@@ -53,14 +49,25 @@ namespace Scholae
 
         private async Task AuthenticateUser(string email, string password)
         {
-            var authentication = new Authentication(email);
-            var accessToken = await authentication.AuthenticateUser(password);
-            var userAttributes = Authentication.GetUserAttributes(accessToken);
+            //var authentication = new Authentication(email);
+            //var accessToken = await authentication.AuthenticateUser(password);
+            //var userAttributes = Authentication.GetUserAttributes(accessToken);
             //TODO: Crea connessione con API e scrivi metodi per user e libri 
             //TokenResponse token = API.GetToken(userAttributes.First().Value);
-            await SecureStorage.SetAsync("email", userAttributes.First().Value);
-            await SecureStorage.SetAsync("accessToken", accessToken);
+            //await SecureStorage.SetAsync("email", userAttributes.First().Value);
+            //await SecureStorage.SetAsync("accessToken", accessToken);
             //await SecureStorage.SetAsync("token", token.toString());
+            var response = APIConnector.Login(email, password);
+            if(!response.IsSuccessful)
+            {
+                await DisplayAlert("Login fallito", "Email e/o password errati", "Riprova");
+                PasswordEntry.Text = string.Empty;
+            }
+            else
+            {
+                Navigation.InsertPageBefore(new TabbedHomePage(), this);
+                await Navigation.PopAsync();
+            }
         }
 
         private void LoginErrorHandler(Exception ex)
