@@ -15,20 +15,20 @@ model Libro {
   Edizione               String         @db.VarChar
   Editore                String         @db.VarChar
   Prezzo                 Decimal        @db.Money
-  Materia                String         @db.VarChar
-  Utente                 BigInt
-  Materia_LibroToMateria Materia        @relation(fields: [Materia], references: [Nome])
-  Utente_LibroToUtente   Utente         @relation(fields: [Utente], references: [Id])
+  Materia_id             String         @db.VarChar
+  Utente_id              BigInt         
+  Materia                Materia        @relation(fields: [Materia_id], references: [Nome])
+  Utente                 Utente         @relation(fields: [Utente_id], references: [Id])
   LibroSalvato           LibroSalvato[]
 }
 
 model LibroSalvato {
-  Libro                       BigInt
-  Utente                      BigInt
-  Libro_LibroToLibroSalvato   Libro  @relation(fields: [Libro], references: [Id])
-  Utente_LibroSalvatoToUtente Utente @relation(fields: [Utente], references: [Id])
+  Libro_id                       BigInt
+  Utente_id                      BigInt
+  Libro                          Libro  @relation(fields: [Libro_id], references: [Id])
+  Utente                         Utente @relation(fields: [Utente_id], references: [Id])
 
-  @@id([Libro, Utente])
+  @@id([Libro_id, Utente_id])
 }
 
 model Materia {

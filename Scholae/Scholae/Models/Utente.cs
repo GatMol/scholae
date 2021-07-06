@@ -21,6 +21,19 @@ namespace Scholae
         public string Nazionalita { get => nazionalita; set => nazionalita = value; }
         public string Citta { get => citta; set => citta = value; }
         public string Password{ get => password; }
+        public string NomeCognome { get
+            {
+                return Nome + " " + Cognome;
+            }
+            set
+            {
+            }
+        }
+
+        public Utente()
+        {
+
+        }
 
         public Utente(string nome, string cognome, string email, string password, long numeroTelefono, string nazionalita, string citta)
         {

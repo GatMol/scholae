@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Newtonsoft.Json;
+using Scholae.ViewModels;
 
 namespace Scholae.Services
 {
@@ -37,6 +39,24 @@ namespace Scholae.Services
                     password = password
                 });
             return client.Execute(request);
+        }
+
+        public static List<Libro> GetAllLibri()
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest("/libro", Method.GET);
+            IRestResponse response = client.Execute(request);
+            List<Libro> allLibri = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
+            return allLibri;
+        }
+
+        public static List<Libro> GetLibroPerNome(String nome)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/libro/cercaPerNome/{nome}" , Method.GET);
+            IRestResponse response = client.Execute(request);
+            List<Libro> libriPerNome = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
+            return libriPerNome;
         }
     }
 }

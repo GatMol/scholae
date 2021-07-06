@@ -1,43 +1,105 @@
 ﻿using MvvmHelpers;
+using Scholae.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Scholae.ViewModels
 {
-    public class LibriViewModels
+    public class LibriViewModels : INotifyPropertyChanged
     {
 
         public List<Libro> libri { get; set; }
 
+        public string testoSearchBar { get; set; }
+
         public ObservableRangeCollection<Libro> LibriDaMostrare
         {
-            get;
-            set;
+            get {
+                return libriDaMostrare;
+            }
+            set
+            {
+                libriDaMostrare = value;
+                OnPropertyChanged();
+            }
         }
 
 
         private ObservableRangeCollection<Libro> libriDaMostrare;
 
+        bool isRefreshing;
+
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set
+            {
+                isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+
+        const int RefreshDuration = 2;
+
+        public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
+
+        public ICommand PerformSearch => new Command<string>((string nome) =>
+        {
+            CercaPerNome(nome);
+        });
+
         public LibriViewModels()
         {
-
             InitData();
         }
 
         private void InitData()
         {
-            libri = new List<Libro>();
-            for (int i = 0; i < 10; i++)
+            libri = APIConnector.GetAllLibri();
+            /*for (int i = 0; i < 10; i++)
             {
                 Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);
                 libri.Add(libro);
-            }
+            }*/
+            Debug.WriteLine(libri.Count());
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
+            Debug.WriteLine(LibriDaMostrare.Count());
+        }
+
+        async Task RefreshItemsAsync()
+        {
+            IsRefreshing = true;
+            await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
+            if (testoSearchBar == null || testoSearchBar.Equals(""))
+                InitData();
+            else
+                PerformSearch.Execute(testoSearchBar);
+            IsRefreshing = false;
+        }
+
+        public void CercaPerNome(String nome)
+        {
+            libri = APIConnector.GetLibroPerNome(nome);
             LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
         }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

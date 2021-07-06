@@ -3,6 +3,11 @@ const prisma = require('../services/database');
 const router = express.Router();
 const db = require("../services/database");
 
+BigInt.prototype.toJSON = function() {       
+    return this.toString()
+  }
+  
+
 router.post("/", async (req, res, next)=> {
     const newLibro = {
         ISBN: req.body.ISBN,
@@ -29,7 +34,24 @@ router.post("/", async (req, res, next)=> {
 });
 
 router.get("/", async (req, res, next) => {
-   await prisma.libro.findMany().then(result => {
+   await prisma.libro.findMany({
+       select: {
+        Id: true,
+        Nome: true,
+        ISBN: true,
+        Autore: true,
+        Editore: true,
+        Edizione: true,
+        Prezzo: true,
+        Materia: true,
+        Utente:{
+            select:{
+                Nome: true,
+                Cognome: true
+            }
+        } 
+       }
+   }).then(result => {
         res.status(200).json(result);
     })
     .catch(err => {
@@ -39,23 +61,50 @@ router.get("/", async (req, res, next) => {
     });
 });
 
-router.get("/nome", async (req, res, next) => {
-    const libri = await prisma.libro.findUnique()({
+router.get("/cercaPerNome/:nome", async (req, res, next) => {
+    const nome = req.params.nome + '%';
+    const result = await prisma.libro.findMany({
+        select: {
+            Id: true,
+            Nome: true,
+            ISBN: true,
+            Autore: true,
+            Editore: true,
+            Edizione: true,
+            Prezzo: true,
+            Materia: true,
+            Utente:{
+                select:{
+                    Nome: true,
+                    Cognome: true
+                }
+            } 
+        },
         where: {
-            Nome: req.params.nome
+            OR: [
+
+            {
+                Nome: {
+                startsWith: nome
+                }
+            },
+            {
+                Materia_id: {
+                    startsWith: nome
+                }
+            }  
+        ]
         }
-    }).catch((err) => {
+    })
+    .catch((err) => {
         return res.status(500).json({
             error: err
         });
     });
-
-    return res.json({
-        Id: libri.Id
-    });
+    res.status(200).json(result);
 });
 
-router.get("/materia", async (req, res, next) => {
+/*router.get("/:materia", async (req, res, next) => {
     const libri = await prisma.libro.findUnique({
         where: {
             Materia: req.params.materia
@@ -69,21 +118,30 @@ router.get("/materia", async (req, res, next) => {
     return res.json({
         Id: libri.Id
     });
-});
+});*/
 
-router.get("/:libroId", (req, res) => {
-    prisma.libro.findUnique({
+router.get("/cercaPerId/:libroId", async (req, res) => {
+    req.data = await db.libro.findUnique({
         where: {
             Id: parseInt(req.params.libroId)
+        },
+        select: {
+            Id: true,
+            Nome: true,
+            Autore: true,
+            Editore: true,
+            Prezzo: true,
+            Materia: true,
+            Utente: true
         }
     }).then(result => {
-        res.status(200).json(result);
-    })
-    .catch(err => {
-        res.status(500).json({
-            error: err
-        });
-    });
+         res.status(200).json(result);
+     })
+     .catch(err => {
+         res.status(500).json({
+             error: err
+         });
+     });
 });
 
 router.delete("/:libroId", async (req, res, next) => {

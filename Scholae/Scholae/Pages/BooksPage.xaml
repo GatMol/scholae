@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Scholae.ViewModels"
              x:Class="Scholae.BooksPage" Padding="0, 20, 0, 0"
              >
+
+    <ContentPage.BindingContext>
+        <local:LibriViewModels/>
+    </ContentPage.BindingContext>
 
     <AbsoluteLayout BackgroundColor="#e4e4e4">
 
@@ -12,32 +16,39 @@
 
         <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
                   AbsoluteLayout.LayoutBounds="0.5,0.015, 130, 100" HorizontalTextAlignment="Center"
-                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
 
-        <Button AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" FontSize="17" FontAttributes="Bold"
-                AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"/>
+        <Label AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" FontSize="17" FontAttributes="Bold"
+               AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"
+               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
         <Rectangle AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.21, 0.115, 0.3, 0.005"
                BackgroundColor="#f6f6f6">
            </Rectangle>
 
-        <Button AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
-                FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"/>
+        <Label AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
+               FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"
+               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-        <SearchBar  VerticalOptions="Start" AbsoluteLayout.LayoutFlags="All"
+        <SearchBar  x:Name="searchBar"
+                    VerticalOptions="Start" AbsoluteLayout.LayoutFlags="All"
                     AbsoluteLayout.LayoutBounds="0, 0.15, 1, 0.05"
-                    CancelButtonColor="#3b5998" Text="Clicca per cercare" TextColor="#2f3a56"
-                    FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"/>
+                    CancelButtonColor="#3b5998" Placeholder="Cerca per nome o materia"
+                    Text="{Binding testoSearchBar, Mode=OneWayToSource}" TextColor="#2f3a56"
+                    FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"
+                    SearchCommand="{Binding PerformSearch}"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar} }"
+                    />
 
-            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+            <RefreshView x:Name="LR" IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                          Command="{Binding RefreshCommand}"
                          AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 1, 1, 0.79">
 
                 <CollectionView
-                    ItemsSource="{Binding LibriDaMostrare}"
+                    ItemsSource="{Binding LibriDaMostrare, Mode=TwoWay}"
                     x:Name="LV"
-                    VerticalScrollBarVisibility="Default"
+                    VerticalScrollBarVisibility="Never"
                     Margin="10, 0" BackgroundColor="#e4e4e4">
 
                     <CollectionView.ItemsLayout>
@@ -50,7 +61,7 @@
                         <DataTemplate>
                             <Frame Padding="5" HasShadow="False"
                                    CornerRadius="30" BackgroundColor="#f6f6f6"
-                                   HeightRequest="150"
+                                   HeightRequest="160"
                                    >
                                 <Grid>
                                 <Grid.ColumnDefinitions>
@@ -59,9 +70,13 @@
                                 </Grid.ColumnDefinitions>
                                    
                                 <Image HorizontalOptions="Center"
-                                       VerticalOptions="Center" Grid.Column="0"
-                                       Source="icona_tutor"
-                                       BackgroundColor="Black"
+                                       VerticalOptions="Center"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="1"
+                                       Source="foto_libro"
+                                       HeightRequest="140"
+                                       WidthRequest="110"
+                                       Grid.Row="0"
                                        Grid.RowSpan="5"
                                        />
 
@@ -83,6 +98,7 @@
                                     <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
                                            Grid.Row="0" Grid.Column="1"
+                                           Grid.ColumnSpan="2"
                                            Text="{Binding Nome}"
                                            FontFamily="Century Gothic"
                                            FontAttributes="Bold"
@@ -92,39 +108,40 @@
                                     <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
                                            Grid.Row="1" Grid.Column="1"
+                                           Grid.ColumnSpan="2"
                                            Text="{Binding Autore}"
                                            FontFamily="Century Gothic"
-                                           FontSize="14"
+                                           FontSize="18"
                                            />
 
                                     <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
                                            Grid.Row="2" Grid.Column="1"
-                                           Text="{Binding Editore}"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding Edizione}"
                                            FontFamily="Century Gothic"
-                                           FontSize="14"/>
+                                           FontSize="18"/>
 
-                                    <AbsoluteLayout Grid.Row="3">
-                                        <Image AbsoluteLayout.LayoutFlags="PositionProportional"
-                                               Source="icona_account"
-                                               AbsoluteLayout.LayoutBounds="0, 0"/>
-                                        <!--<Image AbsoluteLayout.LayoutFlags="PositionProportional"
-                                               Source="{Binding stelline}"
-                                               AbsoluteLayout.LayoutBounds="0, 0.3"/>-->
-                                    </AbsoluteLayout>
+                                        <Image Grid.Row="3" Grid.Column="0"
+                                               Source="icona_account"/>
+                                        <Label Grid.Row="3" Grid.Column="1"
+                                               Grid.ColumnSpan="2"
+                                               Text="{Binding Utente.NomeCognome}"
+                                               FontSize="18"/>
 
-                                    <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
-                                        <Label HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           Text="prezzo   "
-                                           FontFamily="Century Gothic"
-                                           FontSize="14"/>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
 
                                         <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
-                                           Text="{Binding Prezzo}"
+                                           Text="Prezzo: "
                                            FontFamily="Century Gothic"
-                                           FontSize="30"/>
+                                           FontSize="15"/>
+
+                                        <Label HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Text="{Binding  Prezzo, StringFormat='{0:F0} €'}"
+                                           FontFamily="Century Gothic" FontAttributes="Bold"
+                                           FontSize="28"/>
 
                                     </StackLayout>
                                 </Grid>

@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using System.Linq;
 using LinqToDB;
 using LinqToDB.Common;
+using System.Windows.Input;
+
 namespace Scholae
 
 {
@@ -14,8 +16,6 @@ namespace Scholae
         public BooksPage()
         {
             InitializeComponent();
-
-            LV.BindingContext = new LibriViewModels();
         }
 
 
@@ -24,6 +24,9 @@ namespace Scholae
             await Navigation.PopModalAsync();
         }
 
+        void SearchBar_SearchButtonPressed(System.Object sender, System.EventArgs e)
+        {
+        }
 
     }
 }
