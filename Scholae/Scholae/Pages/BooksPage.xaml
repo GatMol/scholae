@@ -62,13 +62,21 @@
                             <Frame Padding="5" HasShadow="False"
                                    CornerRadius="30" BackgroundColor="#f6f6f6"
                                    HeightRequest="160"
-                                   >
+                                   > 
                                 <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                   
+
+                                <Image IsVisible="True" Source="preferito" Grid.Row="0"
+                                       Grid.Column="0" BackgroundColor="Azure"
+                                       />    
+
+                                <Image IsVisible="True" Source="preferitoSelezionato" Grid.Row="0"
+                                       Grid.Column="0"
+                                       />
+
                                 <Image HorizontalOptions="Center"
                                        VerticalOptions="Center"
                                        Grid.Column="0"

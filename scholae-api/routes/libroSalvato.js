@@ -10,8 +10,7 @@ router.get("/:utenteId", async (req, res, next) => {
         }
     })
     .then(result => {
-        console.log(result);
-        res.status(201);
+        res.status(201).json(result);
     })
     .catch(err => {
         return res.status(500).json({

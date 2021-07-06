@@ -104,22 +104,6 @@ router.get("/cercaPerNome/:nome", async (req, res, next) => {
     res.status(200).json(result);
 });
 
-/*router.get("/:materia", async (req, res, next) => {
-    const libri = await prisma.libro.findUnique({
-        where: {
-            Materia: req.params.materia
-        }
-    }).catch((err) => {
-        return res.status(500).json({
-            error: err
-        });
-    });
-
-    return res.json({
-        Id: libri.Id
-    });
-});*/
-
 router.get("/cercaPerId/:libroId", async (req, res) => {
     req.data = await db.libro.findUnique({
         where: {
@@ -128,11 +112,21 @@ router.get("/cercaPerId/:libroId", async (req, res) => {
         select: {
             Id: true,
             Nome: true,
+            ISBN: true,
             Autore: true,
             Editore: true,
+            Edizione: true,
             Prezzo: true,
             Materia: true,
-            Utente: true
+            Utente:{
+                select:{
+                    Nome: true,
+                    Cognome: true,
+                    Telefono: true,
+                    Citta: true,
+                    Email: true
+                }
+            } 
         }
     }).then(result => {
          res.status(200).json(result);
