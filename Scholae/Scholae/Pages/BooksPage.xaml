@@ -61,8 +61,8 @@
                         <DataTemplate>
                             <Frame Padding="5" HasShadow="False"
                                    CornerRadius="30" BackgroundColor="#f6f6f6"
-                                   HeightRequest="160"
-                                   > 
+                                   HeightRequest="160" IsClippedToBounds="True"
+                                   >
                                 <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -70,11 +70,13 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image IsVisible="True" Source="preferito" Grid.Row="0"
-                                       Grid.Column="0" BackgroundColor="Azure"
+                                       Grid.Column="0" TranslationX="-50" 
+                                       TranslationY="-8"
                                        />    
 
                                 <Image IsVisible="True" Source="preferitoSelezionato" Grid.Row="0"
-                                       Grid.Column="0"
+                                       Grid.Column="0" TranslationX="-50"
+                                       TranslationY="-8"
                                        />
 
                                 <Image HorizontalOptions="Center"
@@ -84,6 +86,7 @@
                                        Source="foto_libro"
                                        HeightRequest="140"
                                        WidthRequest="110"
+                                       TranslationY="5"
                                        Grid.Row="0"
                                        Grid.RowSpan="5"
                                        />
