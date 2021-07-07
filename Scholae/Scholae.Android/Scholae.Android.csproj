@@ -69,6 +69,12 @@
     <PackageReference Include="AWSSDK.Core">
       <Version>3.7.0.38</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.11.8-alpha.0.14</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Refractored.MvvmHelpers">
@@ -142,12 +148,16 @@
       </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\icona_indietro.png">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\icona_piu_verde.png">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup />

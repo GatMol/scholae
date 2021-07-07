@@ -17,23 +17,23 @@
               Fill="#3b5998"
               Aspect="Fill"/>
 
-        <Frame 
-            Padding="20,0,20,0"
-            AbsoluteLayout.LayoutBounds="0.5,0.4,0.9,0.6"
-            AbsoluteLayout.LayoutFlags="All"
-            BackgroundColor="AliceBlue">
-            <Grid RowDefinitions="*,*,*,*"
-              ColumnDefinitions="*,*,*">
-               <!--Al posto delle box ci andranno delle immagini collegato con quelle inserite dall'utente-->
-              <BoxView Grid.Row="0" Grid.Column="0" BackgroundColor="Red"/>
-            </Grid>
-            
-        </Frame>
-        
+        <StackLayout>
+            <StackLayout HorizontalOptions="Center">
+                <Label Text="VENDI IL TUO LIBRO" FontSize="28" TextColor="#1D1058" FontAttributes="Bold" Margin="55,20,0,0" />
+                <BoxView HeightRequest="1" Color="#777272" Margin="50,-8,-10,40" />
+            </StackLayout>
 
-        
+            <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
+                CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="10,0,0,0" />
+            <Button Text="Scatta foto" Clicked="Button1_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
+                CornerRadius="20" HorizontalOptions="End" BorderColor="#E7E3E3" BorderWidth="5" Margin="0,-45,-60,0"/>
+            <Image x:Name="resultImage" HeightRequest="300" WidthRequest="300" />
 
-
-
+            <Button BorderWidth="1" WidthRequest="170" HeightRequest="50"
+                    BorderColor="#0EAE0E"
+                    FontSize="20"  FontAttributes="Bold" Text="CONFERMA"  TextColor="#0EAE0E"
+                    CornerRadius="25"
+                    BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="80,-50,0,0"/>
+        </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

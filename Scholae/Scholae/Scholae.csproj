@@ -25,7 +25,9 @@
     <PackageReference Include="AWSSDK.Core" Version="3.7.0.38" />
     <PackageReference Include="AWSSDK.RDS" Version="3.7.2.4" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.1.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Npgsql" Version="5.0.7" />
+    <PackageReference Include="RestSharp" Version="106.11.8-alpha.0.14" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
