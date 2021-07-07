@@ -10,6 +10,8 @@ namespace Scholae
 {
     public partial class LoginPage : ContentPage
     {
+        public static string Email;
+
         public LoginPage()
         {
             Device.SetFlags(new string[] { "Shapes_Experimental" });
@@ -65,6 +67,7 @@ namespace Scholae
             }
             else
             {
+                Email = email;
                 Navigation.InsertPageBefore(new TabbedHomePage(), this);
                 await Navigation.PopAsync();
             }

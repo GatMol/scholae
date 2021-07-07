@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Scholae.ViewModels
@@ -19,6 +20,8 @@ namespace Scholae.ViewModels
         public List<Libro> libri { get; set; }
 
         public string testoSearchBar { get; set; }
+
+        public bool mieiLibri = false;
 
         public ObservableRangeCollection<Libro> LibriDaMostrare
         {
@@ -51,9 +54,23 @@ namespace Scholae.ViewModels
 
         public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
 
+        public ICommand AllLibri => new Command(async () => await TuttiLibri());
+
+        public ICommand LibriSaved => new Command(async () => await LibriSalvati());
+
         public ICommand PerformSearch => new Command<string>((string nome) =>
         {
             CercaPerNome(nome);
+        });
+
+        public ICommand RendiPreferito => new Command<long>((long id) =>
+        {
+            AggiungiPreferito(id);
+        });
+
+        public ICommand RendiNonPreferito => new Command<long>((long id) =>
+        {
+            EliminaPreferito(id);
         });
 
         public LibriViewModels()
@@ -69,19 +86,21 @@ namespace Scholae.ViewModels
                 Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);
                 libri.Add(libro);
             }*/
-            Debug.WriteLine(libri.Count());
             LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
-            Debug.WriteLine(LibriDaMostrare.Count());
         }
 
         async Task RefreshItemsAsync()
         {
             IsRefreshing = true;
             await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
-            if (testoSearchBar == null || testoSearchBar.Equals(""))
-                InitData();
+            if (mieiLibri == true) await LibriSalvati();
             else
-                PerformSearch.Execute(testoSearchBar);
+            {
+                if (testoSearchBar == null || testoSearchBar.Equals(""))
+                    InitData();
+                else
+                    PerformSearch.Execute(testoSearchBar);
+            }
             IsRefreshing = false;
         }
 
@@ -89,6 +108,42 @@ namespace Scholae.ViewModels
         {
             libri = APIConnector.GetLibroPerNome(nome);
             LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
+        }
+
+        public Task TuttiLibri()
+        {
+            InitData();
+            mieiLibri = false;
+            return Task.CompletedTask;
+        }
+
+        public Task LibriSalvati()
+        {
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            List<Libro> libriSalvati = APIConnector.GetLibriSalvati(utente.Id);
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.Take(10).ToList());
+            mieiLibri = true;
+            return Task.CompletedTask;
+        }
+
+        private void AggiungiPreferito(long id)
+        {
+            //Utente utente = APIConnector.GetUtentePerEmail(SecureStorage.GetAsync("email").Result);
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            APIConnector.AddLibroSalvatoAdUtente(id, utente.Id);
+        }
+
+        private void EliminaPreferito(long id)
+        {
+            //Utente utente = APIConnector.GetUtentePerEmail(SecureStorage.GetAsync("email").Result);
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            APIConnector.DeleteLibroSalvatoAdUtente(id, utente.Id);
+        }
+
+        public static bool Salvato(long id_libro)
+        {
+            List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
+            return boo != null && boo.Count > 0;
         }
 
         #region INotifyPropertyChanged

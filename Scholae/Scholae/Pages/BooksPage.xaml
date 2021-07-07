@@ -5,10 +5,10 @@
              >
 
     <ContentPage.BindingContext>
-        <local:LibriViewModels/>
+        <local:LibriViewModels x:Name="libriViewModels"/>
     </ContentPage.BindingContext>
 
-    <AbsoluteLayout BackgroundColor="#e4e4e4">
+    <AbsoluteLayout x:Name="contenitore" BackgroundColor="#e4e4e4">
 
         <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
               CornerRadius="30" BackgroundColor="#3b5998">
@@ -18,17 +18,27 @@
                   AbsoluteLayout.LayoutBounds="0.5,0.015, 130, 100" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
 
-        <Label AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" FontSize="17" FontAttributes="Bold"
+        <Label AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 
+               FontAttributes="Bold" FontSize="17"
                AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"
-               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+               HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Libri" Command="{Binding AllLibri}"/>
+            </Label.GestureRecognizers>
+        </Label>
 
-        <Rectangle AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.21, 0.115, 0.3, 0.005"
-               BackgroundColor="#f6f6f6">
+        <Rectangle x:Name="sottolineatura" AbsoluteLayout.LayoutFlags="All"
+                   AbsoluteLayout.LayoutBounds="0.21, 0.115, 0.3, 0.005"
+                   BackgroundColor="#f6f6f6">
            </Rectangle>
 
         <Label AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
                FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"
-               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+               HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Miei_Libri" Command="{Binding LibriSaved}"/>
+            </Label.GestureRecognizers>
+        </Label>
 
         <SearchBar  x:Name="searchBar"
                     VerticalOptions="Start" AbsoluteLayout.LayoutFlags="All"
@@ -69,15 +79,19 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image IsVisible="True" Source="preferito" Grid.Row="0"
+                                <ImageButton IsVisible="{Binding NotIsSalvato}" Source="preferito" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-50" 
                                        TranslationY="-8"
+                                       Command="{Binding RendiPreferito, Mode=TwoWay, Source={x:Reference libriViewModels}}"
+                                       CommandParameter="{Binding id}"
                                        />    
 
-                                <Image IsVisible="True" Source="preferitoSelezionato" Grid.Row="0"
+                               <ImageButton IsVisible="{Binding IsSalvato}" Source="preferitoSelezionato" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-50"
                                        TranslationY="-8"
-                                       />
+                                       Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModels}}"
+                                       CommandParameter="{Binding id}"
+                                       /> 
 
                                 <Image HorizontalOptions="Center"
                                        VerticalOptions="Center"

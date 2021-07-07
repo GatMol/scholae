@@ -94,4 +94,18 @@ router.post("/login", async (req, res, next) => {
     }
 });
 
+router.get("/cercaPerEmail/:email", async (req, res, next) => {
+    const user = await db.utente.findUnique({
+         where: {
+              Email: req.params.email 
+            }
+         })
+    .catch((err) => {
+        return res.status(500).json({
+            error: err
+        });
+    });
+    return res.status(200).json(user);
+});
+
 module.exports = router;

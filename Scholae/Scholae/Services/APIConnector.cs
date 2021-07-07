@@ -1,10 +1,8 @@
 ﻿using RestSharp;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using Newtonsoft.Json;
 using Scholae.ViewModels;
+using System;
 
 namespace Scholae.Services
 {
@@ -50,13 +48,86 @@ namespace Scholae.Services
             return allLibri;
         }
 
-        public static List<Libro> GetLibroPerNome(String nome)
+        public static List<Libro> GetLibroPerNome(string nome)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest($"/libro/cercaPerNome/{nome}" , Method.GET);
             IRestResponse response = client.Execute(request);
             List<Libro> libriPerNome = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
             return libriPerNome;
+        }
+
+        public static Utente GetUtentePerEmail(string email)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/utente/cercaPerEmail/{email}", Method.GET);
+            IRestResponse response = client.Execute(request);
+            Utente utente = JsonConvert.DeserializeObject<Utente>(response.Content);
+            return utente;
+        }
+
+        public static Libro GetLibroPerId(long id)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/libro/cercaPerId/{id}", Method.GET);
+            IRestResponse response = client.Execute(request);
+            Libro libro = JsonConvert.DeserializeObject<Libro>(response.Content);
+            return libro;
+        }
+
+        public static void AddLibroSalvatoAdUtente(long id_libro, long id_utente)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/libroSalvato", Method.POST);
+            request.AddJsonBody(
+                new
+                {
+                    Libro_id = id_libro,
+                    Utente_id = id_utente
+                });
+            IRestResponse response = client.Execute(request);
+        }
+
+        public static List<Libro> GetLibriSalvati(long id)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/libroSalvato/libriSalvati/{id}", Method.GET);
+            IRestResponse response = client.Execute(request);
+            List<LibroSalvato> libriSalvati = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
+            List<Libro> libri = new List<Libro>();
+            foreach(LibroSalvato ls in libriSalvati)
+            {
+                libri.Add(ls.Libro);
+            }
+            return libri;
+        }
+
+        public static void DeleteLibroSalvatoAdUtente(long id_libro, long id_utente)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/libroSalvato", Method.DELETE);
+            request.AddJsonBody(
+                new
+                {
+                    Libro_id = id_libro,
+                    Utente_id = id_utente
+                });
+            IRestResponse response = client.Execute(request);
+        }
+
+        public static List<LibroSalvato> GetLibroSalvato(long id_libro, long id_utente)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/libroSalvato/get", Method.GET);
+            request.AddJsonBody(
+                new
+                {
+                    Libro_id = id_libro,
+                    Utente_id = id_utente
+                });
+            IRestResponse response = client.Execute(request);
+            List<LibroSalvato> libro = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
+            return libro;
         }
     }
 }

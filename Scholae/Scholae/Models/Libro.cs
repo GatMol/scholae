@@ -75,5 +75,29 @@ namespace Scholae.ViewModels
             get;
             set;
         }
+
+        public Boolean IsSalvato
+        {
+            get {
+                return LibriViewModels.Salvato(id);
+            }
+            set
+            {
+                IsSalvato = LibriViewModels.Salvato(id);
+            }
+        }
+
+        public Boolean NotIsSalvato
+        {
+            get
+            {
+                return !LibriViewModels.Salvato(id);
+            }
+            set
+            {
+                NotIsSalvato = !LibriViewModels.Salvato(id);
+            }
+        }
+
     }
 }
