@@ -27,6 +27,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -61,6 +62,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -105,6 +107,12 @@
     <PackageReference Include="linq2db">
       <Version>3.4.1</Version>
     </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.11.7</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -147,6 +155,9 @@
     <Folder Include="Assets.xcassets\icona_piu_verde.imageset\" />
 
     <Folder Include="Assets.xcassets\icona_libro.imageset\" />
+    <Folder Include="Assets.xcassets\foto_libro.imageset\" />
+    <Folder Include="Assets.xcassets\preferito.imageset\" />
+    <Folder Include="Assets.xcassets\preferitoSelezionato.imageset\" />
   </ItemGroup>
   <ItemGroup>
 	<ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json" />
@@ -198,5 +209,11 @@
 
     <ImageAsset Include="Assets.xcassets\icona_libro.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icona_libro.imageset\icona_libro_.png" />
+    <ImageAsset Include="Assets.xcassets\foto_libro.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\foto_libro.imageset\foto_libro.png" />
+    <ImageAsset Include="Assets.xcassets\preferito.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\preferito.imageset\preferito.png" />
+    <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\preferitoSelezionato.png" />
   </ItemGroup>
 </Project>
