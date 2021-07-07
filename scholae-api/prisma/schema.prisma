@@ -7,9 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Libro {
+  Id           BigInt         @id @default(autoincrement())
+  ISBN         String?        @db.VarChar
+  Nome         String         @db.VarChar
+  Autore       String         @db.VarChar
+  Edizione     String         @db.VarChar
+  Editore      String         @db.VarChar
+  Prezzo       Decimal        @db.Money
+  Materia_id   String         @db.VarChar
+  Utente_id    BigInt
+  Materia      Materia        @relation(fields: [Materia_id], references: [Nome])
+  Utente       Utente         @relation(fields: [Utente_id], references: [Id])
+  LibroSalvato LibroSalvato[]
+}
+
+model LibroSalvato {
+  Libro_id  BigInt
+  Utente_id BigInt
+  Libro     Libro  @relation(fields: [Libro_id], references: [Id])
+  Utente    Utente @relation(fields: [Utente_id], references: [Id])
+
+  @@id([Libro_id, Utente_id])
+}
+
+model Materia {
+  Nome  String  @id @db.VarChar
+  Libro Libro[]
+}
+
 model Utente {
-  Id           BigInt         @id @default(autoincrement())    
-  Email        String         @db.VarChar @unique
+  Id           BigInt         @id @default(autoincrement())
+  Email        String         @unique @db.VarChar
   Nome         String         @db.VarChar
   Cognome      String         @db.VarChar
   Password     String         @db.VarChar
@@ -19,34 +48,3 @@ model Utente {
   Libro        Libro[]
   LibroSalvato LibroSalvato[]
 }
-
-model Materia {
-  Nome         String         @id @db.VarChar
-  Libro        Libro[]
-}
-
-model Libro {
-  Id                     BigInt         @id @default(autoincrement())
-  ISBN                   String?        @db.VarChar
-  Nome                   String         @db.VarChar
-  Autore                 String         @db.VarChar
-  Edizione               String         @db.VarChar
-  Editore                String         @db.VarChar
-  Prezzo                 Decimal        @db.Money
-  Materia                String         @db.VarChar
-  Utente                 BigInt         
-  Materia_LibroToMateria Materia        @relation(fields: [Materia], references: [Nome])
-  Utente_LibroToUtente   Utente         @relation(fields: [Utente], references: [Id])
-  LibroSalvato           LibroSalvato[]
-}
-
-model LibroSalvato {
-  Libro                       BigInt
-  Utente                      BigInt 
-  Libro_LibroToLibroSalvato   Libro  @relation(fields: [Libro], references: [Id])
-  Utente_LibroSalvatoToUtente Utente @relation(fields: [Utente], references: [Id])
-
-  @@id([Libro, Utente])
-}
-
-

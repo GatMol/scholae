@@ -10,7 +10,7 @@ namespace Scholae.Services
     {
         private static string bearerToken = App.token;
 
-        public static void Signup(Utente u)
+        public static IRestResponse Signup(Utente u)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest("/utente/signup", Method.POST);
@@ -24,7 +24,7 @@ namespace Scholae.Services
                     citta = u.Citta,
                     nazionalita = u.Nazionalita
                 });
-            IRestResponse response = client.Execute(request);
+            return client.Execute(request);
         }
 
         public static IRestResponse Login(string email, string password)

@@ -29,6 +29,12 @@
         <Style TargetType="Entry">
             <Setter Property="FontSize" Value="18"/>
         </Style>
-        
+
+        <!--Label-->
+        <Style TargetType="Label" x:Key="ErrorTextStyle">
+            <Setter Property="TextColor" Value = "Red"/>
+            <Setter Property="FontSize" Value = "18"/>
+        </Style>
+
     </Application.Resources>
 </Application>

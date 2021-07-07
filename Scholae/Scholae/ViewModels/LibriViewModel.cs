@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Scholae.ViewModels
 {
-    public class LibriViewModels
+    public class LibriViewModel
     {
 
         public List<Libro> libri { get; set; }
@@ -23,7 +23,7 @@ namespace Scholae.ViewModels
 
         private ObservableRangeCollection<Libro> libriDaMostrare;
 
-        public LibriViewModels()
+        public LibriViewModel()
         {
 
             InitData();

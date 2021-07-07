@@ -77,10 +77,10 @@ router.post("/login", async (req, res, next) => {
                     {
                         email: user.Email,
                     },
-                    process.env.JWT_KEY,
-                    {
+                    process.env.JWT_KEY
+                    /*{
                         expiresIn: 60 * 30
-                    }
+                    }*/
                 );
                 return res.status(200).json({
                     message: 'Auth succeded',

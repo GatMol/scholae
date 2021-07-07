@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Newtonsoft.Json;
+
 
 namespace Scholae
 {
@@ -54,17 +56,21 @@ namespace Scholae
             //var userAttributes = Authentication.GetUserAttributes(accessToken);
             //TODO: Crea connessione con API e scrivi metodi per user e libri 
             //TokenResponse token = API.GetToken(userAttributes.First().Value);
-            //await SecureStorage.SetAsync("email", userAttributes.First().Value);
+            //
             //await SecureStorage.SetAsync("accessToken", accessToken);
-            //await SecureStorage.SetAsync("token", token.toString());
+            //
             var response = APIConnector.Login(email, password);
-            if(!response.IsSuccessful)
+            if (!response.IsSuccessful)
             {
                 await DisplayAlert("Login fallito", "Email e/o password errati", "Riprova");
                 PasswordEntry.Text = string.Empty;
             }
             else
             {
+                BearerToken token = JsonConvert.DeserializeObject<BearerToken>(response.Content);
+                Debug.WriteLine("\n\nLOGINPAGE: loggato e il token e': " + token.AccessToken + "\n\n");
+                await SecureStorage.SetAsync("email", email);
+                await SecureStorage.SetAsync("accessToken", token.AccessToken);
                 Navigation.InsertPageBefore(new TabbedHomePage(), this);
                 await Navigation.PopAsync();
             }
@@ -74,6 +80,12 @@ namespace Scholae
         {
             Debug.WriteLine(ex.Message);
             DisplayAlert("Login error", ex.Message, "Try again");
+        }
+
+        public sealed class BearerToken
+        {
+            [JsonProperty(propertyName: "token")]
+            public string AccessToken { set; get; }
         }
     }
 }

@@ -17,10 +17,12 @@ namespace Scholae
         public string Nome { get => nome; set => nome = value; }
         public string Cognome { get => cognome; set => cognome = value; }
         public string Email { get => email; set => email = value; }
+        public string Password { get => password; }
         public long Telefono { get => telefono; set => telefono = value; }
         public string Nazionalita { get => nazionalita; set => nazionalita = value; }
         public string Citta { get => citta; set => citta = value; }
-        public string Password{ get => password; }
+
+        public Utente() { }
 
         public Utente(string nome, string cognome, string email, string password, long numeroTelefono, string nazionalita, string citta)
         {
@@ -29,17 +31,6 @@ namespace Scholae
             this.email = email;
             this.password = password;
             this.telefono = numeroTelefono;
-            this.nazionalita = nazionalita;
-            this.citta = citta;
-        }
-
-        /*costruttore senza numero di telefono*/
-        public Utente(string nome, string cognome, string email, string password, string nazionalita, string citta)
-        {
-            this.nome = nome;
-            this.cognome = cognome;
-            this.email = email;
-            this.password = password;
             this.nazionalita = nazionalita;
             this.citta = citta;
         }

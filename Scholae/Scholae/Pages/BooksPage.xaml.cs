@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Scholae.ViewModels;
+﻿using Scholae.ViewModels;
 using Xamarin.Forms;
-using System.Linq;
-using LinqToDB;
-using LinqToDB.Common;
 namespace Scholae
 
 {
@@ -15,7 +10,7 @@ namespace Scholae
         {
             InitializeComponent();
 
-            LV.BindingContext = new LibriViewModels();
+            LV.BindingContext = new LibriViewModel();
         }
 
 

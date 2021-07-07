@@ -219,6 +219,7 @@
                         BorderColor="#2f3a56" 
                         CornerRadius="0" BorderWidth="1.1"
                         Margin="-10, 0"
+                        Clicked="Logout"
                         />
 
                 <Button Text="Elimina account" TextColor="#df4f4f"
