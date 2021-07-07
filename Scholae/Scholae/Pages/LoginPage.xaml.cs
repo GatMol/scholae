@@ -12,6 +12,8 @@ namespace Scholae
 {
     public partial class LoginPage : ContentPage
     {
+        public static string Email;
+
         public LoginPage()
         {
             Device.SetFlags(new string[] { "Shapes_Experimental" });
@@ -71,6 +73,7 @@ namespace Scholae
                 Debug.WriteLine("\n\nLOGINPAGE: loggato e il token e': " + token.AccessToken + "\n\n");
                 await SecureStorage.SetAsync("email", email);
                 await SecureStorage.SetAsync("accessToken", token.AccessToken);
+                Email = email;
                 Navigation.InsertPageBefore(new TabbedHomePage(), this);
                 await Navigation.PopAsync();
             }

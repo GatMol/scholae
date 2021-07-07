@@ -13,11 +13,7 @@
 
     <local:BooksPage  IconImageSource="icona_libro"/>
 
-    <local:TutorPage   IconImageSource="icona_tutor"/>
-
     <local:SellBooksPage   IconImageSource="icona_piu"/>
-
-    <local:BooksPage   IconImageSource="icona_chat"/>
 
     <local:AccountPage   IconImageSource="icona_account"/>
 

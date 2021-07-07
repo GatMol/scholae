@@ -6,6 +6,7 @@ namespace Scholae
 {
     public class Utente
     {
+        private long id;
         private string nome;
         private string cognome;
         private string email;
@@ -14,15 +15,27 @@ namespace Scholae
         private string nazionalita;
         private string citta;
 
+        public long Id { get => id; set => id = value; }
         public string Nome { get => nome; set => nome = value; }
         public string Cognome { get => cognome; set => cognome = value; }
         public string Email { get => email; set => email = value; }
-        public string Password { get => password; }
         public long Telefono { get => telefono; set => telefono = value; }
         public string Nazionalita { get => nazionalita; set => nazionalita = value; }
         public string Citta { get => citta; set => citta = value; }
+        public string Password{ get => password; }
+        public string NomeCognome { get
+            {
+                return Nome + " " + Cognome;
+            }
+            set
+            {
+            }
+        }
 
-        public Utente() { }
+        public Utente()
+        {
+
+        }
 
         public Utente(string nome, string cognome, string email, string password, long numeroTelefono, string nazionalita, string citta)
         {
