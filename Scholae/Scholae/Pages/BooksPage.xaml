@@ -14,8 +14,8 @@
               CornerRadius="30" BackgroundColor="#3b5998">
            </Frame>
 
-        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
-                  AbsoluteLayout.LayoutBounds="0.5,0.015, 130, 100" HorizontalTextAlignment="Center"
+        <Label AbsoluteLayout.LayoutFlags="All"  Text="Scholae" FontSize="40"
+                  AbsoluteLayout.LayoutBounds="0.5,0.015, 0.5, 0.07" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
 
         <Label AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 

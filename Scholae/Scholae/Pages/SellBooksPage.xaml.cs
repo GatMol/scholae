@@ -15,6 +15,22 @@ namespace Scholae
         public SellBooksPage()
         {
             InitializeComponent();
+
+            MainPicker.Items.Add("Analisi");
+            MainPicker.Items.Add("APS");
+            MainPicker.Items.Add("SIW");
+        }
+
+        private void MainPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var name = MainPicker.Items[MainPicker.SelectedIndex];
+
+            DisplayAlert(name, "Materia selezionata", "Ok");
+        }
+
+        void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new SellPhotoPage());
         }
     }
 }

@@ -142,6 +142,32 @@ router.get("/cercaPerId/:libroId", async (req, res) => {
      });
 });
 
+
+router.get("/cercaPerUtente/:utenteId", async (req, res) => {
+    req.data = await db.libro.findUnique({
+        where: {
+            Utente_id: parseInt(req.params.utenteId)
+        },
+        select: {
+            Id: true,
+            Nome: true,
+            ISBN: true,
+            Autore: true,
+            Editore: true,
+            Edizione: true,
+            Prezzo: true,
+            Materia: true,
+        }
+    }).then(result => {
+         res.status(200).json(result);
+     })
+     .catch(err => {
+         res.status(500).json({
+             error: err
+         });
+     });
+});
+
 router.delete("/:libroId", async (req, res, next) => {
     const deleteLibro = await db.libro.delete({
         where: {
