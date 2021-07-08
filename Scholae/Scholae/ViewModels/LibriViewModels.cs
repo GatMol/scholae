@@ -50,7 +50,7 @@ namespace Scholae.ViewModels
             }
         }
 
-        const int RefreshDuration = 2;
+        const int RefreshDuration = 1;
 
         public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
 

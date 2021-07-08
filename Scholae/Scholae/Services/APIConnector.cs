@@ -27,6 +27,11 @@ namespace Scholae.Services
             IRestResponse response = client.Execute(request);
         }
 
+        internal static List<Libro> tuttiImieiLibri(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public static IRestResponse Login(string email, string password)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
