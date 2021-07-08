@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Scholae.ViewModels;
-using Xamarin.Forms;
-using System.Linq;
-using LinqToDB;
-using LinqToDB.Common;
-using System.Windows.Input;
+﻿using Xamarin.Forms;
 using System.Threading.Tasks;
 
 namespace Scholae

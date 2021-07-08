@@ -2,11 +2,15 @@ const express = require('express');
 const prisma = require('../services/database');
 const router = express.Router();
 const db = require("../services/database");
+const multer = require('multer')
+const upload = multer ({ dest: 'uploads/' })
+
+const { uploadFile } = require('../s3')
 
 BigInt.prototype.toJSON = function() {       
     return this.toString()
-  }
-  
+}
+
 
 router.post("/", async (req, res, next)=> {
     const newLibro = {
@@ -154,5 +158,15 @@ router.delete("/:libroId", async (req, res, next) => {
         Id: req.params.Id
     });
 });
+
+router.post('/images', async (req, res) => {
+    console.log(req)
+    const fileStream = req.body.filestream
+    const fileName = req.body.filename    
+    const result = await uploadFile(fileStream, fileName)
+    console.log(result)
+    const description = req.body.description
+    res.send(req)
+})
 
 module.exports = router;
