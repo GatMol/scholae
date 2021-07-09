@@ -2,38 +2,53 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scholae.SellPhotoPage">
-    <AbsoluteLayout>
-        <!--Onda scura-->
-        <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
+    <ScrollView>
+        <AbsoluteLayout>
+            <!--Onda scura-->
+            <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
               AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
               Data="M-2552.03,2434.542s-85.089-24.01-131.343-15.909-94.013,57.732-167.167,67.124-115.46-35.7-115.46-35.7v118.3h413.97Z"
               Fill="#2f3a56"
               Aspect="Fill"/>
 
-        <!--Onda chiara-->
-        <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
+            <!--Onda chiara-->
+            <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
               AbsoluteLayout.LayoutFlags="XProportional, YProportional" 
               Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
               Fill="#3b5998"
               Aspect="Fill"/>
 
-        <StackLayout>
-            <StackLayout HorizontalOptions="Center">
-                <Label Text="VENDI IL TUO LIBRO" FontSize="28" TextColor="#1D1058" FontAttributes="Bold" Margin="40,20,0,0" />
-                <BoxView HeightRequest="1" Color="#777272" Margin="50,-8,10,40" />
-            </StackLayout>
+            <StackLayout>
+                <Label Text="VENDI IL TUO LIBRO" FontSize="28" TextColor="#1D1058" FontAttributes="Bold" Margin="30,20,0,0" HorizontalOptions="Center" />
+                <BoxView HeightRequest="1" Color="#777272" Margin="90,-8,65,30" />
 
-            <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
-                CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="15,0,0,0" />
-            <Button Text="Scatta foto" Clicked="Button1_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
-                CornerRadius="20" HorizontalOptions="End" BorderColor="#E7E3E3" BorderWidth="5" Margin="0,-45,-15,0"/>
-            <Image x:Name="resultImage" HeightRequest="300" WidthRequest="350" Margin="35,5,0,0" />
-            
-            <Button BorderWidth="1" WidthRequest="170" HeightRequest="50"
+                <Label HorizontalOptions="Center" Text="Riepilogo dati libro" FontSize="20" Margin="30,-20,0,10" FontAttributes="Bold" TextColor="#3F403F"/>
+
+                <BoxView Grid.RowSpan="1" CornerRadius="15" HeightRequest="250" 
+                         Margin="40,0,10,0" HorizontalOptions="Fill" InputTransparent="False" BackgroundColor="#F3F0F0"/>
+
+                <Label Text="Nome del libro: Analisi 1" Margin="55,-240,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="Autore: natalini" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="Materia: Analisi" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="ISBN: 11111111111" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="Edizione: 2018" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="Editore: Panini" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="Prezzo: 35$" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+
+                <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
+                CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="25,30,0,0" />
+                <Button Text="Scatta foto" Clicked="Button1_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
+                CornerRadius="20" HorizontalOptions="End" BorderColor="#E7E3E3" BorderWidth="5" Margin="0,-46,-5,0"/>
+                <Image x:Name="resultImage" HeightRequest="350" WidthRequest="350" Margin="30,5,0,0" />
+
+                <Button BorderWidth="1" WidthRequest="170" HeightRequest="50"
                     BorderColor="#0EAE0E"
-                    FontSize="20"  FontAttributes="Bold" Text="CONFERMA"  TextColor="#0EAE0E"
-                    CornerRadius="25" Clicked="SalvaFoto"
-                    BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="35,20,0,0"/>
-        </StackLayout>
-    </AbsoluteLayout>
+                    FontSize="20"  FontAttributes="Bold" Text="VENDI"  TextColor="#0EAE0E"
+                    CornerRadius="25"
+                    BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="30,20,0,20"/>
+
+              
+            </StackLayout>
+        </AbsoluteLayout>
+    </ScrollView>
 </ContentPage>
