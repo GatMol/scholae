@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Scholae.ViewModels;
 using System;
+using Xamarin.Forms;
+using System.IO;
+using System.Diagnostics;
 
 namespace Scholae.Services
 {
@@ -78,7 +81,7 @@ namespace Scholae.Services
         public static void AddLibroSalvatoAdUtente(long id_libro, long id_utente)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libroSalvato", Method.POST);
+            var request = new RestRequest("/libroSalvato", Method.POST);
             request.AddJsonBody(
                 new
                 {
@@ -105,7 +108,7 @@ namespace Scholae.Services
         public static void DeleteLibroSalvatoAdUtente(long id_libro, long id_utente)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libroSalvato", Method.DELETE);
+            var request = new RestRequest("/libroSalvato", Method.DELETE);
             request.AddJsonBody(
                 new
                 {
@@ -118,7 +121,7 @@ namespace Scholae.Services
         public static List<LibroSalvato> GetLibroSalvato(long id_libro, long id_utente)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libroSalvato/get", Method.GET);
+            var request = new RestRequest("/libroSalvato/get", Method.GET);
             request.AddJsonBody(
                 new
                 {
@@ -128,6 +131,17 @@ namespace Scholae.Services
             IRestResponse response = client.Execute(request);
             List<LibroSalvato> libro = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
             return libro;
+        }
+
+        public static void SalvaImmagine(ImageSource image)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest("/libro/images", Method.POST);
+            //nel body form-data ho key:libroImage value:streamImg
+            request.AddHeader("Content-Type", "multipart/form-data");
+            request.AddFile("libroImage", image.ToString());
+            var response = client.Execute(request);
+            Debug.WriteLine($"\n\n{response}\n\n");
         }
     }
 }

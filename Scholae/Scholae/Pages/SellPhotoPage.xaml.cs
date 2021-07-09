@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Scholae.Services;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 
 namespace Scholae
 {
@@ -40,6 +44,16 @@ namespace Scholae
 
                 resultImage.Source = ImageSource.FromStream(() => stream);
             }
+        }
+
+        async void SalvaFoto(object sender, EventArgs e)
+        {
+            //TODO: Prendo immagine dal picker e la mando all APIConnector e pusho nuova pagina
+            Debug.WriteLine($"SOURCE: {resultImage.Source}");
+            APIConnector.SalvaImmagine(resultImage.Source);
+            //var stream = File.ReadAllBytes(resultImage.Source.ToString());
+            //APIConnector.SalvaImmagine(stream);
+            await Navigation.PopAsync();
         }
     }
 }

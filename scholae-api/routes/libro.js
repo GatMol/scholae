@@ -2,10 +2,10 @@ const express = require('express');
 const prisma = require('../services/database');
 const router = express.Router();
 const db = require("../services/database");
-const multer = require('multer')
-const upload = multer ({ dest: 'uploads/' })
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/'});
 
-const { uploadFile } = require('../s3')
+const { uploadFile, getFileStream } = require('../s3');
 
 BigInt.prototype.toJSON = function() {       
     return this.toString()
@@ -185,14 +185,32 @@ router.delete("/:libroId", async (req, res, next) => {
     });
 });
 
-router.post('/images', async (req, res) => {
-    console.log(req)
-    const fileStream = req.body.filestream
-    const fileName = req.body.filename    
-    const result = await uploadFile(fileStream, fileName)
-    console.log(result)
-    const description = req.body.description
-    res.send(req)
-})
+router.post('/images', upload.single('libroImage'), async (req, res) => {
+    const file = req.file;
+    console.log(file);
+    const result = await uploadFile(file);
+    console.log(result);
+    return res.status(200).json({
+        message: 'immagine salvata',
+        file: file,
+        s3: result
+    })
+});
+
+router.get('/images/:key', async (req, res) => {
+    const key = req.params.key
+    const readStream = getFileStream(key);
+
+    return res.status(200).json({
+        message: "Immagine presa",
+        Key: key,
+        Img: readStream
+    });
+    //TODO: Riporta in un formato la foto oppure come stream
+    //TODO: Aggiungi un campo path nell immagine, associato alla key generata da multer e che lo identifica all'interno del bucket
+    //cosi quando carichiamo il libro, carichiamo l'immagine facendo una get dell'immagine
+    //TODO: Aggiungi nel POST del libro il campo path
+    //TODO: 
+});
 
 module.exports = router;

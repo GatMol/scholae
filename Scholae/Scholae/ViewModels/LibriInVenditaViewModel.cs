@@ -31,7 +31,7 @@ namespace Scholae.ViewModels
         private void InitData()
         {
             Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            libri = APIConnector.tuttiImieiLibri(utente.Id);
+            //libri = APIConnector.tuttiImieiLibri(utente.Id);
         }
     }
 }
