@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Scholae.ViewModels;
 using System;
+using Xamarin.Forms;
+using System.IO;
 using System.Diagnostics;
 
 namespace Scholae.Services
@@ -11,7 +13,7 @@ namespace Scholae.Services
     {
         private static string bearerToken = App.token;
 
-        public static void Signup(Utente u)
+        public static IRestResponse Signup(Utente u)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest("/utente/signup", Method.POST);
@@ -25,7 +27,7 @@ namespace Scholae.Services
                     citta = u.Citta,
                     nazionalita = u.Nazionalita
                 });
-            IRestResponse response = client.Execute(request);
+            return client.Execute(request);
         }
 
         public static IRestResponse Login(string email, string password)
@@ -79,7 +81,7 @@ namespace Scholae.Services
         public static void AddLibroSalvatoAdUtente(long id_libro, long id_utente)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libroSalvato", Method.POST);
+            var request = new RestRequest("/libroSalvato", Method.POST);
             request.AddJsonBody(
                 new
                 {
@@ -92,7 +94,7 @@ namespace Scholae.Services
         public static List<Libro> GetLibriSalvati(long id)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libroSalvato/cercaPerUtente/{id}", Method.GET);
+            var request = new RestRequest($"/libroSalvato/libriSalvati/{id}", Method.GET);
             IRestResponse response = client.Execute(request);
             List<LibroSalvato> libriSalvati = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
             List<Libro> libri = new List<Libro>();
@@ -116,7 +118,7 @@ namespace Scholae.Services
             IRestResponse response = client.Execute(request);
         }
 
-        public static LibroSalvato GetLibroSalvato(long id_libro, long id_utente)
+        public static List<LibroSalvato> GetLibroSalvato(long id_libro, long id_utente)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest("/libroSalvato/get", Method.GET);
@@ -127,24 +129,19 @@ namespace Scholae.Services
                     Utente_id = id_utente
                 });
             IRestResponse response = client.Execute(request);
-            LibroSalvato libro = JsonConvert.DeserializeObject<LibroSalvato>(response.Content);
+            List<LibroSalvato> libro = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
             return libro;
         }
 
-        public static List<Libro> tuttiImieiLibri(long utenteId)
+        public static void SalvaImmagine(ImageSource image)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libro/cercaPerUtente/{utenteId}", Method.GET);
-            IRestResponse response = client.Execute(request);
-            List<Libro> libro = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
-            return libro;
-        }
-
-        public static void DeleteLibro(long libroId)
-        {
-            var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libro/elimina/{libroId}", Method.DELETE);
-            IRestResponse response = client.Execute(request);
+            var request = new RestRequest("/libro/images", Method.POST);
+            //nel body form-data ho key:libroImage value:streamImg
+            request.AddHeader("Content-Type", "multipart/form-data");
+            request.AddFile("libroImage", image.ToString());
+            var response = client.Execute(request);
+            Debug.WriteLine($"\n\n{response}\n\n");
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Scholae
             try
             {
                 _email = await SecureStorage.GetAsync("email");
-                token = await SecureStorage.GetAsync("token");
+                token = await SecureStorage.GetAsync("accessToken");
+                Debug.WriteLine($"\n\nAPP IN APERTURA: token in storage {token}\n\n");
             }
             catch (Exception e)
             {

@@ -48,17 +48,6 @@ namespace Scholae
             this.citta = citta;
         }
 
-        /*costruttore senza numero di telefono*/
-        public Utente(string nome, string cognome, string email, string password, string nazionalita, string citta)
-        {
-            this.nome = nome;
-            this.cognome = cognome;
-            this.email = email;
-            this.password = password;
-            this.nazionalita = nazionalita;
-            this.citta = citta;
-        }
-
         /*Equals e hashCode*/
         public override bool Equals(object obj)
         {

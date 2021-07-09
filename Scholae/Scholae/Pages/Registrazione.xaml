@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviour="clr-namespace:Scholae.Helpers.Behaviours"
+             xmlns:converter="clr-namespace:Scholae.Helpers.Converters" 
+             xmlns:viewmodels="clr-namespace:Scholae.ViewModels" x:DataType="viewmodels:RegistrazioneViewModel"
              x:Class="Scholae.Registrazione"
              Padding="0,20,0,0">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <AbsoluteLayout>
         <!--Onda scura--> 
@@ -35,55 +44,118 @@
         
         <StackLayout AbsoluteLayout.LayoutBounds="0.5,0,0.8,0.8"
                      AbsoluteLayout.LayoutFlags="All"
-                     Spacing="15"
-                     >
+                     Spacing="15">
             
             <!--Benvenuto-->
             <Label Text="BENVENUTO!"  TextColor="{x:StaticResource TextColorDark}"
                FontSize="30"  FontAttributes="Bold"/>
 
-           
+           <ScrollView>
             <!--inserimento dati sensibili-->
-            <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.28,0.9,0.8"
+                <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.28,0.9,0.8"
                              AbsoluteLayout.LayoutFlags="All" 
                              Spacing="13">
-                <Entry 
-                    x:Name="NomeEntry"
-                    Placeholder="Nome*"
-                    Text="{Binding Nome}"/>
-                <Entry 
-                    x:Name="CognomeEntry"
-                    Placeholder="Cognome*"
-                    Text="{Binding Cognome}"/>
-                <Entry 
-                    x:Name="EmailEntry"
-                    Placeholder="Email*"
-                    Text="{Binding Email}"/>
-                <Entry 
-                    x:Name="PasswordEntry"
-                    IsPassword="true"
-                    Placeholder="Password*"
-                    FontAttributes="Italic"
-                    Text="{Binding Password}"/>
-                <Entry 
-                    x:Name="VerificaPasswordEntry"
-                    IsPassword="True"
-                    Placeholder="Verifica password*"
-                    FontAttributes="Italic"/>
-                <Entry 
-                    x:Name="NumeroDiTelefonoEntry"
-                    Placeholder="Numero di telefono"
-                    Text="{Binding NumeroDiTelefono}"/>
-                <Entry 
-                    x:Name="CittaEntry"
-                    Placeholder="Citta"
-                    Text="{Binding Citta}"/>
-                <Entry 
-                    x:Name="NazionalitaEntry"
-                    Placeholder="Nazionalita"
-                    Text="{Binding Nazionalita}"/>
-            </StackLayout>
+                    <!--Nome-->
+                    <Entry x:Name="NomeEntry"
+                        Placeholder="Nome*"
+                        Text="{Binding Nome.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Nome.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Nome.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Nome.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
 
+                    <!--Cognome-->
+                    <Entry x:Name="CognomeEntry"
+                        Placeholder="Cognome*"
+                        Text="{Binding Cognome.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Cognome.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Cognome.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Cognome.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+
+                    <!--Email-->
+                    <Entry x:Name="EmailEntry"
+                        Placeholder="Email*"
+                        Text="{Binding Email.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Email.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Email.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+
+                    <!--Password-->
+                    <Entry x:Name="PasswordEntry"
+                        IsPassword="true"
+                        Placeholder="Password*"
+                        FontAttributes="Italic"
+                        Text="{Binding Password.Item1.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.Item1.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Password.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Password.Item1.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+
+                    <!--VerificaPassword-->
+                    <Entry x:Name="VerificaPasswordEntry"
+                        IsPassword="True"
+                        Placeholder="Verifica password*"
+                        FontAttributes="Italic"
+                        Text="{Binding Password.Item2.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.Item2.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Password.Item2.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Password.Item2.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+
+                    <!--Telefono-->
+                    <Entry x:Name="NumeroDiTelefonoEntry"
+                        Placeholder="Numero di telefono"
+                        Text="{Binding Telefono.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Telefono.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Telefono.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Telefono.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+
+                    <!--Citta-->
+                    <Entry x:Name="CittaEntry"
+                        Placeholder="Citta"
+                        Text="{Binding Citta.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Citta.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Citta.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Citta.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+
+                    <!--Nazionalita-->
+                    <Entry x:Name="NazionalitaEntry"
+                        Placeholder="Nazionalita"
+                        Text="{Binding Nazionalita.Value}">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Nazionalita.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{Binding Nazionalita.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Nazionalita.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
+                </StackLayout>
+           </ScrollView>
             
         </StackLayout>
 
@@ -98,7 +170,8 @@
                 CornerRadius="30"
                 BackgroundColor="#FCB677"
                 Margin="0,10,0,0"
-                Clicked="Registration"/>
+                Clicked="SignUp"
+                />
 
         <!-- campo obligatorio -->
         <Label AbsoluteLayout.LayoutBounds="1.05,1,0.5,0.05"

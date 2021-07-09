@@ -25,7 +25,7 @@ namespace Scholae
         {
             var name = MainPicker.Items[MainPicker.SelectedIndex];
 
-            DisplayAlert(name, "Materia selezionata", "Ok");
+
         }
 
         void Handle_Clicked(object sender, System.EventArgs e)

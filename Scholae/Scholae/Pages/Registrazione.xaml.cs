@@ -10,61 +10,37 @@ using Xamarin.Essentials;
 using Npgsql;
 using Scholae.Services;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
+using Scholae.ViewModels;
+using RestSharp;
 
 namespace Scholae
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Registrazione : ContentPage
     {
+        RegistrazioneViewModel registrazioneVM;
         public Registrazione()
         {
             Device.SetFlags(new string[] { "Shapes_Experimental" });
             InitializeComponent();
-            BindingContext = this;
+            registrazioneVM = new RegistrazioneViewModel();
+            BindingContext = registrazioneVM;
         }
 
-        /*salvo nelle variabili i cambi text delle entry per portarmi dietro le informazioni di ogni utente
-          da mettere successivamente nel database*/
-
-        async void Registration(object sender, EventArgs e)
+        public async void SignUp(Object sender, EventArgs e)
         {
-            string nome = NomeEntry.Text;
-            string cognome = CognomeEntry.Text;
-            string email = EmailEntry.Text;
-            string password = PasswordEntry.Text;
-            long telefono = long.Parse(NumeroDiTelefonoEntry.Text);
-            string nazionalita = NazionalitaEntry.Text;
-            string citta = CittaEntry.Text;
-            //TODO: VALIDAZIONE DATI
-            /* controllo che i dati siano giusti (altrimenti popUp) e che possa metterli nel database (altrimenti popup)*/
-            /* allora li metto nel database e torno alla homepage da cui accedo con i dati messi qui*/
-            if (InvalidData())
-                await DisplayAlert("Errore", "Campi non validi", "Ok");
-            else {
-                if (InvalidVerificationPassword())
-                    await DisplayAlert("Errore", "Password non coincidenti", "Ok");
-                else
-                {
-                    Utente u = new Utente(nome, cognome, email, password, telefono, nazionalita, citta);
-                    Debug.WriteLine(u.ToString());
-                    APIConnector.Signup(u);
+            IRestResponse response = registrazioneVM.SignUp();
+            if (response != null)
+            {
+                if (((int)response.StatusCode).Equals(409))
+                    await DisplayAlert("Errore", "Email già utilizzata", "Ok");
+                else if (response.IsSuccessful)
                     await Navigation.PopToRootAsync();
-                }
+                else
+                    await DisplayAlert("Errore", "Errore durante la registrazione", "Riprova");
             }
         }
-
-        public bool InvalidData()
-        {
-            return string.IsNullOrWhiteSpace(EmailEntry.Text) ||
-                     string.IsNullOrWhiteSpace(NomeEntry.Text) ||
-                     string.IsNullOrWhiteSpace(CognomeEntry.Text) ||
-                     string.IsNullOrWhiteSpace(PasswordEntry.Text) ||
-                     string.IsNullOrWhiteSpace(VerificaPasswordEntry.Text);
-        }
-
-        private bool InvalidVerificationPassword()
-        {
-            return !string.Equals(PasswordEntry.Text, VerificaPasswordEntry.Text);
-        }   
     }
 }
