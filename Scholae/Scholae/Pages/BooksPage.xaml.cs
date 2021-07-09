@@ -27,10 +27,6 @@ namespace Scholae
             await Navigation.PopModalAsync();
         }
 
-        void SearchBar_SearchButtonPressed(System.Object sender, System.EventArgs e)
-        {
-        }
-
         async void Miei_Libri(System.Object sender, System.EventArgs e)
         {
             if (mieiLibri == false)
@@ -39,6 +35,8 @@ namespace Scholae
                 {
                     await sottolineatura.TranslateTo(Width / 2.5, 0, 500, Easing.CubicInOut);
                 });
+                libri.FontAttributes = FontAttributes.None;
+                imieilibri.FontAttributes = FontAttributes.Bold;
                 mieiLibri = true;
             }
         }
@@ -52,8 +50,11 @@ namespace Scholae
                 {
                     await sottolineatura.TranslateTo(0, 0, 500, Easing.CubicInOut);
                 });
+                libri.FontAttributes = FontAttributes.Bold;
+                imieilibri.FontAttributes = FontAttributes.None;
                 mieiLibri = false;
             }
         }
+
     }
 }

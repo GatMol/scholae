@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
 }
 
 datasource db {
@@ -15,18 +16,19 @@ model Libro {
   Edizione               String         @db.VarChar
   Editore                String         @db.VarChar
   Prezzo                 Decimal        @db.Money
+  Immagine               String         @db.VarChar
   Materia_id             String         @db.VarChar
   Utente_id              BigInt         
   Materia                Materia        @relation(fields: [Materia_id], references: [Nome])
   Utente                 Utente         @relation(fields: [Utente_id], references: [Id])
-  LibroSalvato           LibroSalvato[]
+  LibroSalvato           LibroSalvato[] 
 }
 
 model LibroSalvato {
   Libro_id                       BigInt
   Utente_id                      BigInt
-  Libro                          Libro  @relation(fields: [Libro_id], references: [Id])
-  Utente                         Utente @relation(fields: [Utente_id], references: [Id])
+  Libro                          Libro  @relation(fields: [Libro_id], references: [Id], onDelete: Cascade)
+  Utente                         Utente @relation(fields: [Utente_id], references: [Id], onDelete: Cascade)
 
   @@id([Libro_id, Utente_id])
 }

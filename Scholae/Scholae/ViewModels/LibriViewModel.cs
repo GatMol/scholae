@@ -2,19 +2,15 @@
 using Scholae.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
+using BaseViewModel = Scholae.Services.BaseViewModel;
 
 namespace Scholae.ViewModels
 {
-    public class LibriViewModels : INotifyPropertyChanged
+    public class LibriViewModels : BaseViewModel
     {
 
         public List<Libro> libri { get; set; }
@@ -142,19 +138,9 @@ namespace Scholae.ViewModels
 
         public static bool Salvato(long id_libro)
         {
-            List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
-            return boo != null && boo.Count > 0;
+            LibroSalvato boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
+            return boo != null ;
         }
 
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
     }
 }

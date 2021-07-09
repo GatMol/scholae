@@ -7,6 +7,12 @@ namespace Scholae.ViewModels
         {
         }
 
+        public LibroSalvato(Libro libro, Utente utente)
+        {
+            Libro = libro;
+            Utente = utente;
+        }
+
         public Libro Libro
         {
             get;

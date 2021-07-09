@@ -18,7 +18,7 @@
                   AbsoluteLayout.LayoutBounds="0.5,0.015, 0.5, 0.07" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
 
-        <Label AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 
+        <Label x:Name="libri" AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 
                FontAttributes="Bold" FontSize="17"
                AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"
                HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
@@ -32,7 +32,7 @@
                    BackgroundColor="#f6f6f6">
            </Rectangle>
 
-        <Label AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
+        <Label x:Name="imieilibri" AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
                FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"
                HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
             <Label.GestureRecognizers>
@@ -86,12 +86,12 @@
                                        CommandParameter="{Binding id}"
                                        />    
 
-                               <ImageButton IsVisible="{Binding IsSalvato}" Source="preferitoSelezionato" Grid.Row="0"
+                               <!--<ImageButton IsVisible="{Binding IsSalvato}" Source="preferitoSelezionato" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-50"
                                        TranslationY="-8"
                                        Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModels}}"
                                        CommandParameter="{Binding id}"
-                                       /> 
+                                       /> -->
 
                                 <Image HorizontalOptions="Center"
                                        VerticalOptions="Center"

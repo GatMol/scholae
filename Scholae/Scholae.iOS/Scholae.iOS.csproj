@@ -158,6 +158,7 @@
     <Folder Include="Assets.xcassets\foto_libro.imageset\" />
     <Folder Include="Assets.xcassets\preferito.imageset\" />
     <Folder Include="Assets.xcassets\preferitoSelezionato.imageset\" />
+    <Folder Include="Assets.xcassets\elimina.imageset\" />
   </ItemGroup>
   <ItemGroup>
 	<ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json" />
@@ -215,5 +216,12 @@
     <ImageAsset Include="Assets.xcassets\preferito.imageset\preferito.png" />
     <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\preferitoSelezionato.png" />
+    <ImageAsset Include="Assets.xcassets\elimina.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\elimina.imageset\elimina-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FontAwesome5BrandsRegular.otf" />
+    <BundleResource Include="Resources\FontAwesome5Regular.otf" />
+    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
   </ItemGroup>
 </Project>
