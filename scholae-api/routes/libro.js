@@ -2,13 +2,18 @@ const express = require('express');
 const prisma = require('../services/database');
 const router = express.Router();
 const db = require("../services/database");
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/'});
+const fs = require('fs');
+const util = require('util');
+const unlinkFile = util.promisify(fs.unlink);
+const { uploadFile, getFileStream } = require('../s3');
 
 BigInt.prototype.toJSON = function() {       
     return this.toString()
   }
   
-
-  router.post("/", upload.single('libroImage'), async (req, res, next)=> {
+router.post("/", upload.single('libroImage'), async (req, res, next)=> {
     //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
     const file = req.file;
     console.log(file);

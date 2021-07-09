@@ -88,13 +88,13 @@ namespace Scholae.Services
                     Libro_id = id_libro,
                     Utente_id = id_utente
                 });
-            IRestResponse response = client.Execute(request);
+            client.Execute(request);
         }
 
         public static List<Libro> GetLibriSalvati(long id)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libroSalvato/libriSalvati/{id}", Method.GET);
+            var request = new RestRequest($"/libroSalvato/cercaPerUtente/{id}", Method.GET);
             IRestResponse response = client.Execute(request);
             List<LibroSalvato> libriSalvati = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
             List<Libro> libri = new List<Libro>();
@@ -115,13 +115,13 @@ namespace Scholae.Services
                     Libro_id = id_libro,
                     Utente_id = id_utente
                 });
-            IRestResponse response = client.Execute(request);
+            client.Execute(request);
         }
 
-        public static List<LibroSalvato> GetLibroSalvato(long id_libro, long id_utente)
+        public static LibroSalvato GetLibroSalvato(long id_libro, long id_utente)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest("/libroSalvato/get", Method.GET);
+            var request = new RestRequest("/libroSalvato/ottienimi", Method.GET);
             request.AddJsonBody(
                 new
                 {
@@ -129,11 +129,30 @@ namespace Scholae.Services
                     Utente_id = id_utente
                 });
             IRestResponse response = client.Execute(request);
-            List<LibroSalvato> libro = JsonConvert.DeserializeObject<List<LibroSalvato>>(response.Content);
+            LibroSalvato libro = JsonConvert.DeserializeObject<LibroSalvato>(response.Content);
+            Debug.WriteLine("\n\n\n\n" + libro);
             return libro;
+
         }
 
-        public static void SalvaImmagine(ImageSource image)
+        public static List<Libro> tuttiImieiLibri(long utenteId)
+    {
+        var client = new RestClient($"{Constants.API_ENDPOINT}");
+        var request = new RestRequest($"/libro/cercaPerUtente/{utenteId}", Method.GET);
+        IRestResponse response = client.Execute(request);
+        List<Libro> libro = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
+        return libro;
+    }
+
+    public static void DeleteLibro(long libroId)
+    {
+        var client = new RestClient($"{Constants.API_ENDPOINT}");
+        var request = new RestRequest($"/libro/elimina/{libroId}", Method.DELETE);
+        client.Execute(request);
+    }
+
+
+    public static void SalvaImmagine(ImageSource image)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest("/libro/images", Method.POST);

@@ -79,9 +79,9 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <ImageButton IsVisible="{Binding NotIsSalvato}" Source="preferito" Grid.Row="0"
+                                <ImageButton IsVisible="{Binding NotIsSalvato, Mode=TwoWay}" Source="preferito" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-50" 
-                                       TranslationY="-8"
+                                       TranslationY="-8" 
                                        Command="{Binding RendiPreferito, Mode=TwoWay, Source={x:Reference libriViewModels}}"
                                        CommandParameter="{Binding id}"
                                        />    

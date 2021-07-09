@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+
 namespace Scholae.ViewModels
 {
     public class Libro
@@ -91,11 +93,15 @@ namespace Scholae.ViewModels
         {
             get
             {
+                Debug.WriteLine("\n\n\nmetodo get di NotIsSalvato\n\n\n\n");
+                Debug.WriteLine(!LibriViewModels.Salvato(id));
                 return !LibriViewModels.Salvato(id);
             }
             set
             {
+                Debug.WriteLine("\n\n\nmetodo set di NotIsSalvato\n\n\n\n");
                 NotIsSalvato = !LibriViewModels.Salvato(id);
+                Debug.WriteLine(NotIsSalvato);
             }
         }
 

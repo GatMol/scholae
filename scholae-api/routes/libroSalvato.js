@@ -22,7 +22,7 @@ router.post("/", async (req, res, next) =>{
         });
 });
 
-router.get("/get", async (req, res, next) =>{
+router.get("/ottienimi", async (req, res, next) =>{
     console.log(req);
     await prisma.libroSalvato.findUnique({
         select: {

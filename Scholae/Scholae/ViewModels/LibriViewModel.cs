@@ -2,6 +2,7 @@
 using Scholae.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -138,7 +139,8 @@ namespace Scholae.ViewModels
 
         public static bool Salvato(long id_libro)
         {
-            LibroSalvato boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
+            LibroSalvato boo = APIConnector.GetLibroSalvato(id_libro, APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
+            Debug.WriteLine(APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
             return boo != null ;
         }
 
