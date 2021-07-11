@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:Scholae.ViewModels" 
+             x:DataType="viewmodels:SellPageViewModel"
              x:Class="Scholae.SellPhotoPage">
+
     <ScrollView>
         <AbsoluteLayout>
             <!--Onda scura-->
@@ -27,13 +30,13 @@
                 <BoxView Grid.RowSpan="1" CornerRadius="15" HeightRequest="250" 
                          Margin="40,0,10,0" HorizontalOptions="Fill" InputTransparent="False" BackgroundColor="#F3F0F0"/>
 
-                <Label Text="Nome del libro: Analisi 1" Margin="55,-240,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="Autore: natalini" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="Materia: Analisi" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="ISBN: 11111111111" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="Edizione: 2018" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="Editore: Panini" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="Prezzo: 35$" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Nome}" Margin="55,-240,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Autore}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Isbn}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Edizione}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Editore}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Prezzo}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                <Label Text="{Binding Libro.Materia.Nome}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
 
                 <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
                 CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="25,30,0,0" />
@@ -44,7 +47,7 @@
                 <Button BorderWidth="1" WidthRequest="170" HeightRequest="50"
                     BorderColor="#0EAE0E"
                     FontSize="20"  FontAttributes="Bold" Text="VENDI"  TextColor="#0EAE0E"
-                    CornerRadius="25"
+                    CornerRadius="25" Clicked="MettiLibroInVendita"
                     BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="30,20,0,20"/>
 
               
