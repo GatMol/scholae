@@ -11,21 +11,21 @@ namespace Scholae
 {
     public partial class App : Application
     {
-        private string _email;
+        public static string email;
         public static string token;
 
         public App()
         {
             InitializeComponent();
             _ = GetCurrentUser();
-            MainPage = _email != null ? new NavigationPage(new TabbedHomePage()) : new NavigationPage(new LoginPage());
+            MainPage = email != null ? new NavigationPage(new TabbedHomePage()) : new NavigationPage(new LoginPage());
         }
 
         private async Task GetCurrentUser()
         {
             try
             {
-                _email = await SecureStorage.GetAsync("email");
+                email = await SecureStorage.GetAsync("email");
                 token = await SecureStorage.GetAsync("accessToken");
                 Debug.WriteLine($"\n\nAPP IN APERTURA: token in storage {token}\n\n");
             }

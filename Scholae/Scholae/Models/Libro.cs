@@ -11,7 +11,7 @@ namespace Scholae.ViewModels
 
         }
 
-        public Libro(long id, String nome, String ISBN, String autore, String editore, String edizione, int prezzo)
+        public Libro(long id, String nome, String ISBN, String autore, String editore, String edizione, int prezzo, string path)
         {
             this.id = id;
             this.Nome = nome;
@@ -20,6 +20,7 @@ namespace Scholae.ViewModels
             this.Editore = editore;
             this.Edizione = edizione;
             this.Prezzo = prezzo;
+            this.Path = path;
         }
 
         public long id
@@ -66,6 +67,12 @@ namespace Scholae.ViewModels
             set;
         }
 
+        public string Path
+        {
+            get;
+            set;
+        }
+
         public Utente Utente
         {
             get;
@@ -103,6 +110,14 @@ namespace Scholae.ViewModels
                 NotIsSalvato = !LibriViewModels.Salvato(id);
                 Debug.WriteLine(NotIsSalvato);
             }
+        }
+
+        public override string ToString()
+        {
+            string UtenteLibro = Utente!=null ? Utente.ToString() : "Nessun utente";
+            string MateriaLibro = Materia != null ? Materia.ToString() : "Nessuna materia";
+            return "Libro:\n" + $"Nome: {Nome}\n" + $"Autore: {Autore}\n" + $"Edizione: {Edizione}\n" + $"Editore: {Editore}\n"
+                + $"ISBN: {Isbn}\n" + $"Path: {Path}\n" + $"Utente: {UtenteLibro}\n" + $"Materia: {MateriaLibro}\n";
         }
 
     }

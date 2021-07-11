@@ -62,7 +62,7 @@ namespace Scholae
 
         public override string ToString()
         {
-            return $"Utente = " +
+            return $"Utente = {Id}" +
                 $"nome: {this.nome}, " +
                 $"cognome: {this.cognome}, " +
                 $"email: {this.email}," +

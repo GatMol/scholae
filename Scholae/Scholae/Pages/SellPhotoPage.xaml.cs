@@ -10,12 +10,14 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Diagnostics;
+using Scholae.ViewModels;
 
 namespace Scholae
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SellPhotoPage : ContentPage
     {
+        public SellPageViewModel spPage { get; set; }
         public SellPhotoPage()
         {
             InitializeComponent();
@@ -29,11 +31,29 @@ namespace Scholae
 
             if (result != null)
             {
-                var stream = await result.OpenReadAsync();
-
-                resultImage.Source = ImageSource.FromStream(() => stream);
+                await Task.Run(async () =>
+                {
+                    var stream = await result.OpenReadAsync();
+                    Device.BeginInvokeOnMainThread(() => {
+                        resultImage.Source = ImageSource.FromStream(() => stream);
+                    });
+                    spPage.Img = ReadFully(stream);
+                    stream.Position = 0;
+                    spPage.Filename = result.FileName;
+                    
+                });     
             }
         }
+
+        public static byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
         async void Button1_Clicked(System.Object sender, System.EventArgs e)
         {
             var result = await MediaPicker.CapturePhotoAsync();
@@ -46,14 +66,14 @@ namespace Scholae
             }
         }
 
-        async void SalvaFoto(object sender, EventArgs e)
+        async void MettiLibroInVendita(object sender, EventArgs e)
         {
-            //TODO: Prendo immagine dal picker e la mando all APIConnector e pusho nuova pagina
-            Debug.WriteLine($"SOURCE: {resultImage.Source}");
-            APIConnector.SalvaImmagine(resultImage.Source);
-            //var stream = File.ReadAllBytes(resultImage.Source.ToString());
-            //APIConnector.SalvaImmagine(stream);
-            await Navigation.PopAsync();
+            Debug.WriteLine(spPage!=null ? spPage.ToString() : "Nullo");
+            if (spPage.VendiLibro())
+                await Navigation.PopToRootAsync();
+            else
+                await DisplayAlert("Errore", "Riprova", "Ok");
         }
+
     }
 }

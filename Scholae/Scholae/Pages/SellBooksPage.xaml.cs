@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Scholae.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,25 +14,29 @@ namespace Scholae
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SellBooksPage : ContentPage
     {
+        public SellPageViewModel sbVM;
         public SellBooksPage()
         {
+            sbVM = new SellPageViewModel();
             InitializeComponent();
-
-            MainPicker.Items.Add("Analisi");
-            MainPicker.Items.Add("APS");
-            MainPicker.Items.Add("SIW");
+            BindingContext = sbVM;
+            List<string> materie = sbVM.GetMaterie();
+            MainPicker.ItemsSource = materie;
         }
 
         private void MainPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var name = MainPicker.Items[MainPicker.SelectedIndex];
-
-
         }
 
-        void Handle_Clicked(object sender, System.EventArgs e)
+        async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new SellPhotoPage());
+            SellPhotoPage spPage = new SellPhotoPage()
+            {
+                spPage = sbVM,
+                BindingContext = sbVM
+            };
+            await Navigation.PushAsync(spPage);
         }
     }
 }

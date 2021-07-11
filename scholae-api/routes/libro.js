@@ -11,14 +11,22 @@ const { uploadFile, getFileStream } = require('../s3');
 
 BigInt.prototype.toJSON = function() {       
     return this.toString()
-  }
-  
-router.post("/", upload.single('libroImage'), async (req, res, next)=> {
-    //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
+}
+
+router.post('/images', upload.single('libroImage'), async (req, res) => {
     const file = req.file;
     console.log(file);
     const result = await uploadFile(file);
     console.log(result);
+    return res.status(200).json({
+        message: 'immagine salvata',
+        file: file,
+        s3: result
+    })
+});
+
+router.post("/", async (req, res, next)=> {
+    //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
     const newLibro = {
         ISBN: req.body.ISBN,
         Nome: req.body.Nome,
@@ -28,13 +36,39 @@ router.post("/", upload.single('libroImage'), async (req, res, next)=> {
         Prezzo: req.body.Prezzo,
         Materia_id: req.body.Materia_id,
         Utente_id: parseInt(req.body.Utente_id),
-        Immagine: file.filename
     }
 
     await prisma.libro.create({data: newLibro})
     .then(result => {
         console.log(result);
-        res.status(201);
+        res.status(201).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+});
+
+router.post("/foto/:id", upload.single('libroImage'), async (req, res, next)=> {
+    //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
+    const file = req.file;
+    console.log(file);
+    const result = await uploadFile(file);
+    await unlinkFile(file.path);
+    console.log(result);
+    await prisma.libro.update({
+        where: {
+            Id: parseInt(req.params.id)
+          },
+          data: {
+            Immagine: file.filename
+          }
+    })
+    .then(result => {
+        console.log(result);
+        res.status(201).json(result);
     })
     .catch(err => {
         console.log(err);
@@ -60,7 +94,7 @@ router.get("/", async (req, res, next) => {
                 Nome: true,
                 Cognome: true
             }
-        } 
+        }
        }
    }).then(result => {
         res.status(200).json(result);
@@ -115,8 +149,20 @@ router.get("/cercaPerNome/:nome", async (req, res, next) => {
     res.status(200).json(result);
 });
 
+//*************************************************************A */
+
+function getImmagineLibro(key) {
+    const readStream = getFileStream(key);
+    return readStream;
+    //TODO: Riporta in un formato la foto oppure come stream
+    //TODO: Aggiungi un campo path nell immagine, associato alla key generata da multer e che lo identifica all'interno del bucket
+    //cosi quando carichiamo il libro, carichiamo l'immagine facendo una get dell'immagine
+    //TODO: Aggiungi nel POST del libro il campo path
+};
+
+
 router.get("/cercaPerId/:libroId", async (req, res) => {
-    req.data = await db.libro.findUnique({
+    await db.libro.findUnique({
         where: {
             Id: parseInt(req.params.libroId)
         },
@@ -137,10 +183,15 @@ router.get("/cercaPerId/:libroId", async (req, res) => {
                     Citta: true,
                     Email: true
                 }
-            } 
+            },
+            Immagine: true 
         }
     }).then(result => {
-         res.status(200).json(result);
+        const img = getImmagineLibro(result.Immagine);
+        res.status(201).json({
+            Libro: result,
+            Stream: img
+        });
      })
      .catch(err => {
          res.status(500).json({
@@ -151,7 +202,10 @@ router.get("/cercaPerId/:libroId", async (req, res) => {
 
 
 router.get("/cercaPerUtente/:utenteId", async (req, res) => {
-    req.data = await db.libro.findMany({
+    req.data = await db.libro.findUnique({
+        where: {
+            Utente_id: parseInt(req.params.utenteId)
+        },
         select: {
             Id: true,
             Nome: true,
@@ -161,17 +215,6 @@ router.get("/cercaPerUtente/:utenteId", async (req, res) => {
             Edizione: true,
             Prezzo: true,
             Materia: true,
-            Utente:{
-                select:{
-                    Nome: true,
-                    Cognome: true
-                }
-            } 
-        },
-        where: {
-            Utente: {
-                    Id: parseInt(req.params.utenteId)
-            }
         }
     }).then(result => {
          res.status(200).json(result);
@@ -183,8 +226,8 @@ router.get("/cercaPerUtente/:utenteId", async (req, res) => {
      });
 });
 
-router.delete("/elimina/:libroId", async (req, res, next) => {
-    const deleteLibro = await prisma.libro.delete({
+router.delete("/:libroId", async (req, res, next) => {
+    const deleteLibro = await db.libro.delete({
         where: {
             Id: parseInt(req.params.libroId)
         }
@@ -193,7 +236,15 @@ router.delete("/elimina/:libroId", async (req, res, next) => {
             error: err
         })
     });
-    res.status(200).json();
+
+    res.status(200).json({
+        message: 'libro eliminato',
+        Id: req.params.Id
+    });
 });
+
+
+
+
 
 module.exports = router;

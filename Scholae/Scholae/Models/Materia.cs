@@ -13,5 +13,10 @@ namespace Scholae.ViewModels
             set;
 
         }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }
