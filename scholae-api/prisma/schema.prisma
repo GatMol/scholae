@@ -16,7 +16,7 @@ model Libro {
   Edizione               String         @db.VarChar
   Editore                String         @db.VarChar
   Prezzo                 Decimal        @db.Money
-  Immagine               String         @db.VarChar
+  Immagine               String?        @db.VarChar
   Materia_id             String         @db.VarChar
   Utente_id              BigInt         
   Materia                Materia        @relation(fields: [Materia_id], references: [Nome])

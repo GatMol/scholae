@@ -7,6 +7,7 @@ CREATE TABLE "Libro" (
     "Edizione" VARCHAR NOT NULL,
     "Editore" VARCHAR NOT NULL,
     "Prezzo" MONEY NOT NULL,
+    "Immagine" VARCHAR,
     "Materia_id" VARCHAR NOT NULL,
     "Utente_id" BIGINT NOT NULL,
 
@@ -15,10 +16,10 @@ CREATE TABLE "Libro" (
 
 -- CreateTable
 CREATE TABLE "LibroSalvato" (
-    "Libro" BIGINT NOT NULL,
-    "Utente" BIGINT NOT NULL,
+    "Libro_id" BIGINT NOT NULL,
+    "Utente_id" BIGINT NOT NULL,
 
-    PRIMARY KEY ("Libro","Utente")
+    PRIMARY KEY ("Libro_id","Utente_id")
 );
 
 -- CreateTable
@@ -46,13 +47,13 @@ CREATE TABLE "Utente" (
 CREATE UNIQUE INDEX "Utente.Email_unique" ON "Utente"("Email");
 
 -- AddForeignKey
-ALTER TABLE "Libro" ADD FOREIGN KEY ("Materia_id") REFERENCES "Materia"("Nome") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Libro" ADD FOREIGN KEY ("Materia_id") REFERENCES "Materia"("Nome") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Libro" ADD FOREIGN KEY ("Utente_id") REFERENCES "Utente"("Id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Libro" ADD FOREIGN KEY ("Utente_id") REFERENCES "Utente"("Id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LibroSalvato" ADD FOREIGN KEY ("Libro") REFERENCES "Libro"("Id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "LibroSalvato" ADD FOREIGN KEY ("Libro_id") REFERENCES "Libro"("Id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LibroSalvato" ADD FOREIGN KEY ("Utente") REFERENCES "Utente"("Id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "LibroSalvato" ADD FOREIGN KEY ("Utente_id") REFERENCES "Utente"("Id") ON DELETE CASCADE ON UPDATE CASCADE;
