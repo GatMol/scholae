@@ -108,4 +108,15 @@ router.get("/cercaPerEmail/:email", async (req, res, next) => {
     return res.status(200).json(user);
 });
 
+router.delete("/:utenteid", async (req, res) => {
+    await db.utente.delete({
+        where: {
+            Id: parseInt(req.params.utenteid)
+        }
+    }).catch((err) => {
+       return res.status(500);
+    })
+    return res.status(200);
+});
+
 module.exports = router;
