@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Scholae.ViewModels;
 using Xamarin.Forms;
 
 namespace Scholae.Pages

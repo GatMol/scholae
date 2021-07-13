@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Scholae.ViewModels"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Scholae.ViewModels"
+             xmlns:service="clr-namespace:Scholae.Services"
              x:Class="Scholae.BooksPage" Padding="0, 20, 0, 0"
              >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:InverseBoolConverter x:Key="InverseBool"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <local:LibriViewModels x:Name="libriViewModels"/>
+        <local:LibriViewModel x:Name="libriViewModel"/>
     </ContentPage.BindingContext>
 
     <AbsoluteLayout x:Name="contenitore" BackgroundColor="#e4e4e4">
@@ -18,7 +25,7 @@
                   AbsoluteLayout.LayoutBounds="0.5,0.015, 0.5, 0.07" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
 
-        <Label AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 
+        <Label x:Name="libri" AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 
                FontAttributes="Bold" FontSize="17"
                AbsoluteLayout.LayoutBounds="0.2, 0.06, 0.3, 0.09"
                HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
@@ -32,7 +39,7 @@
                    BackgroundColor="#f6f6f6">
            </Rectangle>
 
-        <Label AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
+        <Label x:Name="imieilibri" AbsoluteLayout.LayoutFlags="All" Text="I miei libri" TextColor="#f6f6f6"
                FontSize="17" AbsoluteLayout.LayoutBounds="0.76, 0.063, 0.3, 0.09"
                HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
             <Label.GestureRecognizers>
@@ -76,33 +83,34 @@
                                 <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <ImageButton IsVisible="{Binding NotIsSalvato}" Source="preferito" Grid.Row="0"
-                                       Grid.Column="0" TranslationX="-50" 
+                                <ImageButton IsVisible="{Binding visibilitanonpreferiti, Source={x:Reference libriViewModel}}" Source="preferito" Grid.Row="0"
+                                       Grid.Column="0" TranslationX="-30" 
                                        TranslationY="-8"
-                                       Command="{Binding RendiPreferito, Mode=TwoWay, Source={x:Reference libriViewModels}}"
+                                       Command="{Binding RendiPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
-                                       />    
+                                       />
 
-                               <ImageButton IsVisible="{Binding IsSalvato}" Source="preferitoSelezionato" Grid.Row="0"
-                                       Grid.Column="0" TranslationX="-50"
+                                <ImageButton IsVisible="{Binding visibilitanonpreferiti, Converter={StaticResource InverseBool}, Source={x:Reference libriViewModel}}" Source="preferitoSelezionato" Grid.Row="0"
+                                       Grid.Column="0" TranslationX="-30"
                                        TranslationY="-8"
-                                       Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModels}}"
+                                       Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
-                                       /> 
+                                       />
 
                                 <Image HorizontalOptions="Center"
                                        VerticalOptions="Center"
                                        Grid.Column="0"
                                        Grid.ColumnSpan="1"
-                                       Source="foto_libro"
-                                       HeightRequest="140"
-                                       WidthRequest="110"
+                                       Source="{Binding Immagine, Mode=OneWay}"
+                                       HeightRequest="120"
+                                       WidthRequest="130"
                                        TranslationY="5"
                                        Grid.Row="0"
                                        Grid.RowSpan="5"
+                                       TranslationX="30"
                                        />
 
                                 <Grid Grid.Column="1" Grid.RowSpan="5">
@@ -123,8 +131,9 @@
                                     <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
                                            Grid.Row="0" Grid.Column="1"
+                                           Grid.RowSpan="1"
                                            Grid.ColumnSpan="2"
-                                           Text="{Binding Nome}"
+                                           Text="{Binding NomeCorto}"
                                            FontFamily="Century Gothic"
                                            FontAttributes="Bold"
                                            FontSize="20"
@@ -134,9 +143,9 @@
                                            VerticalOptions="Center"
                                            Grid.Row="1" Grid.Column="1"
                                            Grid.ColumnSpan="2"
-                                           Text="{Binding Autore}"
+                                           Text="{Binding AutoreCorto}"
                                            FontFamily="Century Gothic"
-                                           FontSize="18"
+                                           FontSize="16"
                                            />
 
                                     <Label HorizontalOptions="Center"
@@ -145,16 +154,16 @@
                                            Grid.ColumnSpan="2"
                                            Text="{Binding Edizione}"
                                            FontFamily="Century Gothic"
-                                           FontSize="18"/>
+                                           FontSize="16"/>
 
-                                        <Image Grid.Row="3" Grid.Column="0"
+                                       <!-- <Image Grid.Row="3" Grid.Column="0"
                                                Source="icona_account"/>
                                         <Label Grid.Row="3" Grid.Column="1"
                                                Grid.ColumnSpan="2"
                                                Text="{Binding Utente.NomeCognome}"
-                                               FontSize="18"/>
+                                               FontSize="18"/>-->
 
-                                    <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+                                    <StackLayout TranslationX="-10" HorizontalOptions="End" Orientation="Horizontal" Grid.Row="4" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="2">
 
                                         <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
@@ -164,7 +173,7 @@
 
                                         <Label HorizontalOptions="Center"
                                            VerticalOptions="Center"
-                                           Text="{Binding  Prezzo, StringFormat='{0:F0} €'}"
+                                           Text="{Binding  Prezzo, StringFormat='{0:F0}€'}"
                                            FontFamily="Century Gothic" FontAttributes="Bold"
                                            FontSize="28"/>
 

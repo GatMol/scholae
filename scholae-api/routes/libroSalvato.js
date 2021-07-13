@@ -3,22 +3,6 @@ const prisma = require('../services/database');
 const router = express.Router();
 const db = require("../services/database");
 
-router.get("/getLibriSalvati/:utenteId", async (req, res, next) => {
-    await prisma.libroSalvato.findMany({
-        where: {
-            Utente: parseInt(req.params.utenteId)
-        }
-    })
-    .then(result => {
-        res.status(201).json(result);
-    })
-    .catch(err => {
-        return res.status(500).json({
-            error: err
-        });
-    });
-});
-
 router.post("/", async (req, res, next) =>{
 
     const libroS = {
@@ -38,33 +22,68 @@ router.post("/", async (req, res, next) =>{
         });
 });
 
-router.get("/get", async (req, res, next) =>{
-
-     libroS = await prisma.libroSalvato.findMany({
+router.get("/ottienimi", async (req, res, next) =>{
+    console.log(req);
+    await prisma.libroSalvato.findUnique({
         select: {
-            Libro: true,
-            Utente: true
+            Libro: {
+                select: {
+                    Id: true,
+                    Nome: true,
+                    ISBN: true,
+                    Autore: true,
+                    Editore: true,
+                    Edizione: true,
+                    Prezzo: true,
+                    Utente: {
+                        select: {
+                            Nome: true, 
+                            Cognome: true
+                },
+                Immagine: true
+            }
+                }
+            }
         },
         where: {
-            Libro_id: req.body.Libro_id,
-            Utente_id: req.body.Utente_id
+            Libro_id_Utente_id: {
+                Libro_id: parseInt(req.body.Libro_id),
+                Utente_id: parseInt(req.body.Utente_id)
         }
+    }
+    }).then(result => {
+        res.status(200).json(result);
     })
     .catch(err => {
-        console.log(err);
         res.status(500).json({
             error: err
         });
-        });
-        return res.status(200).json(libroS);
+    });
 });
 
 
-router.get("/libriSalvati/:utenteId", async(req, res, next) => {
+router.get("/cercaPerUtente/:utenteId", async(req, res, next) => {
     
     await prisma.libroSalvato.findMany({
         select: {
-            Libro:true
+            Libro: {
+                select: {
+                    Id: true,
+                    Nome: true,
+                    ISBN: true,
+                    Autore: true,
+                    Editore: true,
+                    Edizione: true,
+                    Prezzo: true,
+                    Utente: {
+                        select: {
+                            Nome: true, 
+                            Cognome: true
+                }
+            },
+            Immagine: true
+                }
+            }
         },
         where: {
             Utente_id: parseInt(req.params.utenteId)

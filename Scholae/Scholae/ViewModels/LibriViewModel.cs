@@ -2,19 +2,17 @@
 using Scholae.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
+using BaseViewModel = Scholae.Services.BaseViewModel;
 
 namespace Scholae.ViewModels
 {
-    public class LibriViewModels : INotifyPropertyChanged
+    public class LibriViewModel : BaseViewModel
     {
         public Session sessioneCorrente;
         public List<Libro> libri { get; set; }
@@ -22,6 +20,21 @@ namespace Scholae.ViewModels
         public string testoSearchBar { get; set; }
 
         public bool mieiLibri = false;
+
+        private bool visibilitapreferiti;
+
+        public bool visibilitanonpreferiti
+        {
+            get
+            {
+                return visibilitapreferiti;
+            }
+            set
+            {
+                visibilitapreferiti = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableRangeCollection<Libro> LibriDaMostrare
         {
@@ -73,21 +86,28 @@ namespace Scholae.ViewModels
             EliminaPreferito(id);
         });
 
-        public LibriViewModels()
+        public LibriViewModel()
         {
             InitData();
+            visibilitanonpreferiti = true;
+            //Task.Run(() => Visibilitapreferiti = false);
+        }
             sessioneCorrente = Session.GetSession();
     }
 
         private void InitData()
         {
-            libri = APIConnector.GetAllLibri();
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            libri = APIConnector.GetAllLibri(utente.Id);
             /*for (int i = 0; i < 10; i++)
             {
                 Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);
                 libri.Add(libro);
             }*/
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.ToList());
+            foreach(Libro libro in libri) {
+                Debug.WriteLine(libro.ToString());
+            }
         }
 
         async Task RefreshItemsAsync()
@@ -107,19 +127,26 @@ namespace Scholae.ViewModels
 
         public void CercaPerNome(String nome)
         {
-            libri = APIConnector.GetLibroPerNome(nome);
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            libri = APIConnector.GetLibroPerNome(nome, utente.Id);
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri ?? new List<Libro>());
         }
 
         public Task TuttiLibri()
         {
-            InitData();
             mieiLibri = false;
+            InitData();
+            visibilitanonpreferiti = true;
             return Task.CompletedTask;
         }
 
         public Task LibriSalvati()
         {
+            mieiLibri = true;
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            List<Libro> libriSalvati = APIConnector.GetLibriSalvati(utente.Id);
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.ToList());
+            visibilitanonpreferiti = false;
             //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
             List<Libro> libriSalvati = APIConnector.GetLibriSalvati(sessioneCorrente.UtenteCorrente.Id);
             //TODO: Mettere i libriSalvati in memoria nell'utenteCorrente
@@ -144,12 +171,11 @@ namespace Scholae.ViewModels
             //TODO: Rimuovere libroSalvato in memoria
         }
 
-        //public static bool Salvato(long id_libro)
-        //{
-        //    //List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
-        //    List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, sessioneCorrente.UtenteCorrente.Id);
-        //    return boo != null && boo.Count > 0;
-        //}
+        public static bool Salvato(long id_libro)
+        {
+            List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
+            return boo != null && boo.Count > 0;
+        }
 
         #region INotifyPropertyChanged
 
@@ -160,6 +186,5 @@ namespace Scholae.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #endregion
     }
 }

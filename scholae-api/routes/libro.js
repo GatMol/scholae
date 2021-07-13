@@ -7,7 +7,13 @@ const upload = multer({ dest: 'uploads/'});
 const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink);
-const { uploadFile, getFileStream } = require('../s3');
+const { uploadFile, getFileStream, s3 } = require('../s3');
+const http = require('http');
+
+
+const location = "/libro/immagine/";
+
+var toArray = require('stream-to-array');
 
 BigInt.prototype.toJSON = function() {       
     return this.toString()
@@ -29,6 +35,7 @@ router.post("/", async (req, res, next)=> {
     await prisma.libro.create({data: newLibro})
     .then(result => {
         console.log(result);
+        console.log(s3);
         res.status(201).json(result);
     })
     .catch(err => {
@@ -50,10 +57,11 @@ router.post("/foto/:id", upload.single('libroImage'), async (req, res, next)=> {
             Id: parseInt(req.params.id)
           },
           data: {
-            Immagine: file.filename
+            Immagine: location +  file.filename
           }
     })
     .then(result => {
+        console.log(result.Immagine);
         console.log(result);
         res.status(201).json(result);
     })
@@ -65,7 +73,7 @@ router.post("/foto/:id", upload.single('libroImage'), async (req, res, next)=> {
     });
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/:utenteId", async (req, res, next) => {
    await prisma.libro.findMany({
        select: {
         Id: true,
@@ -81,7 +89,13 @@ router.get("/", async (req, res, next) => {
                 Nome: true,
                 Cognome: true
             }
-        }
+        },
+        Immagine: true
+       },
+       where: {
+           NOT: {
+            Utente_id: parseInt(req.params.utenteId)
+           }
        }
    }).then(result => {
         res.status(200).json(result);
@@ -110,7 +124,8 @@ router.get("/cercaPerNome/:nome", async (req, res, next) => {
                     Nome: true,
                     Cognome: true
                 }
-            } 
+            },
+            Immagine: true
         },
         where: {
             OR: [
@@ -125,7 +140,10 @@ router.get("/cercaPerNome/:nome", async (req, res, next) => {
                     startsWith: nome
                 }
             }  
-        ]
+        ],
+        NOT: {
+            Utente_id: parseInt(req.body.Utente_id)
+        }
         }
     })
     .catch((err) => {
@@ -140,12 +158,24 @@ router.get("/cercaPerNome/:nome", async (req, res, next) => {
 
 function getImmagineLibro(key) {
     const readStream = getFileStream(key);
+    console.log(readStream);
     return readStream;
-    //TODO: Riporta in un formato la foto oppure come stream
-    //TODO: Aggiungi un campo path nell immagine, associato alla key generata da multer e che lo identifica all'interno del bucket
-    //cosi quando carichiamo il libro, carichiamo l'immagine facendo una get dell'immagine
-    //TODO: Aggiungi nel POST del libro il campo path
 };
+
+const bucketName = process.env.S3_BUCKET;
+
+router.get("/immagine/:filename", (req, res) => {
+    const downloadParams = {
+        Key: req.params.filename,
+        Bucket: bucketName,
+        ResponseContentType: "image/jpeg"
+    };
+    s3.getObject(downloadParams, function(err, data) {
+        res.writeHead(200, {'Content-Type': 'image/jpeg'});
+        res.write(data.Body, 'binary');
+        res.end(null, 'binary');
+    });
+});
 
 
 router.get("/cercaPerId/:libroId", async (req, res) => {
@@ -189,7 +219,7 @@ router.get("/cercaPerId/:libroId", async (req, res) => {
 
 
 router.get("/cercaPerUtente/:utenteId", async (req, res) => {
-    req.data = await db.libro.findUnique({
+    req.data = await db.libro.findMany({
         where: {
             Utente_id: parseInt(req.params.utenteId)
         },
@@ -202,6 +232,7 @@ router.get("/cercaPerUtente/:utenteId", async (req, res) => {
             Edizione: true,
             Prezzo: true,
             Materia: true,
+            Immagine: true
         }
     }).then(result => {
          res.status(200).json(result);

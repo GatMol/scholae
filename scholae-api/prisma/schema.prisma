@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
   previewFeatures = ["referentialActions"]
 }
 
@@ -9,26 +9,26 @@ datasource db {
 }
 
 model Libro {
-  Id           BigInt         @id @default(autoincrement())
-  ISBN         String?        @db.VarChar
-  Nome         String         @db.VarChar
-  Autore       String         @db.VarChar
-  Edizione     String         @db.VarChar
-  Editore      String         @db.VarChar
-  Prezzo       Decimal        @db.Money
-  Immagine     String?        @db.VarChar
-  Materia_id   String         @db.VarChar
-  Utente_id    BigInt
-  Materia      Materia        @relation(fields: [Materia_id], references: [Nome])
-  Utente       Utente         @relation(fields: [Utente_id], references: [Id])
-  LibroSalvato LibroSalvato[]
+  Id                     BigInt         @id @default(autoincrement())
+  ISBN                   String?        @db.VarChar
+  Nome                   String         @db.VarChar
+  Autore                 String         @db.VarChar
+  Edizione               String         @db.VarChar
+  Editore                String         @db.VarChar
+  Prezzo                 Decimal        @db.Money
+  Immagine               String?        @db.VarChar
+  Materia_id             String         @db.VarChar
+  Utente_id              BigInt         
+  Materia                Materia        @relation(fields: [Materia_id], references: [Nome])
+  Utente                 Utente         @relation(fields: [Utente_id], references: [Id], onDelete: Cascade)
+  LibroSalvato           LibroSalvato[] 
 }
 
 model LibroSalvato {
-  Libro_id  BigInt
-  Utente_id BigInt
-  Libro     Libro  @relation(fields: [Libro_id], references: [Id], onDelete: Cascade)
-  Utente    Utente @relation(fields: [Utente_id], references: [Id], onDelete: Cascade)
+  Libro_id                       BigInt
+  Utente_id                      BigInt
+  Libro                          Libro  @relation(fields: [Libro_id], references: [Id], onDelete: Cascade)
+  Utente                         Utente @relation(fields: [Utente_id], references: [Id], onDelete: Cascade)
 
   @@id([Libro_id, Utente_id])
 }
