@@ -31,10 +31,11 @@ namespace Scholae.ViewModels
         public bool VendiLibro()
         {
             //TODO: salva in locale quello che prendi dal SS
-            string email = App.email;
+            //string email = App.email;
+            string email = LoginPage.Email;
             Utente u = APIConnector.GetUtentePerEmail(email);
             Debug.WriteLine("\n\nVENDILIBRO NEL VM, UTENTE: ");
-            Debug.WriteLine(u.ToString());
+            //Debug.WriteLine(u.ToString());
             Libro.Utente = u;
             Libro libro = APIConnector.CreaLibro(Libro);
             if (libro != null)

@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
+using Scholae.Services;
 
 namespace Scholae.ViewModels
 {
     public class Libro
     {
 
+        private string _immagine;
+
+        private string nome;
+
         public Libro()
         {
 
         }
 
-        public Libro(long id, String nome, String ISBN, String autore, String editore, String edizione, int prezzo, string path)
+        public Libro(long id, String nome, String ISBN, String autore, String editore, String edizione, int prezzo, string immagine)
         {
             this.id = id;
             this.Nome = nome;
@@ -20,7 +25,7 @@ namespace Scholae.ViewModels
             this.Editore = editore;
             this.Edizione = edizione;
             this.Prezzo = prezzo;
-            this.Path = path;
+            this.Immagine = immagine;
         }
 
         public long id
@@ -67,10 +72,16 @@ namespace Scholae.ViewModels
             set;
         }
 
-        public string Path
+        public string Immagine
         {
-            get;
-            set;
+            get
+            {
+                return Constants.API_ENDPOINT + _immagine;
+            }
+            set
+            {
+                _immagine = value;
+            } 
         }
 
         public Utente Utente
@@ -85,30 +96,30 @@ namespace Scholae.ViewModels
             set;
         }
 
-        public Boolean IsSalvato
-        {
-            get {
-                return LibriViewModels.Salvato(id);
-            }
-            set
-            {
-                IsSalvato = LibriViewModels.Salvato(id);
-            }
-        }
-
-        public Boolean NotIsSalvato
+        public string NomeCorto
         {
             get
             {
-                Debug.WriteLine("\n\n\nmetodo get di NotIsSalvato\n\n\n\n");
-                Debug.WriteLine(!LibriViewModels.Salvato(id));
-                return !LibriViewModels.Salvato(id);
+                if (Nome.Length > 14)
+                {
+                    return Nome.Substring(0, 13) + "...";
+                }
+                else
+                    return Nome;
             }
-            set
+        }
+
+        public string AutoreCorto
+        {
+            get
             {
-                Debug.WriteLine("\n\n\nmetodo set di NotIsSalvato\n\n\n\n");
-                NotIsSalvato = !LibriViewModels.Salvato(id);
-                Debug.WriteLine(NotIsSalvato);
+                if (Autore.Length > 18)
+                {
+                    String[] NomeeCognome = Autore.Split(' ');
+                    return NomeeCognome[0];
+                }
+                else
+                    return Autore;
             }
         }
 
@@ -117,7 +128,7 @@ namespace Scholae.ViewModels
             string UtenteLibro = Utente!=null ? Utente.ToString() : "Nessun utente";
             string MateriaLibro = Materia != null ? Materia.ToString() : "Nessuna materia";
             return "Libro:\n" + $"Nome: {Nome}\n" + $"Autore: {Autore}\n" + $"Edizione: {Edizione}\n" + $"Editore: {Editore}\n"
-                + $"ISBN: {Isbn}\n" + $"Path: {Path}\n" + $"Utente: {UtenteLibro}\n" + $"Materia: {MateriaLibro}\n";
+                + $"ISBN: {Isbn}\n" + $"Path: {Immagine}\n" + $"Utente: {UtenteLibro}\n" + $"Materia: {MateriaLibro}\n";
         }
 
     }

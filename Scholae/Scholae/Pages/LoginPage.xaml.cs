@@ -71,8 +71,8 @@ namespace Scholae
             {
                 BearerToken token = JsonConvert.DeserializeObject<BearerToken>(response.Content);
                 Debug.WriteLine("\n\nLOGINPAGE: loggato e il token e': " + token.AccessToken + "\n\n");
-                await SecureStorage.SetAsync("email", email);
-                await SecureStorage.SetAsync("accessToken", token.AccessToken);
+                //await SecureStorage.SetAsync("email", email);
+                //await SecureStorage.SetAsync("accessToken", token.AccessToken);
                 Email = email;
                 Navigation.InsertPageBefore(new TabbedHomePage(), this);
                 await Navigation.PopAsync();

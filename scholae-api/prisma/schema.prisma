@@ -20,7 +20,7 @@ model Libro {
   Materia_id             String         @db.VarChar
   Utente_id              BigInt         
   Materia                Materia        @relation(fields: [Materia_id], references: [Nome])
-  Utente                 Utente         @relation(fields: [Utente_id], references: [Id])
+  Utente                 Utente         @relation(fields: [Utente_id], references: [Id], onDelete: Cascade)
   LibroSalvato           LibroSalvato[] 
 }
 

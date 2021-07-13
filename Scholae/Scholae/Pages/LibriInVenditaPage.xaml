@@ -78,7 +78,7 @@
                                        VerticalOptions="Center"
                                        Grid.Column="0"
                                        Grid.ColumnSpan="1"
-                                       Source="foto_libro"
+                                       Source="{Binding Immagine, Mode=OneWay}"
                                        HeightRequest="140"
                                        WidthRequest="110"
                                        TranslationY="5"

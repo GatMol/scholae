@@ -2,6 +2,7 @@
 using Scholae.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using BaseViewModel = Scholae.Services.BaseViewModel;
 
 namespace Scholae.ViewModels
 {
-    public class LibriViewModels : BaseViewModel
+    public class LibriViewModel : BaseViewModel
     {
 
         public List<Libro> libri { get; set; }
@@ -19,6 +20,21 @@ namespace Scholae.ViewModels
         public string testoSearchBar { get; set; }
 
         public bool mieiLibri = false;
+
+        private bool visibilitapreferiti;
+
+        public bool visibilitanonpreferiti
+        {
+            get
+            {
+                return visibilitapreferiti;
+            }
+            set
+            {
+                visibilitapreferiti = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableRangeCollection<Libro> LibriDaMostrare
         {
@@ -70,20 +86,26 @@ namespace Scholae.ViewModels
             EliminaPreferito(id);
         });
 
-        public LibriViewModels()
+        public LibriViewModel()
         {
             InitData();
+            visibilitanonpreferiti = true;
+            //Task.Run(() => Visibilitapreferiti = false);
         }
 
         private void InitData()
         {
-            libri = APIConnector.GetAllLibri();
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            libri = APIConnector.GetAllLibri(utente.Id);
             /*for (int i = 0; i < 10; i++)
             {
                 Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);
                 libri.Add(libro);
             }*/
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.ToList());
+            foreach(Libro libro in libri) {
+                Debug.WriteLine(libro.ToString());
+            }
         }
 
         async Task RefreshItemsAsync()
@@ -103,23 +125,26 @@ namespace Scholae.ViewModels
 
         public void CercaPerNome(String nome)
         {
-            libri = APIConnector.GetLibroPerNome(nome);
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.Take(10).ToList());
+            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            libri = APIConnector.GetLibroPerNome(nome, utente.Id);
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri ?? new List<Libro>());
         }
 
         public Task TuttiLibri()
         {
-            InitData();
             mieiLibri = false;
+            InitData();
+            visibilitanonpreferiti = true;
             return Task.CompletedTask;
         }
 
         public Task LibriSalvati()
         {
+            mieiLibri = true;
             Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
             List<Libro> libriSalvati = APIConnector.GetLibriSalvati(utente.Id);
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.Take(10).ToList());
-            mieiLibri = true;
+            LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.ToList());
+            visibilitanonpreferiti = false;
             return Task.CompletedTask;
         }
 

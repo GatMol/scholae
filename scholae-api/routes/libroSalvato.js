@@ -39,7 +39,8 @@ router.get("/ottienimi", async (req, res, next) =>{
                         select: {
                             Nome: true, 
                             Cognome: true
-                }
+                },
+                Immagine: true
             }
                 }
             }
@@ -79,7 +80,8 @@ router.get("/cercaPerUtente/:utenteId", async(req, res, next) => {
                             Nome: true, 
                             Cognome: true
                 }
-            }
+            },
+            Immagine: true
                 }
             }
         },
