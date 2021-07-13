@@ -7,6 +7,8 @@ namespace Scholae.ViewModels
 {
     public class LibriInVenditaViewModel
     {
+        public Session sessioneCorrente;
+
         public List<Libro> libri;
 
         private ObservableCollection<Libro> iMieiLibri;
@@ -26,11 +28,12 @@ namespace Scholae.ViewModels
         public LibriInVenditaViewModel()
         {
             InitData();
+            sessioneCorrente = Session.GetSession();
         }
 
         private void InitData()
         {
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
             //libri = APIConnector.tuttiImieiLibri(utente.Id);
         }
     }

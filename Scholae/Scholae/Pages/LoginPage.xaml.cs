@@ -12,7 +12,8 @@ namespace Scholae
 {
     public partial class LoginPage : ContentPage
     {
-        public static string Email;
+        //public static string Email;
+        public Utente UtenteCorrente { get; set; }
 
         public LoginPage()
         {
@@ -37,58 +38,20 @@ namespace Scholae
                 await DisplayAlert("Error login", "Email e/o password non validi", "Ok");
                 isValid = false;
             }
+            
             if (isValid)
             {
-                try
+                if (await Authentication.AuthenticateUser(email, password))
                 {
-                    await AuthenticateUser(email, password);
+                    Navigation.InsertPageBefore(new TabbedHomePage(), this);
+                    await Navigation.PopAsync();
                 }
-                catch (Exception ex)
+                else
                 {
-                    LoginErrorHandler(ex);
+                    await DisplayAlert("Login error", "", "Try again");
                     PasswordEntry.Text = string.Empty;
                 }
             }
-        }
-
-        private async Task AuthenticateUser(string email, string password)
-        {
-            //var authentication = new Authentication(email);
-            //var accessToken = await authentication.AuthenticateUser(password);
-            //var userAttributes = Authentication.GetUserAttributes(accessToken);
-            //TODO: Crea connessione con API e scrivi metodi per user e libri 
-            //TokenResponse token = API.GetToken(userAttributes.First().Value);
-            //
-            //await SecureStorage.SetAsync("accessToken", accessToken);
-            //
-            var response = APIConnector.Login(email, password);
-            if (!response.IsSuccessful)
-            {
-                await DisplayAlert("Login fallito", "Email e/o password errati", "Riprova");
-                PasswordEntry.Text = string.Empty;
-            }
-            else
-            {
-                BearerToken token = JsonConvert.DeserializeObject<BearerToken>(response.Content);
-                Debug.WriteLine("\n\nLOGINPAGE: loggato e il token e': " + token.AccessToken + "\n\n");
-                await SecureStorage.SetAsync("email", email);
-                await SecureStorage.SetAsync("accessToken", token.AccessToken);
-                Email = email;
-                Navigation.InsertPageBefore(new TabbedHomePage(), this);
-                await Navigation.PopAsync();
-            }
-        }
-
-        private void LoginErrorHandler(Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-            DisplayAlert("Login error", ex.Message, "Try again");
-        }
-
-        public sealed class BearerToken
-        {
-            [JsonProperty(propertyName: "token")]
-            public string AccessToken { set; get; }
         }
     }
 }

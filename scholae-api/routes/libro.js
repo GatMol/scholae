@@ -13,18 +13,6 @@ BigInt.prototype.toJSON = function() {
     return this.toString()
 }
 
-router.post('/images', upload.single('libroImage'), async (req, res) => {
-    const file = req.file;
-    console.log(file);
-    const result = await uploadFile(file);
-    console.log(result);
-    return res.status(200).json({
-        message: 'immagine salvata',
-        file: file,
-        s3: result
-    })
-});
-
 router.post("/", async (req, res, next)=> {
     //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
     const newLibro = {
@@ -52,7 +40,6 @@ router.post("/", async (req, res, next)=> {
 });
 
 router.post("/foto/:id", upload.single('libroImage'), async (req, res, next)=> {
-    //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
     const file = req.file;
     console.log(file);
     const result = await uploadFile(file);

@@ -21,5 +21,9 @@ namespace Scholae
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
     }
 }

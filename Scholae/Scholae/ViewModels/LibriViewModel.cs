@@ -16,7 +16,7 @@ namespace Scholae.ViewModels
 {
     public class LibriViewModels : INotifyPropertyChanged
     {
-
+        public Session sessioneCorrente;
         public List<Libro> libri { get; set; }
 
         public string testoSearchBar { get; set; }
@@ -76,7 +76,8 @@ namespace Scholae.ViewModels
         public LibriViewModels()
         {
             InitData();
-        }
+            sessioneCorrente = Session.GetSession();
+    }
 
         private void InitData()
         {
@@ -119,8 +120,9 @@ namespace Scholae.ViewModels
 
         public Task LibriSalvati()
         {
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            List<Libro> libriSalvati = APIConnector.GetLibriSalvati(utente.Id);
+            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            List<Libro> libriSalvati = APIConnector.GetLibriSalvati(sessioneCorrente.UtenteCorrente.Id);
+            //TODO: Mettere i libriSalvati in memoria nell'utenteCorrente
             LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.Take(10).ToList());
             mieiLibri = true;
             return Task.CompletedTask;
@@ -129,22 +131,25 @@ namespace Scholae.ViewModels
         private void AggiungiPreferito(long id)
         {
             //Utente utente = APIConnector.GetUtentePerEmail(SecureStorage.GetAsync("email").Result);
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            APIConnector.AddLibroSalvatoAdUtente(id, utente.Id);
+            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            APIConnector.AddLibroSalvatoAdUtente(id, sessioneCorrente.UtenteCorrente.Id);
+            //TODO: Aggiungere libroSalvato in memoria
         }
 
         private void EliminaPreferito(long id)
         {
             //Utente utente = APIConnector.GetUtentePerEmail(SecureStorage.GetAsync("email").Result);
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            APIConnector.DeleteLibroSalvatoAdUtente(id, utente.Id);
+            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            APIConnector.DeleteLibroSalvatoAdUtente(id, sessioneCorrente.UtenteCorrente.Id);
+            //TODO: Rimuovere libroSalvato in memoria
         }
 
-        public static bool Salvato(long id_libro)
-        {
-            List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
-            return boo != null && boo.Count > 0;
-        }
+        //public static bool Salvato(long id_libro)
+        //{
+        //    //List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
+        //    List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, sessioneCorrente.UtenteCorrente.Id);
+        //    return boo != null && boo.Count > 0;
+        //}
 
         #region INotifyPropertyChanged
 

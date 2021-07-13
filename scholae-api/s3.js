@@ -22,7 +22,7 @@ function uploadFile (file) {
         Body: fileStream,
         Key: file.filename
     };
-
+    
     return s3.upload(uploadParams).promise();
 };
 exports.uploadFile = uploadFile;

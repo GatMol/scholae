@@ -22,7 +22,7 @@ namespace Scholae
         {
             InitializeComponent();
         }
-        async void Button_Clicked(System.Object sender, System.EventArgs e)
+        async void Button_Clicked(object sender, EventArgs e)
         {
             var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
             {
@@ -40,8 +40,7 @@ namespace Scholae
                     spPage.Img = ReadFully(stream);
                     stream.Position = 0;
                     spPage.Filename = result.FileName;
-                    
-                });     
+                });
             }
         }
 
@@ -54,7 +53,7 @@ namespace Scholae
             }
         }
 
-        async void Button1_Clicked(System.Object sender, System.EventArgs e)
+        async void Button1_Clicked(object sender, EventArgs e)
         {
             var result = await MediaPicker.CapturePhotoAsync();
 
@@ -70,7 +69,10 @@ namespace Scholae
         {
             Debug.WriteLine(spPage!=null ? spPage.ToString() : "Nullo");
             if (spPage.VendiLibro())
+            {
+                Debug.WriteLine("\nSellPhotoP.cs : Ho messo in vendita il libro");
                 await Navigation.PopToRootAsync();
+            }
             else
                 await DisplayAlert("Errore", "Riprova", "Ok");
         }
