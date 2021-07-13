@@ -15,9 +15,14 @@ namespace Scholae
         }
 
 
-        async void HomeButton_Clicked(System.Object sender, System.EventArgs e)
+        async void RendiPreferito_Clicked(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PopModalAsync();
+            await DisplayAlert("Salvato", "Il libro è stato salvato in 'I miei libri'", "OK");
+        }
+
+        async void TogliPreferito_Clicked(System.Object sender, System.EventArgs e)
+        {
+            await DisplayAlert("Eliminato", "Il libro è stato eliminato da 'I miei libri'", "OK");
         }
 
         async void Miei_Libri(System.Object sender, System.EventArgs e)
@@ -48,6 +53,5 @@ namespace Scholae
                 mieiLibri = false;
             }
         }
-
     }
 }

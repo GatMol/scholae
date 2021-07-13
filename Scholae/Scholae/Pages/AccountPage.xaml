@@ -223,7 +223,7 @@
                         />
 
                 <Button Text="Elimina account" TextColor="#df4f4f"
-                        BorderColor="#2f3a56" 
+                        BorderColor="#2f3a56" Clicked="OnDeleteButtonClicked"
                         CornerRadius="0" BorderWidth="1"
                         Margin="-10, -7"
                         />

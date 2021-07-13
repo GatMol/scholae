@@ -161,13 +161,5 @@ namespace Scholae.ViewModels
             Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
             APIConnector.DeleteLibroSalvatoAdUtente(id, utente.Id);
         }
-
-        public static bool Salvato(long id_libro)
-        {
-            LibroSalvato boo = APIConnector.GetLibroSalvato(id_libro, APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
-            Debug.WriteLine(APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
-            return boo != null ;
-        }
-
     }
 }

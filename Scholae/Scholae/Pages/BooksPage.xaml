@@ -88,14 +88,14 @@
 
                                 <ImageButton IsVisible="{Binding visibilitanonpreferiti, Source={x:Reference libriViewModel}}" Source="preferito" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-30" 
-                                       TranslationY="-8"
+                                       TranslationY="-8" Clicked="RendiPreferito_Clicked"
                                        Command="{Binding RendiPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
                                        />
 
                                 <ImageButton IsVisible="{Binding visibilitanonpreferiti, Converter={StaticResource InverseBool}, Source={x:Reference libriViewModel}}" Source="preferitoSelezionato" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-30"
-                                       TranslationY="-8"
+                                       TranslationY="-8" Clicked="TogliPreferito_Clicked"
                                        Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
                                        />
