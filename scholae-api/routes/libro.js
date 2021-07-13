@@ -61,9 +61,11 @@ router.post("/foto/:id", upload.single('libroImage'), async (req, res, next)=> {
           }
     })
     .then(result => {
-        console.log(result.Immagine);
-        console.log(result);
-        res.status(201).json(result);
+        console.log(location +  file.filename);
+        const data = location +  file.filename;
+        console.log(data);
+        res.status(201).send(data);
+        console.log(res);
     })
     .catch(err => {
         console.log(err);

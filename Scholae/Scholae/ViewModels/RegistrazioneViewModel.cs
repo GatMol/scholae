@@ -1,13 +1,8 @@
 ﻿using RestSharp;
 using Scholae.Services;
 using Scholae.Validazione;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace Scholae.ViewModels
 {
@@ -30,14 +25,14 @@ namespace Scholae.ViewModels
 
         public void AddValidationRules()
         {
-            Nome.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Nome e' un campo obbligatorio"});
+            Nome.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Nome e' un campo obbligatorio" });
             Cognome.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Cognome e' un campo obbligatorio" });
             Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email e' un campo obbligatorio" });
-            Email.Validations.Add(new IsValidEmailRule<string> { ValidationMessage = "Email non valida"});
-            Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password obbligatoria"});
+            Email.Validations.Add(new IsValidEmailRule<string> { ValidationMessage = "Email non valida" });
+            Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password obbligatoria" });
             Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password obbligatoria" });
-            Password.Validations.Add(new MatchPairValidationRule<string> { ValidationMessage = "Le password devono coincidere"});
-            Telefono.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Telefono obbligatorio"});
+            Password.Validations.Add(new MatchPairValidationRule<string> { ValidationMessage = "Le password devono coincidere" });
+            Telefono.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Telefono obbligatorio" });
             Telefono.Validations.Add(new IsValidNumberRule<string> { ValidationMessage = "Numero non valido" });
             Telefono.Validations.Add(new IsLengthValidRule<string> { MinimunLenght = 10, MaximunLenght = 10, ValidationMessage = "10 numeri necessari" });
             Nazionalita.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Nazionalita e' un campo obbligatorio" });

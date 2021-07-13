@@ -1,5 +1,4 @@
-﻿using System;
-namespace Scholae.ViewModels
+﻿namespace Scholae.ViewModels
 {
     public class LibroSalvato
     {

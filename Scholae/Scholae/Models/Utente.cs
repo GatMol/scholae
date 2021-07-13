@@ -1,7 +1,5 @@
 ﻿using Scholae.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Scholae
 {
@@ -15,8 +13,8 @@ namespace Scholae
         private long telefono;
         private string nazionalita;
         private string citta;
-        //private List<LibroSalvato> libriSalvati;
-        //private List<Libro> libriInVendita;
+        private List<LibroSalvato> libriSalvati;
+        private List<Libro> libriInVendita;
 
         public long Id { get => id; set => id = value; }
         public string Nome { get => nome; set => nome = value; }
@@ -25,8 +23,10 @@ namespace Scholae
         public long Telefono { get => telefono; set => telefono = value; }
         public string Nazionalita { get => nazionalita; set => nazionalita = value; }
         public string Citta { get => citta; set => citta = value; }
-        public string Password{ get => password; }
-        public string NomeCognome { get
+        public string Password { get => password; }
+        public string NomeCognome
+        {
+            get
             {
                 return Nome + " " + Cognome;
             }
@@ -34,9 +34,9 @@ namespace Scholae
             {
             }
         }
-        
+
         public List<LibroSalvato> LibriSalvati { get; set; }
-        public List<Libro> LibriInVendita { get; set; }
+        public List<Libro> LibriInVendita { get => libriInVendita; set => libriInVendita = value; }
 
 
         public Utente()
@@ -57,11 +57,11 @@ namespace Scholae
 
         public void AddLibroInVendita(Libro libro)
         {
-            if (LibriInVendita == null)
+            if (libriInVendita == null)
             {
-                LibriInVendita = new List<Libro>();
+                libriInVendita = new List<Libro>();
             }
-            LibriInVendita.Add(libro);
+            libriInVendita.Add(libro);
         }
 
         /*Equals e hashCode*/

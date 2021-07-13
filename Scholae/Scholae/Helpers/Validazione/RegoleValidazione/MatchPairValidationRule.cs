@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Scholae.Validazione
+﻿namespace Scholae.Validazione
 {
     class MatchPairValidationRule<T> : IValidationRule<ValidatablePair<T>>
     {

@@ -1,16 +1,11 @@
-﻿using Scholae.Services;
+﻿using Scholae.ViewModels;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Diagnostics;
-using Scholae.ViewModels;
 
 namespace Scholae
 {
@@ -36,7 +31,8 @@ namespace Scholae
                 {
                     var stream = await result.OpenReadAsync();
 
-                    Device.BeginInvokeOnMainThread(() => {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
                         resultImage.Source = ImageSource.FromFile(result.FullPath);
                     });
                     spPage.Img = ReadFully(stream);
@@ -85,7 +81,7 @@ namespace Scholae
 
         async void MettiLibroInVendita(object sender, EventArgs e)
         {
-            Debug.WriteLine(spPage!=null ? spPage.ToString() : "Nullo");
+            Debug.WriteLine(spPage != null ? spPage.ToString() : "Nullo");
             if (spPage.VendiLibro())
             {
                 Debug.WriteLine("\nSellPhotoP.cs : Ho messo in vendita il libro");

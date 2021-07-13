@@ -1,11 +1,9 @@
-﻿using RestSharp;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using Scholae.ViewModels;
-using System;
-using Xamarin.Forms;
-using System.IO;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace Scholae.Services
 {
@@ -18,7 +16,8 @@ namespace Scholae.Services
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest("/utente/signup", Method.POST);
             request.AddJsonBody(
-                new { 
+                new
+                {
                     email = u.Email,
                     nome = u.Nome,
                     cognome = u.Cognome,
@@ -44,7 +43,8 @@ namespace Scholae.Services
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest("/utente/login", Method.POST);
             request.AddJsonBody(
-                new { 
+                new
+                {
                     email = email,
                     password = password
                 });
@@ -63,7 +63,7 @@ namespace Scholae.Services
         public static List<Libro> GetLibroPerNome(string nome, long utenteid)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libro/cercaPerNome/{nome}" , Method.GET);
+            var request = new RestRequest($"/libro/cercaPerNome/{nome}", Method.GET);
             request.AddJsonBody(
                new
                {
@@ -172,8 +172,9 @@ namespace Scholae.Services
             var request = new RestRequest("/libro", Method.POST);
             Debug.WriteLine("\n\nCREA LIBRO:");
             Debug.WriteLine(libro.ToString());
-            request.AddJsonBody( 
-                new {
+            request.AddJsonBody(
+                new
+                {
                     ISBN = libro.Isbn,
                     Nome = libro.Nome,
                     Autore = libro.Autore,

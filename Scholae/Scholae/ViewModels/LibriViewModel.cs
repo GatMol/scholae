@@ -2,7 +2,6 @@
 using Scholae.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace Scholae.ViewModels
 {
     public class LibriViewModel : BaseViewModel
     {
-        public Session sessioneCorrente;
+        public Utente utenteCorrente;
         public List<Libro> libri { get; set; }
 
         public string testoSearchBar { get; set; }
@@ -38,7 +37,8 @@ namespace Scholae.ViewModels
 
         public ObservableRangeCollection<Libro> LibriDaMostrare
         {
-            get {
+            get
+            {
                 return libriDaMostrare;
             }
             set
@@ -88,103 +88,75 @@ namespace Scholae.ViewModels
 
         public LibriViewModel()
         {
+            utenteCorrente = Session.GetSession().UtenteCorrente;
             InitData();
             visibilitanonpreferiti = true;
             //Task.Run(() => Visibilitapreferiti = false);
         }
-            sessioneCorrente = Session.GetSession();
+
+    private void InitData()
+    {
+        libri = APIConnector.GetAllLibri(utenteCorrente.Id);
+        /*for (int i = 0; i < 10; i++)
+        {
+            Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);
+            libri.Add(libro);
+        }*/
+        LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.ToList());
+        foreach (Libro libro in libri)
+        {
+            Debug.WriteLine(libro.ToString());
+        }
     }
 
-        private void InitData()
+    async Task RefreshItemsAsync()
+    {
+        IsRefreshing = true;
+        await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
+        if (mieiLibri == true) await LibriSalvati();
+        else
         {
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            libri = APIConnector.GetAllLibri(utente.Id);
-            /*for (int i = 0; i < 10; i++)
-            {
-                Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);
-                libri.Add(libro);
-            }*/
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri.ToList());
-            foreach(Libro libro in libri) {
-                Debug.WriteLine(libro.ToString());
-            }
-        }
-
-        async Task RefreshItemsAsync()
-        {
-            IsRefreshing = true;
-            await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
-            if (mieiLibri == true) await LibriSalvati();
+            if (testoSearchBar == null || testoSearchBar.Equals(""))
+                InitData();
             else
-            {
-                if (testoSearchBar == null || testoSearchBar.Equals(""))
-                    InitData();
-                else
-                    PerformSearch.Execute(testoSearchBar);
-            }
-            IsRefreshing = false;
+                PerformSearch.Execute(testoSearchBar);
         }
-
-        public void CercaPerNome(String nome)
-        {
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            libri = APIConnector.GetLibroPerNome(nome, utente.Id);
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libri ?? new List<Libro>());
-        }
-
-        public Task TuttiLibri()
-        {
-            mieiLibri = false;
-            InitData();
-            visibilitanonpreferiti = true;
-            return Task.CompletedTask;
-        }
-
-        public Task LibriSalvati()
-        {
-            mieiLibri = true;
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            List<Libro> libriSalvati = APIConnector.GetLibriSalvati(utente.Id);
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.ToList());
-            visibilitanonpreferiti = false;
-            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            List<Libro> libriSalvati = APIConnector.GetLibriSalvati(sessioneCorrente.UtenteCorrente.Id);
-            //TODO: Mettere i libriSalvati in memoria nell'utenteCorrente
-            LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.Take(10).ToList());
-            mieiLibri = true;
-            return Task.CompletedTask;
-        }
-
-        private void AggiungiPreferito(long id)
-        {
-            //Utente utente = APIConnector.GetUtentePerEmail(SecureStorage.GetAsync("email").Result);
-            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            APIConnector.AddLibroSalvatoAdUtente(id, sessioneCorrente.UtenteCorrente.Id);
-            //TODO: Aggiungere libroSalvato in memoria
-        }
-
-        private void EliminaPreferito(long id)
-        {
-            //Utente utente = APIConnector.GetUtentePerEmail(SecureStorage.GetAsync("email").Result);
-            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            APIConnector.DeleteLibroSalvatoAdUtente(id, sessioneCorrente.UtenteCorrente.Id);
-            //TODO: Rimuovere libroSalvato in memoria
-        }
-
-        public static bool Salvato(long id_libro)
-        {
-            List<LibroSalvato> boo = APIConnector.GetLibroSalvato(id_libro, id_utente: APIConnector.GetUtentePerEmail(LoginPage.Email).Id);
-            return boo != null && boo.Count > 0;
-        }
-
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        IsRefreshing = false;
     }
+
+    public void CercaPerNome(String nome)
+    {
+        libri = APIConnector.GetLibroPerNome(nome, utenteCorrente.Id);
+        LibriDaMostrare = new ObservableRangeCollection<Libro>(libri ?? new List<Libro>());
+    }
+
+    public Task TuttiLibri()
+    {
+        mieiLibri = false;
+        InitData();
+        visibilitanonpreferiti = true;
+        return Task.CompletedTask;
+    }
+
+    public Task LibriSalvati()
+    {
+        mieiLibri = true;
+        List<Libro> libriSalvati = APIConnector.GetLibriSalvati(utenteCorrente.Id);
+        LibriDaMostrare = new ObservableRangeCollection<Libro>(libriSalvati.ToList());
+        visibilitanonpreferiti = false;
+        return Task.CompletedTask;
+    }
+
+    private void AggiungiPreferito(long id)
+    {
+        APIConnector.AddLibroSalvatoAdUtente(id, utenteCorrente.Id);
+        //TODO: Aggiungere libroSalvato in memoria
+    }
+
+    private void EliminaPreferito(long id)
+    {
+        APIConnector.DeleteLibroSalvatoAdUtente(id, utenteCorrente.Id);
+        //TODO: Rimuovere libroSalvato in memoria
+    }
+}
 }

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 
 namespace Scholae.Validazione
 {
     public class ValidatableObject<T> : IValidatable<T>
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public List<IValidationRule<T>> Validations { get; } = new List<IValidationRule<T>>();
 
         public List<string> Errors { get; set; } = new List<string>();

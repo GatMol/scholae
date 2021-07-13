@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Scholae.Pages;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using Scholae.Pages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 

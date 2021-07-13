@@ -1,11 +1,6 @@
 ﻿using Scholae.Services;
 using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
-using Newtonsoft.Json;
 
 
 namespace Scholae
@@ -21,7 +16,7 @@ namespace Scholae
             InitializeComponent();
             BindingContext = this;
         }
-      
+
         async void OnRegistrationPage(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Registrazione());
@@ -33,12 +28,12 @@ namespace Scholae
             var password = PasswordEntry.Text;
             var isValid = true;
 
-            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 await DisplayAlert("Error login", "Email e/o password non validi", "Ok");
                 isValid = false;
             }
-            
+
             if (isValid)
             {
                 if (await Authentication.AuthenticateUser(email, password))

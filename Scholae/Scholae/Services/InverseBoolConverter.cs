@@ -3,7 +3,7 @@ using System.Globalization;
 using Xamarin.Forms;
 namespace Scholae.Services
 {
-    public class InverseBoolConverter: IValueConverter
+    public class InverseBoolConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Scholae.Services;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Npgsql;
-using Scholae.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 
 namespace Scholae
