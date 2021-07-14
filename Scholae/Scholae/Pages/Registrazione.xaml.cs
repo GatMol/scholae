@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using RestSharp;
+using Scholae.ViewModels;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using Npgsql;
-using Scholae.Services;
-using System.Diagnostics;
-using System.Net.Mail;
-using System.Net;
-using Scholae.ViewModels;
-using RestSharp;
 
 namespace Scholae
 {

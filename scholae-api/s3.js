@@ -26,7 +26,7 @@ function uploadFile (file) {
         Key: file.filename,
         ContentType: "image/jpeg"
     };
-
+    
     return s3.upload(uploadParams).promise();
 };
 exports.uploadFile = uploadFile;

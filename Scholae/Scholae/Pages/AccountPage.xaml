@@ -5,12 +5,12 @@
     x:Class="Scholae.AccountPage"
     Padding="0, 20, 0, 0">
 
-    
-   <AbsoluteLayout BackgroundColor="#e4e4e4">
+
+    <AbsoluteLayout>
 
         <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
               CornerRadius="30" BackgroundColor="#3b5998">
-           </Frame>
+        </Frame>
 
 
         <Label AbsoluteLayout.LayoutFlags="All"  Text="Scholae" FontSize="40"
@@ -19,219 +19,176 @@
 
         <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85"
                     Orientation="Vertical" VerticalScrollBarVisibility="Never"
-                    BackgroundColor="#e4e4e4" Scrolled="OnScrollViewScrolled">
+                     Scrolled="OnScrollViewScrolled" >
 
-            <StackLayout BackgroundColor="#e4e4e4">
+            <StackLayout>
 
-                <Frame CornerRadius="40" Margin="10, 20"
+                <Frame CornerRadius="40" Margin="0, 10, 0, 10"
                        HeightRequest="40" WidthRequest="40" 
-                       IsClippedToBounds="True" HorizontalOptions="Start"
-                    >
-                        <ImageButton Source="icona_account"
+                       IsClippedToBounds="True" HorizontalOptions="Center" BorderColor="#2f3a56" >
+                    <ImageButton Source="icona_account"
                                      HorizontalOptions="Center" WidthRequest="40"
                                      VerticalOptions="Center" HeightRequest="40"
                                      />
                 </Frame>
 
-                <Label Text="Nome e cognome" Margin="10, 0"
-                       FontAttributes="Bold" TextColor="#2f3a56"/>
+                <AbsoluteLayout>
 
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.1"/>
-
-                <Rectangle BackgroundColor="#f6f6f6" Margin="-10, -6"
-                           HeightRequest="20"/>
-
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.1"/>
-
-                <AbsoluteLayout HeightRequest="15">
-
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
-
-                    <Label Text="Tipologia account" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="tipologia_account_tapped" />
-                        </Label.GestureRecognizers>
-        
-                </Label>
-
-                    
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.3, 0.9, 0.9, 0.3"
+                           Text="INFORMAZIONI ACCOUNT" FontSize="20"
+                           FontAttributes="Bold" VerticalTextAlignment="End" Margin="-2,-20,0,15"
+                           TextColor="#2f3a56"/>
                 </AbsoluteLayout>
 
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.05"/>
+                <AbsoluteLayout HeightRequest="50">
 
-                <AbsoluteLayout HeightRequest="15">
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.35, 1"
+                           Text="Il mio nome" FontSize="16" HorizontalTextAlignment="End" Margin="0,0,10,0"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
+
+                    <Label Text="Nome" 
+                       Margin="10,0,0,0" TextColor="#2f3a56"
+                       FontSize="18" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
+                    <BoxView HeightRequest="1" Color="#777272" Margin="10,35,0,0" WidthRequest="390"/>
+                </AbsoluteLayout>
+
+                <!--<Line BackgroundColor="Gray" Y1="0" Y2="0.0001"  Margin="10,-15,20,15"/>-->
+
+                <AbsoluteLayout HeightRequest="50">
+
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.35, 1"
+                           Text="Il mio cognome" FontSize="16" HorizontalTextAlignment="End" Margin="0,0,10,0"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
+
+                    <Label Text="Cognome" 
+                       Margin="10, 0, 0, 0" TextColor="#2f3a56"
+                       FontSize="18" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
+
+                    <BoxView HeightRequest="1" Color="#777272" Margin="10,35,0,0" WidthRequest="390"/>
+                </AbsoluteLayout>
+
+
+                <AbsoluteLayout HeightRequest="50">
+
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.25, 1"
+                           Text="la mia mail" FontSize="16" HorizontalTextAlignment="End" Margin="0,0,10,0"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
+
+                    <Label Text="E-mail" 
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="18" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
+
+                    <BoxView HeightRequest="1" Color="#777272" Margin="10,35,0,0" WidthRequest="390"/>
+                </AbsoluteLayout>
+
+
+
+                <AbsoluteLayout HeightRequest="50">
 
                     <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
+                           Source="icona_avanti" Margin="0, 0, 25, 14"/>
 
-                    <Label Text="Libri in vendita" BackgroundColor="#e4e4e4"
+                    <Label Text="Password" 
                        Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
+                       FontSize="18" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Label.GestureRecognizers>
+
+                    </Label>
+
+                    <BoxView HeightRequest="1" Color="#777272" Margin="11,35,0,0" WidthRequest="390"/>
+                </AbsoluteLayout>
+
+
+
+                <AbsoluteLayout HeightRequest="50">
+
+                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.15, 1"
+                           Text="Roma" FontSize="16" HorizontalTextAlignment="End" Margin="0,0,10,0"
+                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
+
+                    <Label Text="Città"
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="18" FontAttributes="Bold"
+                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
+
+                    <BoxView HeightRequest="1" Color="#777272" Margin="10,35,0,0" WidthRequest="390"/>
+                </AbsoluteLayout>
+
+
+
+
+                <AbsoluteLayout HeightRequest="50">
+
+                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
+                           Source="icona_avanti" Margin="0, 0, 25, 14"/>
+
+                    <Label Text="Libri in vendita" 
+                       Margin="10, 0" TextColor="#2f3a56"
+                       FontSize="18" FontAttributes="Bold"
                        AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Libri_in_vendita_tapped"/>
                         </Label.GestureRecognizers>
-        
-                </Label>
 
-                    
+                    </Label>
+
+                    <BoxView HeightRequest="1" Color="#777272" Margin="10,35,0,0" WidthRequest="390"/>
                 </AbsoluteLayout>
 
 
-                <AbsoluteLayout HeightRequest="60">
 
-                    <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                           BorderColor="#2f3a56" Margin="-10, 0" BackgroundColor="#f6f6f6"
-                           HeightRequest="30" HasShadow="False"
-                           />
+                <AbsoluteLayout>
+
 
                     <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.3, 0.9, 0.9, 0.3"
-                           Text="INFORMAZIONI ACCOUNT" FontSize="14"
+                           Text="IMPOSTAZIONI DELL' APP" FontSize="20" Margin="-2,-20, 0, 15"
                            FontAttributes="Bold" VerticalTextAlignment="End"
-                           TextColor="#2f3a56"
-                           />
+                           TextColor="#2f3a56"/>
                 </AbsoluteLayout>
 
-                <AbsoluteLayout HeightRequest="15">
 
-                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.273, 1"
-                           Text="Il mio nome" FontSize="14"
-                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
-
-                    <Label Text="Nome" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.2, 1"/>
-
-
-                    
-                </AbsoluteLayout>
-
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
-
-                <AbsoluteLayout HeightRequest="15">
-
-                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.35, 1"
-                           Text="Il mio cognome" FontSize="14"
-                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
-
-                    <Label Text="Cognome" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
-
-                    
-                </AbsoluteLayout>
-
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
-
-                <AbsoluteLayout HeightRequest="15">
-
-                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.25, 1"
-                           Text="la mia mail" FontSize="14"
-                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
-
-                    <Label Text="E-mail" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
-
-                    
-                </AbsoluteLayout>
-
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
-
-                <AbsoluteLayout HeightRequest="15">
+                <AbsoluteLayout HeightRequest="50">
 
                     <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
+                           Source="icona_avanti" Margin="0, 0, 25, 14"/>
 
-                    <Label Text="Password" BackgroundColor="#e4e4e4"
+                    <Label Text="Notifiche" 
                        Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
+                       FontSize="18" FontAttributes="Bold"
                        AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer />
                         </Label.GestureRecognizers>
-        
-                </Label>
 
-                    
-                </AbsoluteLayout>
-                
-                <Line BackgroundColor="#2f3a56" Y1="1" Y2="1.0005"/>
-
-                <AbsoluteLayout HeightRequest="15">
-
-                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 0, 0.15, 1"
-                           Text="Roma" FontSize="14"
-                           TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
-
-                    <Label Text="Città" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1"/>
-
-                    
-                </AbsoluteLayout>
-
-                <AbsoluteLayout HeightRequest="60">
-
-                    <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                           BorderColor="#2f3a56" Margin="-10, 0" BackgroundColor="#f6f6f6"
-                           HeightRequest="30" HasShadow="False"
-                           />
-
-                    <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.3, 0.9, 0.9, 0.3"
-                           Text="IMPOSTAZIONI DELL'APP" FontSize="14"
-                           FontAttributes="Bold" VerticalTextAlignment="End"
-                           TextColor="#2f3a56"
-                           />
+                    </Label>
+                    <BoxView HeightRequest="1" Color="#777272" Margin="10,35,0,0" WidthRequest="390"/>
                 </AbsoluteLayout>
 
 
-                <AbsoluteLayout HeightRequest="15">
-
-                    <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="2.1, 0, 0.7, 0.7"
-                           Source="icona_avanti"/>
-
-                    <Label Text="Notifiche" BackgroundColor="#e4e4e4"
-                       Margin="10, 0" TextColor="#2f3a56"
-                       FontSize="14" FontAttributes="Bold"
-                       AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 0.6, 1">
-
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
-                        </Label.GestureRecognizers>
-        
-                </Label>
-
-                </AbsoluteLayout>
 
                 <Button Text="Esci" TextColor="#df4f4f"
                         BorderColor="#2f3a56" 
                         CornerRadius="0" BorderWidth="1.1"
                         Margin="-10, 0"
-                        Clicked="Logout"
                         />
 
                 <Button Text="Elimina account" TextColor="#df4f4f"
-                        BorderColor="#2f3a56" Clicked="OnDeleteButtonClicked"
-                        CornerRadius="0" BorderWidth="1"
-                        Margin="-10, -7"
-                        />
-
+                        BorderColor="#df4f4f" BackgroundColor="White"
+                        CornerRadius="30" BorderWidth="1.1"
+                        WidthRequest="50" HeightRequest="50" Margin="50,10,50,10"/>
             </StackLayout>
-
+            
         </ScrollView>
-  
+
     </AbsoluteLayout>
-    
+
 </ContentPage>

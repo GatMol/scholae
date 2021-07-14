@@ -1,15 +1,15 @@
-﻿using System;
+﻿using MvvmHelpers.Commands;
+using Scholae.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MvvmHelpers.Commands;
-using Scholae.Services;
-using System.Linq;
 
 namespace Scholae.ViewModels
 {
-    public class LibriInVenditaViewModel: BaseViewModel
+    public class LibriInVenditaViewModel : BaseViewModel
     {
+        public Utente utenteCorrente;
+
         public List<Libro> libri;
 
         private ObservableCollection<Libro> iMieiLibri;
@@ -40,13 +40,15 @@ namespace Scholae.ViewModels
 
         public LibriInVenditaViewModel()
         {
+            utenteCorrente = Session.GetSession().UtenteCorrente;
             InitData();
         }
 
         private void InitData()
         {
-            Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            libri = APIConnector.tuttiImieiLibri(utente.Id);
+            //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
+            //libri = APIConnector.tuttiImieiLibri(utente.Id);
+            libri = APIConnector.tuttiImieiLibri(utenteCorrente.Id);
             IMieiLibri = new ObservableCollection<Libro>(libri);
         }
 

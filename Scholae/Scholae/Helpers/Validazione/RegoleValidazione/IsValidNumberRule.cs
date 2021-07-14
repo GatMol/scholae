@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Scholae.Validazione
+﻿namespace Scholae.Validazione
 {
     public class IsValidNumberRule<T> : IValidationRule<T>
     {

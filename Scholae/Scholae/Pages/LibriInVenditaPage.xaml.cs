@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Scholae.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Scholae.Pages
 {
@@ -16,6 +13,11 @@ namespace Scholae.Pages
         void Back_Button_Clicked(System.Object sender, System.EventArgs e)
         {
             Navigation.PopAsync();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
 
     }

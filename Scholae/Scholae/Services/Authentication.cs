@@ -1,36 +1,39 @@
-﻿using Amazon.CognitoIdentityProvider.Model;
-using Amazon.Extensions.CognitoAuthentication;
-using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Scholae.Services
 {
     public class Authentication
     {
 
-        private readonly CognitoUser user;
-
-        public Authentication(String email)
+        public static async Task<bool> AuthenticateUser(string email, string password)
         {
-            AmazonUtils.CognitoUserId = email;
-            user = AmazonUtils.CognitoUser;
+            var response = APIConnector.Login(email, password);
+            if (response.IsSuccessful)
+            {
+                UtenteToken utenteConToken = JsonConvert.DeserializeObject<UtenteToken>(response.Content);
+                Debug.WriteLine("\nLOGINPAGE: loggato e il token e': " + utenteConToken.AccessToken + "\n");
+                Debug.WriteLine("\nLOGINPAGE: loggato e utenteCorrente: " + utenteConToken.Utente + "\n");
+                Debug.WriteLine("\nLOGINPAGE: setto nel secureStorage email e token\n");
+                await SecureStorage.SetAsync("email", utenteConToken.Utente.Email);
+                await SecureStorage.SetAsync("accessToken", utenteConToken.AccessToken);
+                Debug.WriteLine("\nLOGINPAGE: setto l'utenteCorrente nella sessione\n");
+                Session.GetSession().UtenteCorrente = utenteConToken.Utente;
+                Debug.WriteLine("\nLOGINPAGE: utenteCorrente nella sessione" + Session.GetSession().UtenteCorrente + "\n");
+                return true;
+            }
+            return false;
         }
 
-        public async Task<string> AuthenticateUser(string password)
+        public sealed class UtenteToken
         {
-            InitiateSrpAuthRequest authRequest = new InitiateSrpAuthRequest { Password = password };
-            AuthFlowResponse authResponse = await user.StartWithSrpAuthAsync(authRequest).ConfigureAwait(false);
-            var accessToken = authResponse.AuthenticationResult.AccessToken;
-            return accessToken;
-        }
+            [JsonProperty(propertyName: "token")]
+            public string AccessToken { set; get; }
 
-        public static List<AttributeType> GetUserAttributes(string accessToken)
-        {
-            var getUserAttributesRequest = new GetUserRequest { AccessToken = accessToken };
-            var getUser = AmazonUtils.IdentityProviderClient.GetUserAsync(getUserAttributesRequest);
-            var userAttributes = getUser.Result.UserAttributes;
-            return userAttributes;
+            [JsonProperty(propertyName: "Utente")]
+            public Utente Utente { set; get; }
         }
     }
 }

@@ -84,7 +84,8 @@ router.post("/login", async (req, res, next) => {
                 );
                 return res.status(200).json({
                     message: 'Auth succeded',
-                    token: token
+                    token: token,
+                    Utente: user
                 });
             }
             res.status(401).json({

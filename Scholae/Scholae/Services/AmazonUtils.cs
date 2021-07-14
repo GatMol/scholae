@@ -1,10 +1,6 @@
 ﻿using Amazon;
 using Amazon.CognitoIdentityProvider;
 using Amazon.Extensions.CognitoAuthentication;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Scholae.Services;
 
 namespace Scholae.Services
 {

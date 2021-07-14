@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Scholae.Pages;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using Scholae.Pages;
-using Scholae.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -40,19 +37,5 @@ namespace Scholae
             Navigation.InsertPageBefore(new LoginPage(), Navigation.NavigationStack[0]);
             await Navigation.PopAsync();
         }
-
-        async void OnDeleteButtonClicked(object sender, EventArgs e)
-        {
-            string action = await DisplayActionSheet("Sei sicuro di voler eliminare l'account?\nQuesta azione è irriversibile.", "Cancel", "Elimina");
-            if (action.Equals("Elimina"))
-            {
-                SecureStorage.Remove("email");
-                SecureStorage.Remove("accessToken");
-                APIConnector.DeleteUtente(Session.GetSession().UtenteCorrente.Id);
-                Navigation.InsertPageBefore(new LoginPage(), Navigation.NavigationStack[0]);
-                await Navigation.PopAsync();
-            }
-        }
-
     }
 }

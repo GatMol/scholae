@@ -1,6 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using Scholae.Services;
+﻿using Scholae.Services;
+using System;
 
 namespace Scholae.ViewModels
 {
@@ -76,12 +75,12 @@ namespace Scholae.ViewModels
         {
             get
             {
-                return Constants.API_ENDPOINT + _immagine;
+                return Constants.LOCALHOST + _immagine;
             }
             set
             {
                 _immagine = value;
-            } 
+            }
         }
 
         public Utente Utente
@@ -125,10 +124,10 @@ namespace Scholae.ViewModels
 
         public override string ToString()
         {
-            string UtenteLibro = Utente!=null ? Utente.ToString() : "Nessun utente";
+            string UtenteLibro = Utente != null ? Utente.ToString() : "Nessun utente";
             string MateriaLibro = Materia != null ? Materia.ToString() : "Nessuna materia";
             return "Libro:\n" + $"Nome: {Nome}\n" + $"Autore: {Autore}\n" + $"Edizione: {Edizione}\n" + $"Editore: {Editore}\n"
-                + $"ISBN: {Isbn}\n" + $"Path: {Immagine}\n" + $"Utente: {UtenteLibro}\n" + $"Materia: {MateriaLibro}\n";
+                + $"ISBN: {Isbn}\n" + $"Immagine: {Immagine}\n" + $"Utente: {UtenteLibro}\n" + $"Materia: {MateriaLibro}\n";
         }
 
     }
