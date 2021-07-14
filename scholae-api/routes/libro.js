@@ -94,8 +94,36 @@ router.get("/:utenteId", async (req, res, next) => {
         Immagine: true
        },
        where: {
+        Utente: {
+            Citta: req.body.Citta,
+            mode: "insensitive"
+        },
            NOT: {
             Utente_id: parseInt(req.params.utenteId)
+           },
+       },
+       include: {
+        select: {
+            Id: true,
+            Nome: true,
+            ISBN: true,
+            Autore: true,
+            Editore: true,
+            Edizione: true,
+            Prezzo: true,
+            Materia: true,
+            Utente:{
+                select:{
+                    Nome: true,
+                    Cognome: true
+                }
+            },
+            Immagine: true
+           },
+           where: {
+               NOT: {
+                Utente_id: parseInt(req.params.utenteId)
+               },
            }
        }
    }).then(result => {

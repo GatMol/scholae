@@ -114,9 +114,14 @@ router.delete("/:utenteid", async (req, res) => {
             Id: parseInt(req.params.utenteid)
         }
     }).catch((err) => {
-       return res.status(500);
-    })
-    return res.status(200);
+        return res.status(500).json({
+            error: err
+        })
+    });
+    return res.status(200).json({
+        message: 'utente eliminato',
+        Id: req.params.utenteid
+    });
 });
 
 module.exports = router;

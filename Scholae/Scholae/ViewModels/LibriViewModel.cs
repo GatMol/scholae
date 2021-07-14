@@ -96,7 +96,7 @@ namespace Scholae.ViewModels
         private void InitData()
         {
             Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
-            libri = APIConnector.GetAllLibri(utente.Id);
+            libri = APIConnector.GetAllLibri(utente.Id, utente.Citta);
             /*for (int i = 0; i < 10; i++)
             {
                 Libro libro = new Libro((long)i, "Nome", "ISBN", "autore", "editore", "edizione", 5);

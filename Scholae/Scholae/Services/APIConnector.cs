@@ -51,10 +51,15 @@ namespace Scholae.Services
             return client.Execute(request);
         }
 
-        public static List<Libro> GetAllLibri(long idutente)
+        public static List<Libro> GetAllLibri(long idutente, string citta)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest($"/libro/{idutente}", Method.GET);
+            request.AddJsonBody(
+                new
+                {
+                    Citta = citta
+                });
             IRestResponse response = client.Execute(request);
             List<Libro> allLibri = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
             return allLibri;
@@ -148,6 +153,13 @@ namespace Scholae.Services
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest($"/libro/{id}", Method.DELETE);
+            IRestResponse response = client.Execute(request);
+        }
+
+        public static void DeleteUtente(object utenteid)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/utente/{utenteid}", Method.DELETE);
             IRestResponse response = client.Execute(request);
         }
 
