@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Scholae.Pages;
+using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace Scholae
@@ -34,7 +36,7 @@ namespace Scholae
             }
         }
 
-        async void Libri(System.Object sender, System.EventArgs e)
+        async void Libri(object sender, System.EventArgs e)
         {
 
             if (mieiLibri == true)
@@ -48,6 +50,5 @@ namespace Scholae
                 mieiLibri = false;
             }
         }
-
     }
 }

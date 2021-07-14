@@ -18,11 +18,6 @@ namespace Scholae
             Console.WriteLine($"ScrollX: {e.ScrollX}, ScrollY: {e.ScrollY}");
         }
 
-        async void tipologia_account_tapped(System.Object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new AccountTypePage());
-        }
-
         async void Libri_in_vendita_tapped(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new LibriInVenditaPage());

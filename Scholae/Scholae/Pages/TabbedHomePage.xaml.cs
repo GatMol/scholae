@@ -12,8 +12,9 @@ namespace Scholae
         public TabbedHomePage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent();
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<Android>().SetIsSmoothScrollEnabled(false);
+            InitializeComponent();
         }
 
         protected override bool OnBackButtonPressed()

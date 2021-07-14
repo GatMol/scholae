@@ -2,11 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:Scholae.ViewModels" 
+             xmlns:service="clr-namespace:Scholae.Helpers.Converters"
              x:DataType="viewmodels:SellPageViewModel"
              x:Class="Scholae.SellPhotoPage">
 
-    <ScrollView>
-        <AbsoluteLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:InverseBoolConverter x:Key="InverseBool"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All">
+            <AbsoluteLayout>
             <!--Onda scura-->
             <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
               AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
@@ -39,19 +47,19 @@
                 <Label Text="{Binding Libro.Materia.Nome}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
 
                 <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
-                CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="25,30,0,0" />
+                CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="25,30,0,0" IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}"/>
                 <Button Text="Scatta foto" Clicked="Button1_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
-                CornerRadius="20" HorizontalOptions="End" BorderColor="#E7E3E3" BorderWidth="5" Margin="0,-46,-5,0"/>
+                CornerRadius="20" HorizontalOptions="End" BorderColor="#E7E3E3" BorderWidth="5" Margin="0,-46,-5,0" IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}"/>
                 <Image x:Name="resultImage" HeightRequest="350" WidthRequest="350" Margin="30,5,0,0" />
 
                 <Button BorderWidth="1" WidthRequest="170" HeightRequest="50"
                     BorderColor="#0EAE0E"
                     FontSize="20"  FontAttributes="Bold" Text="VENDI"  TextColor="#0EAE0E"
                     CornerRadius="25" Clicked="MettiLibroInVendita"
-                    BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="30,20,0,20"/>
-
-              
+                    BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="30,20,0,20" IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}"/>
             </StackLayout>
         </AbsoluteLayout>
     </ScrollView>
+    <ActivityIndicator x:Name="loading" Color="{x:StaticResource PrimaryColor}" IsRunning="false" AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All"/>
+    </AbsoluteLayout>
 </ContentPage>

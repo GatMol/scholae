@@ -8,6 +8,10 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <service:InverseBoolConverter x:Key="InverseBool"/>
+            <OnPlatform x:Key="translationY" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="0" />
+                <On Platform="Android" Value="-22"/>
+            </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -15,14 +19,14 @@
         <local:LibriViewModel x:Name="libriViewModel"/>
     </ContentPage.BindingContext>
 
-    <AbsoluteLayout x:Name="contenitore" BackgroundColor="#e4e4e4">
+    <AbsoluteLayout x:Name="contenitore" BackgroundColor="#e4e4e4" TranslationY="{StaticResource translationY}">
 
-        <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
+            <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
               CornerRadius="30" BackgroundColor="#3b5998">
            </Frame>
 
         <Label AbsoluteLayout.LayoutFlags="All"  Text="Scholae" FontSize="40"
-                  AbsoluteLayout.LayoutBounds="0.5,0.015, 0.5, 0.07" HorizontalTextAlignment="Center"
+                  AbsoluteLayout.LayoutBounds="0.5,0.015, 0.5, 0.09" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
 
         <Label x:Name="libri" AbsoluteLayout.LayoutFlags="All" Text="Libri" TextColor="#f6f6f6" 

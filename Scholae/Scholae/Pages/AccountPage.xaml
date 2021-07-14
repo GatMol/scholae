@@ -5,17 +5,26 @@
     x:Class="Scholae.AccountPage"
     Padding="0, 20, 0, 0">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="translationY" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="0" />
+                <On Platform="Android" Value="-22"/>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <AbsoluteLayout>
+    <AbsoluteLayout x:Name="contenitore" BackgroundColor="#e4e4e4" TranslationY="{StaticResource translationY}">
 
         <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
-              CornerRadius="30" BackgroundColor="#3b5998">
+              CornerRadius="30" BackgroundColor="#3b5998"
+               HasShadow="False">
         </Frame>
 
 
-        <Label AbsoluteLayout.LayoutFlags="All"  Text="Scholae" FontSize="40"
-                  AbsoluteLayout.LayoutBounds="0.5,0.015, 0.5, 0.07" HorizontalTextAlignment="Center"
-                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf"/>
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="40"
+                  AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
+                  TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
 
         <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85"
                     Orientation="Vertical" VerticalScrollBarVisibility="Never"
@@ -29,6 +38,7 @@
                     <ImageButton Source="icona_account"
                                      HorizontalOptions="Center" WidthRequest="40"
                                      VerticalOptions="Center" HeightRequest="40"
+                                 BackgroundColor="Transparent"
                                      />
                 </Frame>
 
@@ -179,6 +189,7 @@
                         BorderColor="#2f3a56" 
                         CornerRadius="0" BorderWidth="1.1"
                         Margin="-10, 0"
+                        Clicked="Logout"
                         />
 
                 <Button Text="Elimina account" TextColor="#df4f4f"

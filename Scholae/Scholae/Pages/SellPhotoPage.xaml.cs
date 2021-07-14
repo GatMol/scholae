@@ -79,16 +79,20 @@ namespace Scholae
             }
         }
 
-        async void MettiLibroInVendita(object sender, EventArgs e)
+        void MettiLibroInVendita(object sender, EventArgs e)
         {
             Debug.WriteLine(spPage != null ? spPage.ToString() : "Nullo");
-            if (spPage.VendiLibro())
+            loading.IsRunning = true;
+            Task.Run(() =>
             {
-                Debug.WriteLine("\nSellPhotoP.cs : Ho messo in vendita il libro");
-                await Navigation.PopToRootAsync();
-            }
-            else
-                await DisplayAlert("Errore", "Riprova", "Ok");
+                if (spPage.VendiLibro())
+                {
+                    Debug.WriteLine("\nSellPhotoP.cs : Ho messo in vendita il libro");
+                    Device.BeginInvokeOnMainThread(async () => { await Navigation.PopToRootAsync(); loading.IsRunning = false; });
+                }
+                else
+                    Device.BeginInvokeOnMainThread(async () => { await DisplayAlert("Errore", "Riprova", "Ok"); loading.IsRunning = false; });
+            });
         }
 
     }

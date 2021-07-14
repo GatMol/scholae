@@ -4,24 +4,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Scholae.ViewModels"
     x:Class="Scholae.Pages.LibriInVenditaPage" Padding="0, 20, 0, 0">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="translationY" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="0" />
+                <On Platform="Android" Value="-22"/>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.BindingContext>
         <local:LibriInVenditaViewModel x:Name="libriInVenditaViewModel"/>
     </ContentPage.BindingContext>
 
-    <AbsoluteLayout BackgroundColor="{StaticResource TextColorLight}">
+    <AbsoluteLayout BackgroundColor="{StaticResource TextColorLight}" TranslationY="{StaticResource translationY}">
 
         <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
               CornerRadius="30" BackgroundColor="#3b5998"
                HasShadow="False">
-           </Frame>
+        </Frame>
 
-
-        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="45"
+        <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="40"
                   AbsoluteLayout.LayoutBounds="0.5, 0.015, 130, 100" HorizontalTextAlignment="Center"
                   TextColor="#f6f6f6" FontFamily="Norican-Regular.ttf" />
 
         <Button ImageSource="icona_indietro" AbsoluteLayout.LayoutFlags="All"
-                AbsoluteLayout.LayoutBounds="0.05, 0.025, 0.04, 0.04" Clicked="Back_Button_Clicked"/>
+                AbsoluteLayout.LayoutBounds="0.05, 0.025, 0.04, 0.04" Clicked="Back_Button_Clicked" BackgroundColor="Transparent"/>
 
         <Label AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.1, 0.39, 0.8, 0.6"
                Text="Libri in vendita" FontSize="18"

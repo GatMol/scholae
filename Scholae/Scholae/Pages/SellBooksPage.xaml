@@ -2,9 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:Scholae.ViewModels" 
+             xmlns:behaviour="clr-namespace:Scholae.Helpers.Behaviours"
+             xmlns:converter="clr-namespace:Scholae.Helpers.Converters" 
              x:DataType="viewmodels:SellPageViewModel"
              x:Class="Scholae.SellBooksPage"
              Padding="0,20,0,0">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <AbsoluteLayout>
         <!--Onda scura-->
         <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
@@ -19,7 +29,7 @@
               Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
               Fill="#3b5998"
               Aspect="Fill"/>
-
+        
         <StackLayout>
             <StackLayout HorizontalOptions="Center">
                 <Label Text="INSERISCI DATI LIBRO" FontSize="28" TextColor="#1D1058" FontAttributes="Bold" Margin="40,0,0,0" HorizontalOptions="Center" />
@@ -28,41 +38,89 @@
 
             <BoxView Grid.RowSpan="1" BackgroundColor="#F3F0F0" CornerRadius="15" HeightRequest="35" 
                      Margin="25,-35,-10,-5" HorizontalOptions="Center" WidthRequest="350"/>
-            <Picker x:Name="MainPicker" Title="Scegli materia*" SelectedItem="{Binding Materia.Nome}"
+            <Picker x:Name="MainPicker" Title="Scegli materia*" SelectedItem="{Binding NomeMateria.Value}"
                      SelectedIndexChanged="MainPicker_SelectedIndexChanged" Margin="35,-40,10,0"/>
+            <Label Margin="34,-10,0,0" Text="{Binding NomeMateria.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding NomeMateria.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
 
 
-            <Grid HeightRequest="350" WidthRequest="350" HorizontalOptions="Center">
+            <Grid HeightRequest="400" WidthRequest="350" HorizontalOptions="Center">
 
-                <BoxView Grid.RowSpan="1" CornerRadius="15" HeightRequest="350" 
+                <BoxView Grid.RowSpan="1" CornerRadius="15" HeightRequest="600" 
                          Margin="25,0,-15,0" HorizontalOptions="Fill" InputTransparent="False" BackgroundColor="#F3F0F0"/>
                 <StackLayout>
 
                     <Entry 
                     x:Name="NomeDelLibroEntry"
                     Placeholder="Nome del libro*"
-                    Text="{Binding Libro.Nome}" Margin="30,0,0,0"/>
+                    Text="{Binding Nome.Value}" Margin="30,0,0,0">
+                    <Entry.Behaviors>
+                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Nome.IsValid}"/>
+                    </Entry.Behaviors>
+                    </Entry>
+                    <Label Margin="34,-10,0,0" Text="{Binding Nome.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Nome.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
                     <Entry 
                     x:Name="AutoreEntry"
                     Placeholder="Autore*"
-                    Text="{Binding Libro.Autore}" Margin="30,0,0,0"/>
+                    Text="{Binding Autore.Value}" Margin="30,0,0,0">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Autore.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Margin="34,-10,0,0" Text="{Binding Autore.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Autore.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
                     <Entry 
                     x:Name="ISBNEntry"
                     Placeholder="ISBN"
-                    Text="{Binding Libro.Isbn}" Margin="30,0,0,0"/>
+                    Keyboard="Numeric"
+                    Text="{Binding Isbn.Value}" Margin="30,0,0,0">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Isbn.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Margin="34,-10,0,0" Text="{Binding Isbn.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Isbn.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
 
                     <Entry 
                     x:Name="EdizioneEntry"
                     Placeholder="Edizione*"
-                    Text="{Binding Libro.Edizione}" Margin="30,0,0,0"/>
+                    Keyboard="Numeric"
+                    Text="{Binding Edizione.Value}" Margin="30,0,0,0">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Edizione.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Margin="34,-10,0,0" Text="{Binding Edizione.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Edizione.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
                     <Entry 
                     x:Name="EditoreEntry"
                     Placeholder="Editore*"
-                    Text="{Binding Libro.Editore}" Margin="30,0,0,0"/>
+                    Text="{Binding Editore.Value}" Margin="30,0,0,0">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Editore.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Margin="34,-10,0,0" Text="{Binding Editore.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Editore.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
                     <Entry 
                     x:Name="PrezzoEntry"
                     Placeholder="Prezzo*" 
-                    Text="{Binding Libro.Prezzo}" Margin="235,0,0,0"/>
+                    Keyboard="Numeric"
+                    Text="{Binding Prezzo.Value}" Margin="235,-10,0,0">
+                        <Entry.Behaviors>
+                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Prezzo.IsValid}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label HorizontalOptions="End"  Margin="0,-10,0,0" Text="{Binding Prezzo.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        IsVisible="{Binding Prezzo.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                         Style="{StaticResource ErrorTextStyle}"/>
                 </StackLayout>
 
             </Grid>
