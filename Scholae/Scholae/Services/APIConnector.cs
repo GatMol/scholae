@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using Scholae.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -62,15 +63,20 @@ namespace Scholae.Services
 
         public static List<Libro> GetLibroPerNome(string nome, long utenteid)
         {
+            Debug.WriteLine("\nNome quando entriamo dentro GETLIBROPERNOME " + nome + utenteid);
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libro/cercaPerNome/{nome}", Method.GET);
-            request.AddJsonBody(
-               new
-               {
-                   Utente_id = utenteid
-               });
+            Debug.WriteLine("\nAPI  " + Constants.API_ENDPOINT);
+            var request = new RestRequest($"/libro/cercaPerNome/{utenteid}/{nome}", Method.GET);
+            Debug.WriteLine(client.BuildUri(request));
             IRestResponse response = client.Execute(request);
+            Debug.WriteLine(response);
             List<Libro> libriPerNome = JsonConvert.DeserializeObject<List<Libro>>(response.Content);
+            if(libriPerNome == null) Debug.WriteLine("\n\nLista libri per nome nulla");
+            else
+            {
+                foreach(Libro l in libriPerNome)
+                    Debug.WriteLine("\nLibro della lista: " + l.ToString());
+            }
             return libriPerNome;
         }
 
@@ -83,12 +89,13 @@ namespace Scholae.Services
             return utente;
         }
 
-        public static LibroEImmagine GetLibroPerId(long id)
+        public static Libro GetLibroPerId(long id)
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
-            var request = new RestRequest($"/libro/cercaPerId/{id}", Method.GET);
+            var request = new RestRequest($"/libro/libroId/{id}", Method.GET);
             IRestResponse response = client.Execute(request);
-            LibroEImmagine libro = JsonConvert.DeserializeObject<LibroEImmagine>(response.Content);
+            Libro libro = JsonConvert.DeserializeObject<Libro>(response.Content);
+            Debug.WriteLine(libro.ToString());
             return libro;
         }
 
@@ -148,6 +155,13 @@ namespace Scholae.Services
         {
             var client = new RestClient($"{Constants.API_ENDPOINT}");
             var request = new RestRequest($"/libro/{id}", Method.DELETE);
+            IRestResponse response = client.Execute(request);
+        }
+
+        public static void DeleteUtente(object utenteid)
+        {
+            var client = new RestClient($"{Constants.API_ENDPOINT}");
+            var request = new RestRequest($"/utente/{utenteid}", Method.DELETE);
             IRestResponse response = client.Execute(request);
         }
 

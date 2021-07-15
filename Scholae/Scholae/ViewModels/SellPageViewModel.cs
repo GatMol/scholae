@@ -101,7 +101,7 @@ namespace Scholae.ViewModels
                     Debug.WriteLine($"\nSellPVM aggiungo il libro in vendita alla lista nell'utente corrente\n");
                     utenteCorrente.AddLibroInVendita(Libro);
                     Debug.WriteLine($"\nSellPVM libriInVendita dell' UC: \n");
-                    foreach (Libro l in utenteCorrente.LibriInVendita)
+                    foreach (Libro l in utenteCorrente.LibriInVendita.Values)
                     {
                         Debug.WriteLine($"\n {l} \n");
                     }

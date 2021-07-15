@@ -58,7 +58,7 @@
                     Text="{Binding testoSearchBar, Mode=OneWayToSource}" TextColor="#2f3a56"
                     FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"
                     SearchCommand="{Binding PerformSearch}"
-                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar} }"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                     />
 
             <RefreshView x:Name="LR" IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
@@ -92,14 +92,14 @@
 
                                 <ImageButton IsVisible="{Binding visibilitanonpreferiti, Source={x:Reference libriViewModel}}" Source="preferito" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-30" 
-                                       TranslationY="-8"
+                                       TranslationY="-8" Clicked="RendiPreferito_Clicked"
                                        Command="{Binding RendiPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
                                        />
 
                                 <ImageButton IsVisible="{Binding visibilitanonpreferiti, Converter={StaticResource InverseBool}, Source={x:Reference libriViewModel}}" Source="preferitoSelezionato" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-30"
-                                       TranslationY="-8"
+                                       TranslationY="-8" Clicked="TogliPreferito_Clicked"
                                        Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
                                        />
@@ -185,6 +185,12 @@
                                 </Grid>
 
                             </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        
+                                        Command="{Binding OttieniInformazioniLibro, Mode=TwoWay, Source={x:Reference libriViewModel}}"
+                                        CommandParameter="{Binding id}" />
+                                </Frame.GestureRecognizers>
                             </Frame> 
 
                         </DataTemplate>

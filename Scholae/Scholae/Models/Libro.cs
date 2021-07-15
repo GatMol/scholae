@@ -85,7 +85,8 @@ namespace Scholae.ViewModels
         {
             get
             {
-                return Constants.LOCALHOST + _immagine;
+                //return Constants.LOCALHOST + _immagine;
+                return Constants.API_ENDPOINT + _immagine;
             }
             set
             {
@@ -136,7 +137,7 @@ namespace Scholae.ViewModels
         {
             string UtenteLibro = Utente != null ? Utente.ToString() : "Nessun utente";
             string MateriaLibro = Materia != null ? Materia.ToString() : "Nessuna materia";
-            return "Libro:\n" + $"Nome: {Nome}\n" + $"Autore: {Autore}\n" + $"Edizione: {Edizione}\n" + $"Editore: {Editore}\n"
+            return "Libro:\n" + $"Id: {id}\n" + $"Nome: {Nome}\n" + $"Autore: {Autore}\n" + $"Edizione: {Edizione}\n" + $"Editore: {Editore}\n"
                 + $"ISBN: {Isbn}\n" + $"Immagine: {Immagine}\n" + $"Utente: {UtenteLibro}\n" + $"Materia: {MateriaLibro}\n";
         }
 

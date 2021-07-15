@@ -97,7 +97,10 @@ router.get("/:utenteId", async (req, res, next) => {
        where: {
            NOT: {
             Utente_id: parseInt(req.params.utenteId)
-           }
+           },
+       },
+       orderBy: {
+           Nome: "desc"
        }
    }).then(result => {
         res.status(200).json(result);
@@ -109,7 +112,42 @@ router.get("/:utenteId", async (req, res, next) => {
     });
 });
 
-router.get("/cercaPerNome/:nome", async (req, res, next) => {
+router.get("/libroId/:libroId", async (req, res, next) => {
+    await prisma.libro.findUnique({
+        select: {
+         Id: true,
+         Nome: true,
+         ISBN: true,
+         Autore: true,
+         Editore: true,
+         Edizione: true,
+         Prezzo: true,
+         Materia: true,
+         Utente:{
+             select:{
+                Nome: true,
+                Cognome: true,
+                Telefono: true,
+                Email: true,
+                Citta: true
+             }
+         },
+         Immagine: true
+        },
+        where: {
+             Id: parseInt(req.params.libroId)
+        }
+    }).then(result => {
+         res.status(200).json(result);
+     })
+     .catch(err => {
+         res.status(500).json({
+             error: err
+         });
+     });
+ });
+
+router.get("/cercaPerNome/:Utente_id/:nome", async (req, res, next) => {
     const nome = req.params.nome + '%';
     const result = await prisma.libro.findMany({
         select: {
@@ -144,7 +182,7 @@ router.get("/cercaPerNome/:nome", async (req, res, next) => {
             }  
         ],
         NOT: {
-            Utente_id: parseInt(req.body.Utente_id)
+            Utente_id: parseInt(req.params.Utente_id)
         }
         }
     })
@@ -181,7 +219,7 @@ router.get("/immagine/:filename", (req, res) => {
 
 
 router.get("/cercaPerId/:libroId", async (req, res) => {
-    await db.libro.findUnique({
+   const libro =  await db.libro.findUnique({
         where: {
             Id: parseInt(req.params.libroId)
         },
@@ -205,17 +243,14 @@ router.get("/cercaPerId/:libroId", async (req, res) => {
             },
             Immagine: true 
         }
-    }).then(result => {
-        const img = getImmagineLibro(result.Immagine);
-        res.status(201).json({
-            Libro: result,
-            Stream: img
-        });
-     })
+    })
      .catch(err => {
-         res.status(500).json({
+         return res.status(500).json({
              error: err
          });
+     });
+     console.log(libro);
+    return res.status(200).send({libro
      });
 });
 

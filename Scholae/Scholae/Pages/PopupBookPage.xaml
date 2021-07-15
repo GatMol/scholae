@@ -1,48 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             Size="360, 550"
-             x:Class="Scholae.Pages.PopupBookPage">
-    <StackLayout>
-        <Label Text="Libro su dei numeri" Margin="20,15,0,0" FontSize="16" TextColor="#3F403F" />
-        <Label Text="Gianfranco la Sbanna" Margin="20,3,0,0" FontSize="16" TextColor="#3F403F"/>
-        <Label Text="Edizione del 2018" Margin="20,3,0,0"  FontSize="16" TextColor="#3F403F"/>
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+           xmlns:local="clr-namespace:Scholae.Pages"
+           x:Class="Scholae.Pages.PopupBookPage"
+           Size="360, 550">
 
-        <Frame Margin="10"
-       BorderColor="Black"
-       CornerRadius="10"
-       HeightRequest="200"
+    <StackLayout>
+        <Label Text="{Binding Nome}" Margin="10, 0,0,0" FontSize="25" TextColor="{StaticResource TextColorDark}" FontAttributes="Bold" />
+        <Label Text="{Binding Autore}" Margin="10,3,0,0" FontSize="16" TextColor="{StaticResource TextColorDark}"/>
+        <Label Text="{Binding Edizione}" Margin="10,3,0,0"  FontSize="16" TextColor="{StaticResource TextColorDark}"/>
+
+        <Frame Margin="0, 10, 0, 10"
+       CornerRadius="20"
+       HeightRequest="200" MinimumHeightRequest="200"
        WidthRequest="350"
        IsClippedToBounds="True"
        HorizontalOptions="Start"
-       VerticalOptions="Center" Padding="20">
-            <Image Source=""
+       VerticalOptions="Center" Padding="20"
+               HasShadow="False">
+            <Image Source="{Binding Immagine}"
          Aspect="AspectFill"
          Margin="-20"
          HeightRequest="100"
          WidthRequest="100" />
         </Frame>
 
-        <Frame Margin="10"
-       BorderColor="Black"
-       CornerRadius="50"
-       HeightRequest="60"
-       WidthRequest="60"
-       IsClippedToBounds="True"
-       HorizontalOptions="Start"
-       VerticalOptions="Center" Padding="20">
-            <Image Source=""
-         Aspect="AspectFill"
-         Margin="-20"
-         HeightRequest="100"
-         WidthRequest="100" />
-        </Frame>
+       <Frame CornerRadius="40" Margin="0, 10, 0, 10"
+              HeightRequest="40" WidthRequest="40" MinimumHeightRequest="40"
+              IsClippedToBounds="True" HorizontalOptions="Start" HasShadow="False" >
+              <Image Source="icona_account"
+                     HorizontalOptions="Center" WidthRequest="40"
+                     VerticalOptions="Center" HeightRequest="40"/>
+                </Frame>
 
-        <Label Text="Ciccio Pasticcio" Margin="20,-100,0,0" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Start" FontAttributes="Bold" FontSize="20" TextColor="#3F403F"/>
-        <Label Text="Tor Marancia, Roma" Margin="20,0,0,0" HorizontalOptions="Center" FontSize="15" TextColor="#3F403F"/>
-        <Label Text="+3933333333333" Margin="20,0,0,0" HorizontalOptions="Center" TextColor="#3F403F" />
-        <Label Text="Prezzo: 15$"  Margin="0,30,20,0"  FontSize="20" TextColor="#3F403F" HorizontalOptions="End" />
+        <Label Text="{Binding Utente.NomeCognome}" Margin="20,-110,0,0" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="Start" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource TextColorDark}"/>
+        <Label Text="{Binding Utente.Email}" Margin="20,0,0,0" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="Start" FontSize="20" TextColor="{StaticResource TextColorDark}"/>
+        <Label Text="{Binding Utente.Citta}" Margin="20,0,0,0" HorizontalOptions="End" FontSize="16" TextColor="{StaticResource TextColorDark}"/>
+        <Label Text="{Binding Utente.Telefono}" Margin="20,0,0,0" HorizontalOptions="End" FontSize="16" TextColor="{StaticResource TextColorDark}" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,15,0,0">
+            <Label Text="Prezzo: " VerticalOptions="Center" FontSize="16" TextColor="{StaticResource TextColorDark}"/> 
+            <Label Text="{Binding Prezzo, StringFormat='{0:F0}€'}" FontSize="28" TextColor="{StaticResource TextColorDark}" HorizontalOptions="End" FontAttributes="Bold" />
+        </StackLayout>
     </StackLayout>
 
 </xct:Popup>
