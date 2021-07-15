@@ -23,6 +23,7 @@ namespace Scholae
             var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
             {
                 Title = "Fai una foto"
+
             });
 
             if (result != null)
@@ -34,6 +35,7 @@ namespace Scholae
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         resultImage.Source = ImageSource.FromFile(result.FullPath);
+                        vendiLibro.IsVisible = true;
                     });
                     spPage.Img = ReadFully(stream);
                     stream.Position = 0;
@@ -76,6 +78,7 @@ namespace Scholae
                 string nf = DateTime.Now.GetHashCode().ToString() + "jpg";
                 SaveStreamAsFile(folderPath, stream, nf);
                 resultImage.Source = ImageSource.FromFile(folderPath + "/" + nf);
+                vendiLibro.IsVisible = true;
             }
         }
 
