@@ -133,7 +133,8 @@ namespace Scholae.ViewModels
             await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
                 if (mieiLibri == true)
                 {
-                    await LibriSalvati();
+                utenteCorrente.LibriSalvati.Clear();
+                LibriDaMostrare = new ObservableRangeCollection<Libro>(GetLibriSalvatiDb().Values.ToList());
                 }
                 else
                 {
