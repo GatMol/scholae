@@ -20,7 +20,6 @@ BigInt.prototype.toJSON = function() {
 }
 
 router.post("/", async (req, res, next)=> {
-    //TODO: nella richiesta aggiungere un campo libroimage con il file (stream)
     const newLibro = {
         ISBN: req.body.ISBN,
         Nome: req.body.Nome,

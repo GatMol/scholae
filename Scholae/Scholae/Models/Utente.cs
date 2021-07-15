@@ -60,10 +60,6 @@ namespace Scholae
         public void AddLibroInVendita(Libro libro)
         {
             Debug.WriteLine("\nlibro da aggiungere in memoria: " + libro);
-            foreach(Libro l in LibriInVendita.Values)
-            {
-                Debug.WriteLine("\nlibro aggiunto in memoria: " + l);
-            }
             LibriInVendita.Add(libro.id, libro);
         }
 

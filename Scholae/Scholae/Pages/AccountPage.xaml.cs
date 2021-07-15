@@ -23,11 +23,6 @@ namespace Scholae
             }
         }
 
-        void OnScrollViewScrolled(object sender, ScrolledEventArgs e)
-        {
-            Console.WriteLine($"ScrollX: {e.ScrollX}, ScrollY: {e.ScrollY}");
-        }
-
         async void Libri_in_vendita_tapped(System.Object sender, System.EventArgs e)
         {
             Libri_In_Vendita.BackgroundColor = Color.LightGray;
