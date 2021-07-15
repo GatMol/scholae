@@ -1,5 +1,7 @@
 ﻿using Scholae.Services;
+using Scholae.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -40,6 +42,8 @@ namespace Scholae
                     {
                         Debug.WriteLine($"\nAPP.CS : Utente NON NULL\n");
                         sessioneCorrente.UtenteCorrente = utenteCorrente;
+                        sessioneCorrente.UtenteCorrente.LibriInVendita = new Dictionary<long, Libro>();
+                        sessioneCorrente.UtenteCorrente.LibriSalvati = new Dictionary<long, Libro>();
                         Debug.WriteLine($"\nSettata in sessione l'utente corrente\n");
                         return true;
                     }
