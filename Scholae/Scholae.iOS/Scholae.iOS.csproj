@@ -113,11 +113,14 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>1.2.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Scholae\Scholae.csproj">
-      <Project>{4AC7B22A-38A7-43FF-8E05-641AA870E837}</Project>
+      <Project>{F5F26107-136C-49C1-8D0F-FE85031B69D4}</Project>
       <Name>Scholae</Name>
     </ProjectReference>
   </ItemGroup>
