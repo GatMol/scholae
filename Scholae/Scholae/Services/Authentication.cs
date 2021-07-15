@@ -19,8 +19,8 @@ namespace Scholae.Services
                 Debug.WriteLine("\nLOGINPAGE: loggato e il token e': " + utenteConToken.AccessToken + "\n");
                 Debug.WriteLine("\nLOGINPAGE: loggato e utenteCorrente: " + utenteConToken.Utente + "\n");
                 Debug.WriteLine("\nLOGINPAGE: setto nel secureStorage email e token\n");
-                await SecureStorage.SetAsync("email", utenteConToken.Utente.Email);
-                await SecureStorage.SetAsync("accessToken", utenteConToken.AccessToken);
+                //await SecureStorage.SetAsync("email", utenteConToken.Utente.Email);
+                //await SecureStorage.SetAsync("accessToken", utenteConToken.AccessToken);
                 Debug.WriteLine("\nLOGINPAGE: setto l'utenteCorrente nella sessione\n");
                 Session.GetSession().UtenteCorrente = utenteConToken.Utente;
                 Session.GetSession().UtenteCorrente.LibriInVendita = new Dictionary<long, Libro>();

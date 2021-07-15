@@ -85,6 +85,6 @@
                 CornerRadius="20"
                 BackgroundColor="{x:StaticResource SecondaryColor}"
                 Clicked="LoginClicked"/>
-        <ActivityIndicator x:Name="loading" Color="{x:StaticResource BackgroundAppLight}" IsRunning="false" AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All"/>
+        <ActivityIndicator x:Name="loading" Color="{x:StaticResource BackgroundAppLight}" IsVisible="false" IsRunning="false" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.5" AbsoluteLayout.LayoutFlags="All"/>
     </AbsoluteLayout>
 </ContentPage>

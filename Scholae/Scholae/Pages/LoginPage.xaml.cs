@@ -29,21 +29,21 @@ namespace Scholae
             var email = EmailEntry.Text;
             var password = PasswordEntry.Text;
             var isValid = true;
+            loading.IsVisible = true;
             loading.IsRunning = true;
 
-            Task.Run(() =>
-            {
+            
                 if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 {
                     isValid = false;
-                    Device.BeginInvokeOnMainThread(async () => { loading.IsRunning = false;  await DisplayAlert("Error login", "Email e/o password non validi", "Ok");  });
+                    Device.BeginInvokeOnMainThread(async () => { loading.IsRunning = false; loading.IsVisible = false;  await DisplayAlert("Error login", "Email e/o password non validi", "Ok");  });
                 }
                 if (isValid)
                 {
                     if (Authentication.AuthenticateUser(email, password).Result)
                     {
                         Navigation.InsertPageBefore(new TabbedHomePage(), this);
-                        Device.BeginInvokeOnMainThread(async () => { await Navigation.PopAsync(); loading.IsRunning = false; });
+                        Device.BeginInvokeOnMainThread(async () => { await Navigation.PopAsync(); loading.IsRunning = false; loading.IsVisible = false; });
                     }
                     else
                     {
@@ -51,11 +51,12 @@ namespace Scholae
                         { 
                             await DisplayAlert("Login error", "", "Try again"); 
                             loading.IsRunning = false;
+                            loading.IsVisible = false;
                             PasswordEntry.Text = string.Empty; 
                         });
                     }
                 }
-            });
+            
         }
     }
 }

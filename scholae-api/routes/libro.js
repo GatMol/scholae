@@ -171,12 +171,14 @@ router.get("/cercaPerNome/:Utente_id/:nome", async (req, res, next) => {
 
             {
                 Nome: {
-                startsWith: nome
+                startsWith: nome,
+                mode: 'insensitive',
                 }
             },
             {
                 Materia_id: {
-                    startsWith: nome
+                    startsWith: nome,
+                    mode: 'insensitive',
                 }
             }  
         ],

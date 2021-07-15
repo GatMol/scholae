@@ -85,16 +85,17 @@ namespace Scholae
         void MettiLibroInVendita(object sender, EventArgs e)
         {
             Debug.WriteLine(spPage != null ? spPage.ToString() : "Nullo");
+            loading.IsVisible = true;
             loading.IsRunning = true;
             Task.Run(() =>
             {
                 if (spPage.VendiLibro())
                 {
                     Debug.WriteLine("\nSellPhotoP.cs : Ho messo in vendita il libro");
-                    Device.BeginInvokeOnMainThread(async () => { await Navigation.PopToRootAsync(); loading.IsRunning = false; });
+                    Device.BeginInvokeOnMainThread(async () => { await Navigation.PopToRootAsync(); loading.IsRunning = false; loading.IsVisible = false; });
                 }
                 else
-                    Device.BeginInvokeOnMainThread(async () => { await DisplayAlert("Errore", "Riprova", "Ok"); loading.IsRunning = false; });
+                    Device.BeginInvokeOnMainThread(async () => { await DisplayAlert("Errore", "Riprova", "Ok"); loading.IsRunning = false; loading.IsVisible = false; });
             });
         }
 

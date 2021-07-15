@@ -53,9 +53,9 @@
                                     CornerRadius="20" FontSize="18" HorizontalOptions="End" IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}"/>
                     </StackLayout>
 
-                    <Image x:Name="resultImage" Margin="0,0,0,20"/>
+                    <Image x:Name="resultImage" Margin="20,0,20,20" HeightRequest="250"/>
 
-                    <Button  x:Name="vendiLibro" WidthRequest="350" HeightRequest="50" Margin="0,0,0,20"
+                    <Button  x:Name="vendiLibro" WidthRequest="350" HeightRequest="50"
                              FontSize="20" FontAttributes="Bold"
                              Text="Vendi"  TextColor="#0EAE0E" 
                              CornerRadius="25" BackgroundColor="#f6f6f6" 
@@ -66,6 +66,6 @@
                 </StackLayout>
         </AbsoluteLayout>
     </ScrollView>
-    <ActivityIndicator x:Name="loading" Color="{x:StaticResource PrimaryColor}" IsRunning="false" AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All"/>
+    <ActivityIndicator x:Name="loading" Color="{x:StaticResource PrimaryColor}" IsVisible="false" IsRunning="false" AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All"/>
     </AbsoluteLayout>
 </ContentPage>
