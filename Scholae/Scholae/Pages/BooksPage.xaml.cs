@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Scholae.Pages;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace Scholae
@@ -53,5 +55,10 @@ namespace Scholae
                 mieiLibri = false;
             }
         }
+
+        /*void Libro_Tapped(System.Object sender, System.EventArgs e)
+        {
+            Navigation.ShowPopup(new PopupBookPage());
+        }*/
     }
 }

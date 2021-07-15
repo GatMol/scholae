@@ -54,7 +54,7 @@
                     Text="{Binding testoSearchBar, Mode=OneWayToSource}" TextColor="#2f3a56"
                     FontSize="14" BackgroundColor="#e4e4e4" PlaceholderColor="#2f3a56"
                     SearchCommand="{Binding PerformSearch}"
-                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar} }"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                     />
 
             <RefreshView x:Name="LR" IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
@@ -181,6 +181,12 @@
                                 </Grid>
 
                             </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        
+                                        Command="{Binding OttieniInformazioniLibro, Mode=TwoWay, Source={x:Reference libriViewModel}}"
+                                        CommandParameter="{Binding id}" />
+                                </Frame.GestureRecognizers>
                             </Frame> 
 
                         </DataTemplate>

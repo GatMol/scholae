@@ -12,7 +12,7 @@ router.post("/", async (req, res, next) =>{
 
     await prisma.libroSalvato.create({data: libroS})
     .then(result => {
-        res.status(201).json(libroS);
+        res.status(201).json(result);
     })
     .catch(err => {
         console.log(err);

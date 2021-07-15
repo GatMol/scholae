@@ -11,10 +11,10 @@
             UnselectedTabColor="#f6f6f6"
             >
 
-    <local:BooksPage  IconImageSource="icona_libro"/>
+    <local:BooksPage IconImageSource="icona_libro"/>
 
-    <local:SellBooksPage   IconImageSource="icona_piu"/>
+    <local:SellBooksPage IconImageSource="icona_piu"/>
 
-    <local:AccountPage   IconImageSource="icona_account"/>
+    <local:AccountPage IconImageSource="icona_account"/>
 
 </TabbedPage>

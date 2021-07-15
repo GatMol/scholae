@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace Scholae.Services
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+
         public BaseViewModel()
         {
         }

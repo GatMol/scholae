@@ -2,28 +2,17 @@
 using Scholae.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Scholae.ViewModels
 {
     public class LibriInVenditaViewModel : BaseViewModel
     {
-        public Utente utenteCorrente;
-
-        public List<Libro> libri;
+        public Utente utenteCorrente;        
 
         private ObservableCollection<Libro> iMieiLibri;
-
-        public ICommand Elimina => new Command<long>((long id) =>
-        {
-            EliminaLibro(id);
-        });
-
-        private void EliminaLibro(long id)
-        {
-            APIConnector.DeleteLibro(id);
-            InitData();
-        }
 
         public ObservableCollection<Libro> IMieiLibri
         {
@@ -48,8 +37,18 @@ namespace Scholae.ViewModels
         {
             //Utente utente = APIConnector.GetUtentePerEmail(LoginPage.Email);
             //libri = APIConnector.tuttiImieiLibri(utente.Id);
-            libri = APIConnector.tuttiImieiLibri(utenteCorrente.Id);
-            IMieiLibri = new ObservableCollection<Libro>(libri);
+            if (utenteCorrente.LibriInVendita.Values != null)
+                IMieiLibri = new ObservableCollection<Libro>(utenteCorrente.LibriInVendita.Values);
+            else
+                IMieiLibri = new ObservableCollection<Libro>();
+        }
+
+        public void EliminaLibro()
+        {
+            Task.Run(() =>
+            {
+                IMieiLibri = new ObservableCollection<Libro>(utenteCorrente.LibriInVendita.Values);
+            });
         }
 
     }

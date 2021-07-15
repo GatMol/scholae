@@ -4,7 +4,11 @@ const router = express.Router();
 const db = require("../services/database");
 
 router.get("/", async (req, res, next) =>{
-    prisma.materia.findMany().then(result => {
+    prisma.materia.findMany({
+        orderBy: {
+            Nome: "desc"
+        }
+    }).then(result => {
         res.status(200).json(result);
     })
     .catch(err => {
