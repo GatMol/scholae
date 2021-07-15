@@ -15,6 +15,16 @@ namespace Scholae.ViewModels
 
         }
 
+        public Libro(String nome, String ISBN, String autore, String editore, String edizione, int prezzo)
+        {
+            this.Nome = nome;
+            this.Isbn = ISBN;
+            this.Autore = autore;
+            this.Editore = editore;
+            this.Edizione = edizione;
+            this.Prezzo = prezzo;
+        }
+
         public Libro(long id, String nome, String ISBN, String autore, String editore, String edizione, int prezzo, string immagine)
         {
             this.id = id;

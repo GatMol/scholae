@@ -2,56 +2,70 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:Scholae.ViewModels" 
+             xmlns:service="clr-namespace:Scholae.Helpers.Converters"
              x:DataType="viewmodels:SellPageViewModel"
              x:Class="Scholae.SellPhotoPage">
 
-    <ScrollView>
-        <AbsoluteLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:InverseBoolConverter x:Key="InverseBool"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <AbsoluteLayout BackgroundColor="#e4e4e4">
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All">
+            <AbsoluteLayout>
             <!--Onda scura-->
-            <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
-              AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
-              Data="M-2552.03,2434.542s-85.089-24.01-131.343-15.909-94.013,57.732-167.167,67.124-115.46-35.7-115.46-35.7v118.3h413.97Z"
-              Fill="#2f3a56"
-              Aspect="Fill"/>
+                <Path AbsoluteLayout.LayoutBounds="1,1.01,1.01,151.388"
+                  AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                  Data="M-2552.03,2434.542s-85.089-24.01-131.343-15.909-94.013,57.732-167.167,67.124-115.46-35.7-115.46-35.7v118.3h413.97Z"
+                  Fill="#2f3a56"
+                  Aspect="Fill"/>
 
-            <!--Onda chiara-->
-            <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
-              AbsoluteLayout.LayoutFlags="XProportional, YProportional" 
-              Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
-              Fill="#3b5998"
-              Aspect="Fill"/>
+                <!--Onda chiara-->
+                <Path AbsoluteLayout.LayoutBounds="1,1.01,211.78,61.165"
+                  AbsoluteLayout.LayoutFlags="XProportional, YProportional" 
+                  Data="M-2551.27,2513.248c-195.052-27-211.782,55.752-211.782,55.752h211.782Z"
+                  Fill="#3b5998"
+                  Aspect="Fill"/>
 
-            <StackLayout>
-                <Label Text="VENDI IL TUO LIBRO" FontSize="28" TextColor="#1D1058" FontAttributes="Bold" Margin="30,20,0,0" HorizontalOptions="Center" />
-                <BoxView HeightRequest="1" Color="#777272" Margin="90,-8,65,30" />
+                <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,20,0,0">
+                    <Label Text="VENDI IL TUO LIBRO" FontSize="28" TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <BoxView HeightRequest="1" Color="#777272" Margin="80,0,80,0"/>
 
-                <Label HorizontalOptions="Center" Text="Riepilogo dati libro" FontSize="20" Margin="30,-20,0,10" FontAttributes="Bold" TextColor="#3F403F"/>
+                    <Frame CornerRadius="20" BackgroundColor="#f6f6f6" Margin="40,20,40,20" Padding="20,20,20,20" HasShadow="False">
+                        <StackLayout>
+                            <Label Text="Riepilogo dati libro" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Libro.Nome}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Autore}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Isbn}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Edizione}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Editore}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Prezzo}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Materia.Nome}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                        </StackLayout>
+                    </Frame>
 
-                <BoxView Grid.RowSpan="1" CornerRadius="15" HeightRequest="250" 
-                         Margin="40,0,10,0" HorizontalOptions="Fill" InputTransparent="False" BackgroundColor="#F3F0F0"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,20">
+                        <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="{StaticResource PrimaryColor}" BackgroundColor="#f6f6f6" WidthRequest="170" HeightRequest="40" 
+                                    CornerRadius="20" FontSize="18" HorizontalOptions="Start" IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}"/>
+                        <Button Text="Scatta foto" Clicked="Button1_Clicked" TextColor="{StaticResource PrimaryColor}" BackgroundColor="#f6f6f6" WidthRequest="170" HeightRequest="40" 
+                                    CornerRadius="20" FontSize="18" HorizontalOptions="End" IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}"/>
+                    </StackLayout>
 
-                <Label Text="{Binding Libro.Nome}" Margin="55,-240,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="{Binding Libro.Autore}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="{Binding Libro.Isbn}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="{Binding Libro.Edizione}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="{Binding Libro.Editore}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="{Binding Libro.Prezzo}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
-                <Label Text="{Binding Libro.Materia.Nome}" Margin="55,5,0,0" FontSize="16" TextColor="#3F403F"/>
+                    <Image x:Name="resultImage" Margin="0,0,0,20"/>
 
-                <Button Text="Aggiungi foto" Clicked="Button_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
-                CornerRadius="20" HorizontalOptions="Start" BorderColor="#E7E3E3" BorderWidth="5" Margin="25,30,0,0" />
-                <Button Text="Scatta foto" Clicked="Button1_Clicked" TextColor="#3F403F" BackgroundColor="#E7E3E3" WidthRequest="170" HeightRequest="40" 
-                CornerRadius="20" HorizontalOptions="End" BorderColor="#E7E3E3" BorderWidth="5" Margin="0,-46,-5,0"/>
-                <Image x:Name="resultImage" HeightRequest="350" WidthRequest="350" Margin="30,5,0,0" />
-
-                <Button BorderWidth="1" WidthRequest="170" HeightRequest="50"
-                    BorderColor="#0EAE0E"
-                    FontSize="20"  FontAttributes="Bold" Text="VENDI"  TextColor="#0EAE0E"
-                    CornerRadius="25" Clicked="MettiLibroInVendita"
-                    BackgroundColor="#F1F1F1" HorizontalOptions="Center" Padding="0" Margin="30,20,0,20"/>
-
-              
-            </StackLayout>
+                    <Button  x:Name="vendiLibro" WidthRequest="350" HeightRequest="50" Margin="0,0,0,20"
+                             FontSize="20" FontAttributes="Bold"
+                             Text="Vendi"  TextColor="#0EAE0E" 
+                             CornerRadius="25" BackgroundColor="#f6f6f6" 
+                             BorderColor="#0EAE0E" BorderWidth="1"
+                             HorizontalOptions="Center" VerticalOptions="Center" 
+                             IsEnabled="{Binding IsRunning, Source={x:Reference loading}, Converter={StaticResource InverseBool}}" Clicked="MettiLibroInVendita"
+                             IsVisible="false"/>
+                </StackLayout>
         </AbsoluteLayout>
     </ScrollView>
+    <ActivityIndicator x:Name="loading" Color="{x:StaticResource PrimaryColor}" IsRunning="false" AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All"/>
+    </AbsoluteLayout>
 </ContentPage>

@@ -27,12 +27,16 @@ namespace Scholae
 
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            SellPhotoPage spPage = new SellPhotoPage()
+            if (sbVM.AreFieldValid())
             {
-                spPage = sbVM,
-                BindingContext = sbVM
-            };
-            await Navigation.PushAsync(spPage);
+                sbVM.GeneraLibero();
+                SellPhotoPage spPage = new SellPhotoPage()
+                {
+                    spPage = sbVM,
+                    BindingContext = sbVM
+                };
+                await Navigation.PushAsync(spPage);
+            }
         }
     }
 }

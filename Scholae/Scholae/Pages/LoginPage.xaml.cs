@@ -1,5 +1,6 @@
 ﻿using Scholae.Services;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
@@ -13,6 +14,7 @@ namespace Scholae
         public LoginPage()
         {
             Device.SetFlags(new string[] { "Shapes_Experimental" });
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             BindingContext = this;
         }
@@ -22,31 +24,38 @@ namespace Scholae
             await Navigation.PushAsync(new Registrazione());
         }
 
-        async void LoginClicked(object sender, EventArgs e)
+        void LoginClicked(object sender, EventArgs e)
         {
             var email = EmailEntry.Text;
             var password = PasswordEntry.Text;
             var isValid = true;
+            loading.IsRunning = true;
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            Task.Run(() =>
             {
-                await DisplayAlert("Error login", "Email e/o password non validi", "Ok");
-                isValid = false;
-            }
-
-            if (isValid)
-            {
-                if (await Authentication.AuthenticateUser(email, password))
+                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 {
-                    Navigation.InsertPageBefore(new TabbedHomePage(), this);
-                    await Navigation.PopAsync();
+                    isValid = false;
+                    Device.BeginInvokeOnMainThread(async () => { loading.IsRunning = false;  await DisplayAlert("Error login", "Email e/o password non validi", "Ok");  });
                 }
-                else
+                if (isValid)
                 {
-                    await DisplayAlert("Login error", "", "Try again");
-                    PasswordEntry.Text = string.Empty;
+                    if (Authentication.AuthenticateUser(email, password).Result)
+                    {
+                        Navigation.InsertPageBefore(new TabbedHomePage(), this);
+                        Device.BeginInvokeOnMainThread(async () => { await Navigation.PopAsync(); loading.IsRunning = false; });
+                    }
+                    else
+                    {
+                        Device.BeginInvokeOnMainThread(async () => 
+                        { 
+                            await DisplayAlert("Login error", "", "Try again"); 
+                            loading.IsRunning = false;
+                            PasswordEntry.Text = string.Empty; 
+                        });
+                    }
                 }
-            }
+            });
         }
     }
 }
