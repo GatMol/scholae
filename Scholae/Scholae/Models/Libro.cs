@@ -85,8 +85,8 @@ namespace Scholae.ViewModels
         {
             get
             {
-                //return Constants.LOCALHOST + _immagine;
-                return Constants.API_ENDPOINT + _immagine;
+                return Constants.LOCALHOST + _immagine;
+                //return Constants.API_ENDPOINT + _immagine;
             }
             set
             {

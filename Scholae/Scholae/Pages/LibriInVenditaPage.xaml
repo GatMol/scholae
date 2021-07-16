@@ -68,7 +68,16 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="&#xf2ed;" 
+                                <Image HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Grid.ColumnSpan="1"
+                                       Source="{Binding Immagine, Mode=OneWay}"
+                                       HeightRequest="130"
+                                       WidthRequest="130"
+                                       Grid.RowSpan="5"
+                                       />
+
+                                    <Label Text="&#xf2ed;" 
                                        Grid.Column="0" FontSize="20"
                                        TextColor="{StaticResource RedDelete}" 
                                        FontFamily="{StaticResource FontAwesomeSolid}"
@@ -81,14 +90,6 @@
                                     </Label.GestureRecognizers>
                                 </Label>
 
-                                <Image HorizontalOptions="Center"
-                                       VerticalOptions="Center"
-                                       Grid.ColumnSpan="1"
-                                       Source="{Binding Immagine, Mode=OneWay}"
-                                       HeightRequest="130"
-                                       WidthRequest="130"
-                                       Grid.RowSpan="5"
-                                       />
 
                                 <StackLayout Grid.Column="1" Grid.RowSpan="5" VerticalOptions="Center">
                                     <Label HorizontalOptions="Start"

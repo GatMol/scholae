@@ -4,9 +4,9 @@
            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
            xmlns:local="clr-namespace:Scholae.Pages"
            x:Class="Scholae.Pages.PopupBookPage"
-           Size="360, 550">
+           Size="360, 580" BackgroundColor="White">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="Transparent">
         <Label Text="{Binding Nome}" Margin="10, 0,0,0" FontSize="25" TextColor="{StaticResource TextColorDark}" FontAttributes="Bold" />
         <Label Text="{Binding Autore}" Margin="10,3,0,0" FontSize="16" TextColor="{StaticResource TextColorDark}"/>
         <Label Text="{Binding Edizione}" Margin="10,3,0,0"  FontSize="16" TextColor="{StaticResource TextColorDark}"/>
@@ -27,18 +27,20 @@
         </Frame>
 
        <Frame CornerRadius="40" Margin="0, 10, 0, 10"
+              TranslationY="50"
               HeightRequest="40" WidthRequest="40" MinimumHeightRequest="40"
+              BackgroundColor="White" BorderColor="{StaticResource TextColorDark}"
               IsClippedToBounds="True" HorizontalOptions="Start" HasShadow="False" >
-              <Image Source="icona_account"
+              <Image Source="icona_account" BackgroundColor="White"
                      HorizontalOptions="Center" WidthRequest="40"
                      VerticalOptions="Center" HeightRequest="40"/>
                 </Frame>
 
         <Label Text="{Binding Utente.NomeCognome}" Margin="20,-110,0,0" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="Start" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource TextColorDark}"/>
-        <Label Text="{Binding Utente.Email}" Margin="20,0,0,0" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="Start" FontSize="20" TextColor="{StaticResource TextColorDark}"/>
+        <Label Text="{Binding Utente.Email}" Margin="20,0,0,0" HorizontalOptions="End" VerticalOptions="Center" HorizontalTextAlignment="Start" FontSize="16" TextColor="{StaticResource TextColorDark}"/>
         <Label Text="{Binding Utente.Citta}" Margin="20,0,0,0" HorizontalOptions="End" FontSize="16" TextColor="{StaticResource TextColorDark}"/>
         <Label Text="{Binding Utente.Telefono}" Margin="20,0,0,0" HorizontalOptions="End" FontSize="16" TextColor="{StaticResource TextColorDark}" />
-        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,15,0,0">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Margin="0,10,0,0">
             <Label Text="Prezzo: " VerticalOptions="Center" FontSize="16" TextColor="{StaticResource TextColorDark}"/> 
             <Label Text="{Binding Prezzo, StringFormat='{0:F0}€'}" FontSize="28" TextColor="{StaticResource TextColorDark}" HorizontalOptions="End" FontAttributes="Bold" />
         </StackLayout>

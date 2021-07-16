@@ -36,7 +36,7 @@
             <StackLayout>
 
                 <Frame CornerRadius="40" Margin="0, 20, 0, 10"
-                       HeightRequest="40" WidthRequest="40" 
+                       HeightRequest="40" WidthRequest="40" BackgroundColor="White"
                        IsClippedToBounds="True" HorizontalOptions="Center" BorderColor="#2f3a56" >
                     <ImageButton Source="icona_account"
                                      HorizontalOptions="Center" WidthRequest="40"
@@ -216,17 +216,16 @@
 
 
 
-                <Button Text="Esci" TextColor="#df4f4f"
-                        BorderColor="#df4f4f" Clicked="Logout"
-                        BackgroundColor="#F3F0F0"
-                        CornerRadius="30" BorderWidth="1.1"
+                <Button Text="Esci" TextColor="White" Clicked="Logout"
+                        BackgroundColor="#dc143c" BorderColor="{StaticResource TextColorDark}"
+                        CornerRadius="25" BorderWidth="1.1"
                         WidthRequest="50" HeightRequest="50" Margin="50,10,50,10"
                         FontSize="18"
                         />
 
-                <Button Text="Elimina account" TextColor="#df4f4f"
-                        BorderColor="#df4f4f" BackgroundColor="#F3F0F0"
-                        CornerRadius="30" BorderWidth="1.1" Clicked="OnDeleteButtonClicked"
+                <Button Text="Elimina account" TextColor="White" BackgroundColor="#dc143c"
+                        BorderColor="{StaticResource TextColorDark}"
+                        CornerRadius="25" BorderWidth="1.1" Clicked="OnDeleteButtonClicked"
                         WidthRequest="50" HeightRequest="50" Margin="50,10,50,10" FontSize="18"/>
             </StackLayout>
             
