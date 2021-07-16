@@ -216,17 +216,17 @@
 
 
 
-                <Button Text="Esci" TextColor="#df4f4f"
-                        BorderColor="#df4f4f" Clicked="Logout"
-                        BackgroundColor="#F3F0F0"
-                        CornerRadius="30" BorderWidth="1.1"
+                <Button Text="Esci" TextColor="white"
+                        Clicked="Logout"
+                        BackgroundColor=" #C70039"
+                        CornerRadius="30"
                         WidthRequest="50" HeightRequest="50" Margin="50,10,50,10"
                         FontSize="18"
                         />
 
-                <Button Text="Elimina account" TextColor="#df4f4f"
-                        BorderColor="#df4f4f" BackgroundColor="#F3F0F0"
-                        CornerRadius="30" BorderWidth="1.1" Clicked="OnDeleteButtonClicked"
+                <Button Text="Elimina account" TextColor="white"
+                        BackgroundColor="#C70039"
+                        CornerRadius="30" Clicked="OnDeleteButtonClicked"
                         WidthRequest="50" HeightRequest="50" Margin="50,10,50,10" FontSize="18"/>
             </StackLayout>
             

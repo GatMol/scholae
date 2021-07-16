@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -87,9 +87,7 @@
       <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="AWSSDK.CognitoIdentity">
-
       <Version>3.7.0.13</Version>
-
       <Version>3.7.0.36</Version>
     </PackageReference>
     <PackageReference Include="AWSSDK.CognitoIdentityProvider">
@@ -97,7 +95,9 @@
     </PackageReference>
     <PackageReference Include="AWSSDK.Core">
       <Version>3.7.0.38</Version>
-
+    </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>1.2.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
@@ -113,73 +113,40 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>1.2.0</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Scholae\Scholae.csproj">
-      <Project>{F5F26107-136C-49C1-8D0F-FE85031B69D4}</Project>
+      <Project>{D1F390DD-28E9-4FD7-9FCE-B179B30263C9}</Project>
       <Name>Scholae</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\chata.imageset\" />
     <Folder Include="Assets.xcassets\chatb.imageset\" />
+    <Folder Include="Assets.xcassets\foto_libro.imageset\" />
     <Folder Include="Assets.xcassets\home.imageset\" />
-
-
     <Folder Include="Assets.xcassets\icona_accoun.imageset\" />
     <Folder Include="Assets.xcassets\icona_account.imageset\" />
     <Folder Include="Assets.xcassets\icona_avanti.imageset\" />
     <Folder Include="Assets.xcassets\icona_chat.imageset\" />
+    <Folder Include="Assets.xcassets\icona_indietro.imageset\" />
     <Folder Include="Assets.xcassets\icona_libro.imageset\" />
-
+    <Folder Include="Assets.xcassets\icona_libro_.imageset\" />
     <Folder Include="Assets.xcassets\icona_libro_premuta.imageset\" />
     <Folder Include="Assets.xcassets\icona_piu.imageset\" />
+    <Folder Include="Assets.xcassets\icona_piu_verde.imageset\" />
     <Folder Include="Assets.xcassets\icona_tutor.imageset\" />
     <Folder Include="Assets.xcassets\icona_tutor_premuta.imageset\" />
     <Folder Include="Assets.xcassets\impostazioni.imageset\" />
     <Folder Include="Assets.xcassets\libri.imageset\" />
     <Folder Include="Assets.xcassets\piu.imageset\" />
     <Folder Include="Assets.xcassets\piu_da_solo.imageset\" />
-    <Folder Include="Assets.xcassets\tutor.imageset\" />
-
-    <Folder Include="Assets.xcassets\icona_accoun.imageset\" />
-    <Folder Include="Assets.xcassets\icona_account.imageset\" />
-    <Folder Include="Assets.xcassets\icona_chat.imageset\" />
-    <Folder Include="Assets.xcassets\icona_libro.imageset\" />
-    <Folder Include="Assets.xcassets\icona_tutor.imageset\" />
-    <Folder Include="Assets.xcassets\icona_avanti.imageset\" />
-    <Folder Include="Assets.xcassets\icona_piu.imageset\" />
-    <Folder Include="Assets.xcassets\icona_libro_.imageset\" />
-    <Folder Include="Assets.xcassets\icona_indietro.imageset\" />
-    <Folder Include="Assets.xcassets\icona_piu_verde.imageset\" />
-
-    <Folder Include="Assets.xcassets\icona_libro.imageset\" />
-    <Folder Include="Assets.xcassets\foto_libro.imageset\" />
     <Folder Include="Assets.xcassets\preferito.imageset\" />
     <Folder Include="Assets.xcassets\preferitoSelezionato.imageset\" />
-    <Folder Include="Assets.xcassets\elimina.imageset\" />
+    <Folder Include="Assets.xcassets\tutor.imageset\" />
   </ItemGroup>
   <ItemGroup>
-	<ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_account.imageset\icona_account.png" />
-    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\icona_chat.png" />
-    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\icona_avanti.png" />
-    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\icona_tutor.png" />
-    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\icona_piu.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_indietro.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_indietro.imageset\icona_indietro.png" />
-    <ImageAsset Include="Assets.xcassets\icona_piu_verde.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_piu_verde.imageset\icona_piu_verde.png" />
-
     <ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -210,21 +177,74 @@
     <ImageAsset Include="Assets.xcassets\icona_piu.imageset\icona_piu.png">
       <Visible>false</Visible>
     </ImageAsset>
-
-    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\icona_libro_.png" />
-    <ImageAsset Include="Assets.xcassets\foto_libro.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\foto_libro.imageset\foto_libro.png" />
-    <ImageAsset Include="Assets.xcassets\preferito.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\preferito.imageset\preferito.png" />
-    <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\preferitoSelezionato.png" />
-    <ImageAsset Include="Assets.xcassets\elimina.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\elimina.imageset\elimina-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\FontAwesome5BrandsRegular.otf" />
-    <BundleResource Include="Resources\FontAwesome5Regular.otf" />
-    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_indietro.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_indietro.imageset\icona_indietro.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_piu_verde.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_piu_verde.imageset\icona_piu_verde.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_account.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_account.imageset\icona_account.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_chat.imageset\icona_chat.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_avanti.imageset\icona_avanti.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_tutor.imageset\icona_tutor.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_piu.imageset\icona_piu.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icona_libro.imageset\icona_libro_.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\foto_libro.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\foto_libro.imageset\foto_libro.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\preferito.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\preferito.imageset\preferito.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\preferitoSelezionato.imageset\preferitoSelezionato.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
 </Project>

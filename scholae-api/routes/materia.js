@@ -6,7 +6,7 @@ const db = require("../services/database");
 router.get("/", async (req, res, next) =>{
     prisma.materia.findMany({
         orderBy: {
-            Nome: "desc"
+            Nome: "asc"
         }
     }).then(result => {
         res.status(200).json(result);

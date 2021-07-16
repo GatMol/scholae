@@ -19,11 +19,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <AbsoluteLayout TranslationY="{StaticResource translationY}">
+    <AbsoluteLayout TranslationY="{StaticResource translationY}" BackgroundColor="#F3F0F0">
 
         <Frame AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, -0.1, 1, 0.2"
               CornerRadius="30" BackgroundColor="#3b5998"
-               HasShadow="False">
+               HasShadow="False" >
         </Frame>
 
         <Label AbsoluteLayout.LayoutFlags="PositionProportional"  Text="Scholae" FontSize="40"
@@ -35,22 +35,24 @@
                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0.85, 1, 0.85">
             <StackLayout>
                 <StackLayout HorizontalOptions="Center">
-                    <Label Text="INSERISCI DATI LIBRO" FontSize="28" TextColor="#1D1058" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="INSERISCI DATI LIBRO" FontSize="28" TextColor="{StaticResource TextColorDark}" FontAttributes="Bold" HorizontalOptions="Center" />
                     <BoxView HeightRequest="1" Color="#777272" Margin="0,0,0,20" />
                 </StackLayout>
-                <Frame BackgroundColor="#F3F0F0" Margin="20,0,20,0" CornerRadius="30" Padding="20,0,20,0" HasShadow="False"
-                       HeightRequest="40">
-                    <Picker x:Name="MainPicker" Title="Scegli materia*" SelectedItem="{Binding NomeMateria.Value}"
+                <Frame Margin="20,0,20,0" CornerRadius="20" Padding="20,0,20,0" HasShadow="False"
+                       HeightRequest="40" BackgroundColor="white">
+                    <Picker x:Name="MainPicker" BackgroundColor="white" Title="Scegli materia*" TextColor="{StaticResource TextColorDark}" TitleColor="{StaticResource TextColorDark}" SelectedItem="{Binding NomeMateria.Value}"
                             SelectedIndexChanged="MainPicker_SelectedIndexChanged" FontSize="18"/>
                 </Frame>
                 <Label Text="{Binding NomeMateria.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                         IsVisible="{Binding NomeMateria.IsValid, Converter={StaticResource InverseBoolConverter}}"
                          Style="{StaticResource ErrorTextStyle}" HorizontalOptions="Center"/>
 
-                <Frame CornerRadius="15" BackgroundColor="#F3F0F0" HasShadow="False"
-                       Margin="20,10,20,20">
+                <Frame CornerRadius="15" HasShadow="False"
+                       Margin="20,10,20,20" BackgroundColor="white">
                     <StackLayout>
-                        <Entry x:Name="NomeDelLibroEntry" Placeholder="Nome del libro*" Text="{Binding Nome.Value}">
+                        <Entry x:Name="NomeDelLibroEntry" Placeholder="Nome del libro*" Text="{Binding Nome.Value}" 
+                               TextColor="{StaticResource TextColorDark}" PlaceholderColor="{StaticResource TextColorDark}"
+                               BackgroundColor="white">
                             <Entry.Behaviors>
                                 <behaviour:EntryLineValidationBehaviour IsValid="{Binding Nome.IsValid}"/>
                             </Entry.Behaviors>
@@ -58,7 +60,9 @@
                         <Label Text="{Binding Nome.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 IsVisible="{Binding Nome.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                 Style="{StaticResource ErrorTextStyle}" HorizontalOptions="Center"/>
-                        <Entry x:Name="AutoreEntry" Placeholder="Autore*" Text="{Binding Autore.Value}">
+                        <Entry x:Name="AutoreEntry" Placeholder="Autore*" Text="{Binding Autore.Value}"
+                               TextColor="{StaticResource TextColorDark}" PlaceholderColor="{StaticResource TextColorDark}"
+                               BackgroundColor="white">
                             <Entry.Behaviors>
                                 <behaviour:EntryLineValidationBehaviour IsValid="{Binding Autore.IsValid}"/>
                             </Entry.Behaviors>
@@ -66,7 +70,9 @@
                         <Label Text="{Binding Autore.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 IsVisible="{Binding Autore.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                 Style="{StaticResource ErrorTextStyle}" HorizontalOptions="Center"/>
-                        <Entry x:Name="ISBNEntry" Placeholder="ISBN" Keyboard="Numeric" Text="{Binding Isbn.Value}">
+                        <Entry x:Name="ISBNEntry" Placeholder="ISBN" Keyboard="Numeric" Text="{Binding Isbn.Value}"
+                               TextColor="{StaticResource TextColorDark}" PlaceholderColor="{StaticResource TextColorDark}"
+                               BackgroundColor="white">
                             <Entry.Behaviors>
                                 <behaviour:EntryLineValidationBehaviour IsValid="{Binding Isbn.IsValid}"/>
                             </Entry.Behaviors>
@@ -74,7 +80,9 @@
                         <Label Text="{Binding Isbn.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 IsVisible="{Binding Isbn.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                  Style="{StaticResource ErrorTextStyle}" HorizontalOptions="Center"/>
-                        <Entry x:Name="EdizioneEntry" Placeholder="Edizione*" Keyboard="Numeric" Text="{Binding Edizione.Value}">
+                        <Entry x:Name="EdizioneEntry" Placeholder="Edizione*" Keyboard="Numeric" Text="{Binding Edizione.Value}"
+                               TextColor="{StaticResource TextColorDark}" PlaceholderColor="{StaticResource TextColorDark}"
+                               BackgroundColor="white">
                             <Entry.Behaviors>
                                 <behaviour:EntryLineValidationBehaviour IsValid="{Binding Edizione.IsValid}"/>
                             </Entry.Behaviors>
@@ -82,7 +90,9 @@
                         <Label Text="{Binding Edizione.Errors, Converter={StaticResource FirstValidationErrorConverter}}" 
                                IsVisible="{Binding Edizione.IsValid, Converter={StaticResource InverseBoolConverter}}" 
                                Style="{StaticResource ErrorTextStyle}" HorizontalOptions="Center"/>
-                        <Entry x:Name="EditoreEntry" Placeholder="Editore*" Text="{Binding Editore.Value}">
+                        <Entry x:Name="EditoreEntry" Placeholder="Editore*" Text="{Binding Editore.Value}"
+                               TextColor="{StaticResource TextColorDark}" PlaceholderColor="{StaticResource TextColorDark}"
+                               BackgroundColor="white">
                             <Entry.Behaviors>
                                 <behaviour:EntryLineValidationBehaviour IsValid="{Binding Editore.IsValid}"/>
                             </Entry.Behaviors>
@@ -91,7 +101,8 @@
                                IsVisible="{Binding Editore.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                Style="{StaticResource ErrorTextStyle}" HorizontalOptions="Center"/>
                         <Entry x:Name="PrezzoEntry" Placeholder="Prezzo*" Keyboard="Numeric" Text="{Binding Prezzo.Value}"
-                               HorizontalOptions="End">
+                               HorizontalOptions="End" TextColor="{StaticResource TextColorDark}" PlaceholderColor="{StaticResource TextColorDark}"
+                               BackgroundColor="white">
                             <Entry.Behaviors>
                                 <behaviour:EntryLineValidationBehaviour IsValid="{Binding Prezzo.IsValid}"/>
                             </Entry.Behaviors>
@@ -101,7 +112,7 @@
                                Style="{StaticResource ErrorTextStyle}"/>
                     </StackLayout>
                 </Frame>
-                <Button Text="Inserisci foto del libro" TextColor="{StaticResource TextColorDark}" BackgroundColor="#F3F0F0" WidthRequest="350" 
+                <Button Text="Inserisci foto del libro" TextColor="{StaticResource TextColorDark}" BackgroundColor="White" WidthRequest="350" 
                     CornerRadius="20" HorizontalOptions="Center"  Clicked="Handle_Clicked" FontSize="18"/>
             </StackLayout>
         </ScrollView>

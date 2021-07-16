@@ -131,17 +131,18 @@ namespace Scholae.ViewModels
         {
             IsRefreshing = true;
             await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
-                if (mieiLibri == true)
-                {
-                    await LibriSalvati();
-                }
-                else
-                {
+            if (mieiLibri == true)
+            {
+                utenteCorrente.LibriSalvati.Clear();
+                LibriDaMostrare = new ObservableRangeCollection<Libro>(GetLibriSalvatiDb().Values.ToList());
+            }
+            else
+            {
                 if (testoSearchBar == null || testoSearchBar.Equals(""))
                     InitData();
                 else
                     PerformSearch.Execute(testoSearchBar);
-                }
+            }
             IsRefreshing = false;
         }
 
@@ -171,8 +172,8 @@ namespace Scholae.ViewModels
             {
                 LibriDaMostrare = new ObservableRangeCollection<Libro>(GetLibriSalvatiDb().Values.ToList());
             }
-                mieiLibri = true;
-            
+            mieiLibri = true;
+
             visibilitanonpreferiti = false;
             return Task.CompletedTask;
         }
@@ -183,7 +184,7 @@ namespace Scholae.ViewModels
             foreach (Libro l in libri)
             {
                 utenteCorrente.AddLibroSalvato(l);
-                }
+            }
             return utenteCorrente.LibriSalvati;
         }
 

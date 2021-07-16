@@ -41,7 +41,7 @@
                             <Label Text="{Binding Libro.Isbn}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
                             <Label Text="{Binding Libro.Edizione}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
                             <Label Text="{Binding Libro.Editore}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
-                            <Label Text="{Binding Libro.Prezzo}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
+                            <Label Text="{Binding Libro.Prezzo}, StringFormat='{0:F0}€'}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
                             <Label Text="{Binding Libro.Materia.Nome}" FontSize="18" TextColor="{StaticResource PrimaryColor}"/>
                         </StackLayout>
                     </Frame>

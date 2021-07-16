@@ -88,7 +88,16 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                </Grid.ColumnDefinitions>   
+
+                                <Image HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Grid.ColumnSpan="1"
+                                       Source="{Binding Immagine, Mode=OneWay}"
+                                       HeightRequest="130"
+                                       WidthRequest="130"
+                                       Grid.RowSpan="5"
+                                       />
 
                                 <ImageButton IsVisible="{Binding visibilitanonpreferiti, Source={x:Reference libriViewModel}}" Source="preferito" Grid.Row="0"
                                        Grid.Column="0" TranslationX="-55" 
@@ -104,15 +113,6 @@
                                        Command="{Binding RendiNonPreferito, Mode=TwoWay, Source={x:Reference libriViewModel}}"
                                        CommandParameter="{Binding id}"
                                        BackgroundColor="Transparent"
-                                       />
-
-                                <Image HorizontalOptions="Center"
-                                       VerticalOptions="Center"
-                                       Grid.ColumnSpan="1"
-                                       Source="{Binding Immagine, Mode=OneWay}"
-                                       HeightRequest="130"
-                                       WidthRequest="130"
-                                       Grid.RowSpan="5"
                                        />
 
                                 <StackLayout Grid.Column="1" Grid.RowSpan="5" VerticalOptions="Center">

@@ -33,7 +33,7 @@
 
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.3, 0.9, 0.17" 
                      AbsoluteLayout.LayoutFlags="All">
-            <Frame Background="#8093BA" CornerRadius="30" Padding="20,0,20,0">
+            <Frame Background="#8093BA" CornerRadius="25" Padding="20,0,20,0" HasShadow="False">
                 <!--Email-->
                 <Entry x:Name="EmailEntry" Placeholder="Email" 
                        Keyboard="Email" FontSize="20"
@@ -41,7 +41,7 @@
                        BackgroundColor="Transparent"
                        PlaceholderColor="{x:StaticResource TextColorDark}"/>
             </Frame>
-            <Frame Background="#8093BA" CornerRadius="30" Padding="20,0,20,0">
+            <Frame Background="#8093BA" CornerRadius="25" Padding="20,0,20,0" HasShadow="False">
                 <!--Password-->
                 <Entry x:Name="PasswordEntry" Placeholder="Password" 
                        IsPassword="True" FontSize="20"
